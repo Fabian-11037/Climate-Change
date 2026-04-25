@@ -1,0 +1,115 @@
+# Diccionario de Campos
+## Importación de Datos
+
+<div style="text-align: justify;">
+A continuación, realizamos una descripción breve de los campos de información encontrados en cada una de los datasets trabajados:
+</div>
+```{r import, message=FALSE, warning=FALSE, echo=FALSE}
+setwd("~/Maestria/Estadistica Computacional/Proyecto/Data")
+
+temperature_data <- read_csv("data.csv", skip = 3)
+emissions_data <- read_csv("annual-co2-emissions.csv")
+emissions_per_capita_data <- read_csv("co2-emissions-per-capita.csv")
+climate_change_data <- read_excel("climate_change.xlsx", sheet = "Data")
+country_data <- read_excel("climate_change.xlsx", sheet = "Country")
+series_data <- read_excel("climate_change.xlsx", sheet = "Series")
+
+```
+
+## Dataset 'Annual CO~2~ Emissions'
+
+<div style="text-align: justify;">
+Obtenido de [@ref1], este dataset nos provee información histórica de las emisiones totales de cada entidad o país desde el año 1949.
+
+
+| Variable       | Descripción          |
+| -------------- | -------------------- |
+| Entity   | País o agrupación de paises   |
+| Code           | Código ISO-Alpha 3 (país) u OWID (agrupación) de la entidad|
+| Year | Año de muestreo del dato |
+| CO~2~ emissions| Total emitido por la entidad en el año en cuestión en Toneladas  |
+</div>
+
+```{r emissions_data_str, message=FALSE, warning=FALSE}
+
+str(emissions_data) %>% kable()
+
+```
+
+## Dataset 'CO~2~ Emissions per Capita'
+
+<div style="text-align: justify;">
+Obtenido de [@ref1], este dataset nos provee información histórica de las emisiones per capita de cada entidad o país desde el año 1949.
+
+
+| Variable       | Descripción          |
+| -------------- | -------------------- |
+| Entity   | País o agrupación de paises   |
+| Code           | Código ISO-Alpha 3 (país) u OWID (agrupación) de la entidad|
+| Year | Year of the data |
+| CO~2~ emissions per capita| Total emitido por la entidad dividido por la población en el año en cuestión en Toneladas por persona |
+</div>
+
+```{r emissions_pèr_capita_data_str, message=FALSE, warning=FALSE}
+
+str(emissions_per_capita_data) %>% kable()
+
+```
+
+## Dataset 'Global Land and Ocean 12-Month Period Average Temperature Anomalies'
+
+<div style="text-align: justify;">
+Obtenido de [@ref159], este dataset nos provee información histórica de la temperatura anómala global promedio por mes desde diciembre de 1850.
+
+| Variable       | Descripción          |
+| -------------- | -------------------- |
+| Date  | Mes de muestreo del dato en formato YYYYMM   |
+| Anomaly          | Temperatura anómala, calculada como la diferencia entre la temperatura global promedio y la temperatura global promedio entre los años 1861 a 1890, en Celsius|
+</div>
+
+```{r temperature_data_str, message=FALSE, warning=FALSE}
+
+str(temperature_data) %>% kable()
+
+```
+
+## Dataset 'Climate Change Data'
+
+<div style="text-align: justify;">
+Obtenido de [@ref155], este dataset nos provee información histórica diferentes variables climaticas y geopolíticas de los países del mundo, desde el año 1990.
+
+| Variable       | Descripción          |
+| -------------- | ------------------------------------------ |
+| Country code   |Código ISO-Alpha 3 (país) u OWID (agrupación) de la entidad   |
+| Country Name   | Nombre de la agrupación o país|
+| Series Code   | Código de la variable muestreada|
+| Series Name   | Nombre de la variable muestreada|
+| 1990 - 2011   | Columnas que corresponden al año de muestreo. Para algunas variables, como proyecciones a futuro, solo se encuentra data en la columna 2011, correspondiente al valor de la proyección|
+
+```{r climate_change_data_str, message=FALSE, warning=FALSE}
+
+str(climate_change_data) %>% kable()
+
+```
+
+```{r country_data_str, message=FALSE, warning=FALSE}
+
+str(country_data) %>% kable()
+
+```
+
+```{r series_data_str, message=FALSE, warning=FALSE}
+
+str(series_data) %>% kable()
+
+```
+
+* Variables utilizadas:
+
+| Variable       | Codigo        | Descripción | 
+| -------------- | -------------- | ---------------------------------------------------|
+| Population  |SP.POP.TOTL  | Población de la entidad |
+| GDP  |NY.GDP.MKTP.CD  | PIB total en doláres de la entidad |
+| Projected annual temperature change (2045-2065, Celsius) |EN.CLC.PCAT.C  | Cambio de temperatura proyectado para el periodo 2045 a 2065 en Celsius |
+| Projected annual precipitation change (2045-2065, mm)  |EN.CLC.PCPT.MM  | Cambio en total de precipitaciones proyectado para el periodo de 2045 a 2065, en mm |
+</div>

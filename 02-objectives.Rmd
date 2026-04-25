@@ -1,0 +1,19 @@
+# Objetivos
+
+## Objetivo General
+
+<div style="text-align: justify;">
+Evaluar la relación entre el aumento de temperatura global, las emisiciones de gases de efecto invernadero (específicamente el dioxido de carbono o CO~2~) y el desarrollo económico de cada país y región, para obtener conclusiones sobre la relación existente entre cada uno de estos fenómenos.
+</div>
+
+---
+
+## Objetivos Específicos
+
+<div style="text-align: justify;">
+1. Analizar la correlación existente entre el incremento histórico de las emisiones de CO~2~ y el incremento la temperatura media global.
+2. Demostrar el impacto de los países con mayor crecimiento ecónomico en el total de las emisiones globales.
+3. Explorar las diferencias en emisiones entre diferentes regiones geográficas del mundo y grupos económicos.
+4. Evaluar el impacto que tendrá el calentamiento global en cada región y grupo económico, y comparar los niveles de afectación proyectados.
+</div>
+---

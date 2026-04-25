@@ -1,0 +1,30 @@
+---
+title: "Calentamiento Global, Emisiones de Dióxido de Carbono y Crecimiento Económico: Una Perspectiva Regional y Económica"
+author: "Fabian Manrique"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+
+site: bookdown::bookdown_site
+
+output:
+  bookdown::gitbook:
+    number_sections: false
+    css: style.css
+
+documentclass: book
+
+bibliography: [book.bib, packages.bib]
+csl: apa.csl
+link-citations: yes
+
+github-repo: https://github.com/Fabian-11037/Word_Bank
+description: "Artículo realizado para la clase de Estadística Computacional en la Maestría de Estadística Aplicada"
+---
+
+# Resumen
+<div style="text-align: justify;">
+
+El presente estudio tiene como objetivo principal analizar el paisaje global de las emisiones de gases de efecto invernadero, evaluando la interdependencia entre el desarrollo económico, la producción de emisiones de gases de efecto invernadero (GEI) y el incremento en la temperatura global media. Adicionalmente,  La contribución científica de este trabajo reside en la integración de múltiples bases de datos climáticas y energéticas para diagnosticar las regiones del mundo que más han contribuido al total emitido a nivel global y analizar patrones económicos y de afectación futura para extraer conclusiones sobre el papel que juega y jugará cada región en este fenómeno.  
+
+Para la consecución de estos objetivos, se adopta un enfoque metodológico cuantitativo y comparativo fundamentado en datos históricos de temperatura y emisiones [@ref155], así como información geopolítica de cada país. El resto del artículo se organiza de la siguiente manera. La segunda sección detalla el analisis exploratorio de los datos. La tercera sección presenta los resultados de la realización de pruebas de hipotesis para sustentar las conclusiones obtenidas en la segunda sección con evidencia numérica. Finalmente, la cuarta sección expone las conclusiones y recomendaciones obtenidas de nuestro análisis.
+
+</div>

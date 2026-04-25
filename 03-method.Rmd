@@ -1,0 +1,42 @@
+# Metodología
+
+## Origen de los Datos
+
+<div style="text-align: justify;">
+Los datos utilizados provienen de diferentes fuentes, entre las cuales encontramos:
+* El analisis realizado por el sitio Web 'Our World in Data' [@ref1]. 
+* El repositorio de datos provisto por el 'National Centers for Environmental Information (NCEI)' [@ref159].
+* El repositorio de datos 'Climate Change Data' provisto por la agencia 'World Bank' [@ref155].
+</div>
+## Procesamiento de Datos
+
+<div style="text-align: justify;">
+Los datos de los diferentes conjuntos de datos fueron importados, transformados y procesados utilizando funciones específicas de R para la manipulación de conjuntos de datos. 
+
+Las librerías utilizadas fueron: 
+
+* ggplot2 [@ggplot2]
+* dplyr [@dplyr]
+* tidyr [@tidyr]
+* readr [@readr]
+* tidyverse [@tidyverse] 
+* readxl [@readxl]
+* knitr [@knitr].
+
+</div>
+
+## Importación de Librerías a usar
+```{r setup, message=FALSE, warning=FALSE, echo=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(readr)
+library(tidyverse)
+library(readxl)
+library(knitr)
+```
+
+<div style="text-align: justify;">
+Mediante estas herramientas, se realizó una exploración inicial mediante gráficas para explorar correlaciones esperadas del entendimiento inicial del tema para obtener conclusiones. Posteriormente, se validarán estas conclusiones con pruebas estadísticas que las sustenten. 
+</div>
+---
