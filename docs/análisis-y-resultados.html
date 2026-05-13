@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Análisis y Resultados | Calentamiento global, emisiones de dióxido de carbono y crecimiento económico: Una perspectiva regional y económica</title>
+  <meta name="description" content="Artículo realizado para la clase de Estadística Computacional en la Maestría de Estadística Aplicada" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Análisis y Resultados | Calentamiento global, emisiones de dióxido de carbono y crecimiento económico: Una perspectiva regional y económica" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Artículo realizado para la clase de Estadística Computacional en la Maestría de Estadística Aplicada" />
+  <meta name="github-repo" content="https://github.com/Fabian-11037/Word_Bank" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Análisis y Resultados | Calentamiento global, emisiones de dióxido de carbono y crecimiento económico: Una perspectiva regional y económica" />
+  
+  <meta name="twitter:description" content="Artículo realizado para la clase de Estadística Computacional en la Maestría de Estadística Aplicada" />
+  
+
+<meta name="author" content="Fabian Manrique" />
+
+
+<meta name="date" content="2026-05-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="diccionario-de-campos.html"/>
+<link rel="next" href="conclusiones.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Calentamiento Global</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Resumen</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a>
+<ul>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html#objetivo-general"><i class="fa fa-check"></i>Objetivo General</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i>Objetivos Específicos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html"><i class="fa fa-check"></i>Metodología</a>
+<ul>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html#origen-de-los-datos"><i class="fa fa-check"></i>Origen de los Datos</a></li>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html#procesamiento-de-datos"><i class="fa fa-check"></i>Procesamiento de Datos</a></li>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html#importaci%C3%B3n-de-librer%C3%ADas-a-usar"><i class="fa fa-check"></i>Importación de Librerías a usar</a></li>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html#importaci%C3%B3n-de-datos"><i class="fa fa-check"></i>Importación de datos</a></li>
+<li class="chapter" data-level="" data-path="metodología.html"><a href="metodología.html#procesamiento-de-datos-1"><i class="fa fa-check"></i>Procesamiento de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="diccionario-de-campos.html"><a href="diccionario-de-campos.html"><i class="fa fa-check"></i>Diccionario de Campos</a>
+<ul>
+<li class="chapter" data-level="" data-path="diccionario-de-campos.html"><a href="diccionario-de-campos.html#dataset-annual-co2-emissions"><i class="fa fa-check"></i>Dataset ‘Annual CO<sub>2</sub> Emissions’</a></li>
+<li class="chapter" data-level="" data-path="diccionario-de-campos.html"><a href="diccionario-de-campos.html#dataset-co2-emissions-per-capita"><i class="fa fa-check"></i>Dataset ‘CO<sub>2</sub> Emissions per Capita’</a></li>
+<li class="chapter" data-level="" data-path="diccionario-de-campos.html"><a href="diccionario-de-campos.html#dataset-global-land-and-ocean-12-month-period-average-temperature-anomalies"><i class="fa fa-check"></i>Dataset ‘Global Land and Ocean 12-Month Period Average Temperature Anomalies’</a></li>
+<li class="chapter" data-level="" data-path="diccionario-de-campos.html"><a href="diccionario-de-campos.html#dataset-climate-change-data"><i class="fa fa-check"></i>Dataset ‘Climate Change Data’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html"><i class="fa fa-check"></i>Análisis y Resultados</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#relaci%C3%B3n-hist%C3%B3rica-entre-emisiones-de-co2-y-aumento-de-la-temperatura-promedio-global."><i class="fa fa-check"></i>Relación histórica entre emisiones de CO<sub>2</sub> y aumento de la temperatura promedio global.</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#prueba-de-hip%C3%B3tesis"><i class="fa fa-check"></i>Prueba de hipótesis</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#emisiones-de-co2-y-el-desarrollo-ec%C3%B3nomico."><i class="fa fa-check"></i>Emisiones de CO<sub>2</sub> y el desarrollo ecónomico.</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#validaci%C3%B3n-estad%C3%ADstica"><i class="fa fa-check"></i>Validación estadística</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#analisis-regional"><i class="fa fa-check"></i>Analisis Regional</a></li>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#analisis-de-distribuci%C3%B3n-de-emisiones-regional-y-econ%C3%B3mica"><i class="fa fa-check"></i>Analisis de distribución de emisiones regional y económica</a></li>
+<li class="chapter" data-level="" data-path="análisis-y-resultados.html"><a href="análisis-y-resultados.html#an%C3%A1lisis-de-proyecciones"><i class="fa fa-check"></i>Análisis de Proyecciones</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusiones.html"><a href="conclusiones.html"><i class="fa fa-check"></i>Conclusiones</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Calentamiento global, emisiones de dióxido de carbono y crecimiento económico: Una perspectiva regional y económica</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-y-resultados" class="section level1 hasAnchor">
+<h1>Análisis y Resultados<a href="análisis-y-resultados.html#an%C3%A1lisis-y-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="relación-histórica-entre-emisiones-de-co2-y-aumento-de-la-temperatura-promedio-global." class="section level2 hasAnchor">
+<h2>Relación histórica entre emisiones de CO<sub>2</sub> y aumento de la temperatura promedio global.<a href="análisis-y-resultados.html#relaci%C3%B3n-hist%C3%B3rica-entre-emisiones-de-co2-y-aumento-de-la-temperatura-promedio-global." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div style="text-align: justify;">
+<p>A continuación, se presenta una gráfica <a href="análisis-y-resultados.html#fig:1">1</a> con el comportamiento histórico de las emisiones totales de CO2 a través de los años. Adicionalmente, se incluye en el mismo gráfico el comportamiento anual de la temperatura anómala durante el mismo periodo de tiempo. El análisis de la gráfica revela una clara correlación positiva y estrecha entre las emisiones totales de CO2 y el incremento de la temperatura global, mostrando trayectorias que aparecen prácticamente superpuestas a lo largo del registro histórico.</p>
+<p>Se observa un patrón de crecimiento acelerado en ambas variables durante los últimos cincuenta años, periodo en el cual han aumentado rápidamente sin alcanzar aún su pico máximo. Esta tendencia ascendente ha impulsado la temperatura media global hasta alcanzar anomalías de aproximadamente 1.3°C en comparación con los niveles preindustriales.</p>
+<p>Diferencias resaltables entre ambas curvas pueden ser que mientras que la curva de emisiones totales presenta un comportamiento sostenido y suave, la temperatura manifiesta una mayor variabilidad natural año tras año, aunque sigue fielmente la tendencia de crecimiento exponencial.</p>
+<p>En la figura <a href="análisis-y-resultados.html#fig:2">2</a>, se puede visualizar directamente la correlación entre ambas variables. Se evidencia una clara relación lineal positiva que complementa lo prensentado en la primera gráfica.</p>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="análisis-y-resultados.html#cb16-1" tabindex="-1"></a>world_co2 <span class="ot">&lt;-</span> emissions_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Code <span class="sc">==</span> <span class="st">&quot;OWID_WRL&quot;</span>)</span>
+<span id="cb16-2"><a href="análisis-y-resultados.html#cb16-2" tabindex="-1"></a>world_per_capita <span class="ot">&lt;-</span> emissions_per_capita_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Code <span class="sc">==</span> <span class="st">&quot;OWID_WRL&quot;</span>)</span>
+<span id="cb16-3"><a href="análisis-y-resultados.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="análisis-y-resultados.html#cb16-4" tabindex="-1"></a>yearly_data <span class="ot">&lt;-</span> yearly_average <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="análisis-y-resultados.html#cb16-5" tabindex="-1"></a>  <span class="fu">left_join</span>(world_co2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span> <span class="ot">=</span> <span class="st">&quot;Year&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="análisis-y-resultados.html#cb16-6" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Entity, <span class="sc">-</span> Code) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="análisis-y-resultados.html#cb16-7" tabindex="-1"></a>  <span class="fu">left_join</span>(world_per_capita, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span> <span class="ot">=</span> <span class="st">&quot;Year&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-8"><a href="análisis-y-resultados.html#cb16-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Entity, <span class="sc">-</span> Code)</span>
+<span id="cb16-9"><a href="análisis-y-resultados.html#cb16-9" tabindex="-1"></a>  </span>
+<span id="cb16-10"><a href="análisis-y-resultados.html#cb16-10" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="análisis-y-resultados.html#cb16-11" tabindex="-1"></a><span class="fu">colnames</span>(yearly_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;mean_temperature_anomaly&quot;</span>, <span class="st">&quot;CO2_emissions&quot;</span>, <span class="st">&quot;CO2 per capita&quot;</span>)</span>
+<span id="cb16-12"><a href="análisis-y-resultados.html#cb16-12" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="análisis-y-resultados.html#cb16-13" tabindex="-1"></a>scale_factor <span class="ot">&lt;-</span> <span class="fu">max</span>(yearly_data<span class="sc">$</span>CO2_emissions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">max</span>(yearly_data<span class="sc">$</span>mean_temperature_anomaly, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="análisis-y-resultados.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(yearly_data, <span class="fu">aes</span>(<span class="at">x =</span> year)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="análisis-y-resultados.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> CO2_emissions, <span class="at">color =</span> <span class="st">&quot;Emisiones de CO~2~ (Toneladas)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="análisis-y-resultados.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_temperature_anomaly <span class="sc">*</span> scale_factor, <span class="at">color =</span> <span class="st">&quot;Temperatura Anomala (°C)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="análisis-y-resultados.html#cb17-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb17-5"><a href="análisis-y-resultados.html#cb17-5" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;CO2 Emissions (Tonnes)&quot;</span>,</span>
+<span id="cb17-6"><a href="análisis-y-resultados.html#cb17-6" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_factor, <span class="at">name =</span> <span class="st">&quot;Temperatura Anomala (°C)&quot;</span>)</span>
+<span id="cb17-7"><a href="análisis-y-resultados.html#cb17-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="análisis-y-resultados.html#cb17-8" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Variable&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Temperatura y emisiones históricas&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="análisis-y-resultados.html#cb17-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb17-10"><a href="análisis-y-resultados.html#cb17-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:1"></span>
+<img src="proyecto-Fabian_files/figure-html/1-1.png" alt="Comportamiento anual de la Emisión total de CO~2~ y Temperatura Anómala" width="672" />
+<p class="caption">
+Figure 1: Comportamiento anual de la Emisión total de CO<sub>2</sub> y Temperatura Anómala
+</p>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="análisis-y-resultados.html#cb18-1" tabindex="-1"></a><span class="fu">ggplot</span>(yearly_data, <span class="fu">aes</span>(<span class="at">x =</span> CO2_emissions, <span class="at">y =</span> mean_temperature_anomaly)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="análisis-y-resultados.html#cb18-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="análisis-y-resultados.html#cb18-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="análisis-y-resultados.html#cb18-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-5"><a href="análisis-y-resultados.html#cb18-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Emisiones de CO2 (Toneladas)&quot;</span>,</span>
+<span id="cb18-6"><a href="análisis-y-resultados.html#cb18-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Temperatura Anomala&quot;</span>,</span>
+<span id="cb18-7"><a href="análisis-y-resultados.html#cb18-7" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;CO2 vs Temperatura Anomala&quot;</span></span>
+<span id="cb18-8"><a href="análisis-y-resultados.html#cb18-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="análisis-y-resultados.html#cb18-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb18-10"><a href="análisis-y-resultados.html#cb18-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:2"></span>
+<img src="proyecto-Fabian_files/figure-html/2-1.png" alt="Gráfico de Dispersión de la Emisión Total de CO~2~ vs Temperatura Anómala" width="672" />
+<p class="caption">
+Figure 2: Gráfico de Dispersión de la Emisión Total de CO<sub>2</sub> vs Temperatura Anómala
+</p>
+</div>
+<div id="prueba-de-hipótesis" class="section level3 hasAnchor">
+<h3>Prueba de hipótesis<a href="análisis-y-resultados.html#prueba-de-hip%C3%B3tesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Validamos nuestras conclusiones con una prueba de correlación. Para este fin, primero analizamos el supuesto de normalidad sobre las variables de emisión de CO<sub>2</sub> y temperatura anomála media.</p>
+<ul>
+<li>Validación supuesto de normalidad</li>
+</ul>
+<p>Realizando las pruebas de normalidad, encontramos que ninguna de las variables de intéres cumplen con este supuesto, ambos con p-valores cercanos a 0 y con qq-plots (<a href="análisis-y-resultados.html#fig:16">3</a> y <a href="análisis-y-resultados.html#fig:17">4</a>) muy distintos a lo que cabría de esperar en un comportamiento normal. Debido a esto, realizamos una prueba de correlación de Spearman para validar la correlación entre ambas variables.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="análisis-y-resultados.html#cb19-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb19-2"><a href="análisis-y-resultados.html#cb19-2" tabindex="-1"></a>  yearly_data<span class="sc">$</span>CO2_emissions,</span>
+<span id="cb19-3"><a href="análisis-y-resultados.html#cb19-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb19-4"><a href="análisis-y-resultados.html#cb19-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(yearly_data<span class="sc">$</span>CO2_emissions),</span>
+<span id="cb19-5"><a href="análisis-y-resultados.html#cb19-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(yearly_data<span class="sc">$</span>CO2_emissions)</span>
+<span id="cb19-6"><a href="análisis-y-resultados.html#cb19-6" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="análisis-y-resultados.html#cb19-7" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="análisis-y-resultados.html#cb19-8" tabindex="-1"></a><span class="fu">qqnorm</span>(yearly_data<span class="sc">$</span>CO2_emissions,</span>
+<span id="cb19-9"><a href="análisis-y-resultados.html#cb19-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb19-10"><a href="análisis-y-resultados.html#cb19-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb19-11"><a href="análisis-y-resultados.html#cb19-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb19-12"><a href="análisis-y-resultados.html#cb19-12" tabindex="-1"></a>       ))</span>
+<span id="cb19-13"><a href="análisis-y-resultados.html#cb19-13" tabindex="-1"></a><span class="fu">qqline</span>(yearly_data<span class="sc">$</span>CO2_emissions, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:16"></span>
+<img src="proyecto-Fabian_files/figure-html/16-1.png" alt="QQ-plot para validación de normalidad - Emisiones de CO2" width="672" />
+<p class="caption">
+Figure 3: QQ-plot para validación de normalidad - Emisiones de CO2
+</p>
+</div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="análisis-y-resultados.html#cb20-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb20-2"><a href="análisis-y-resultados.html#cb20-2" tabindex="-1"></a>  yearly_data<span class="sc">$</span>mean_temperature_anomaly,</span>
+<span id="cb20-3"><a href="análisis-y-resultados.html#cb20-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb20-4"><a href="análisis-y-resultados.html#cb20-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(yearly_data<span class="sc">$</span>mean_temperature_anomaly),</span>
+<span id="cb20-5"><a href="análisis-y-resultados.html#cb20-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(yearly_data<span class="sc">$</span>mean_temperature_anomaly)</span>
+<span id="cb20-6"><a href="análisis-y-resultados.html#cb20-6" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="análisis-y-resultados.html#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="análisis-y-resultados.html#cb20-8" tabindex="-1"></a><span class="fu">qqnorm</span>(yearly_data<span class="sc">$</span>mean_temperature_anomaly,</span>
+<span id="cb20-9"><a href="análisis-y-resultados.html#cb20-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb20-10"><a href="análisis-y-resultados.html#cb20-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb20-11"><a href="análisis-y-resultados.html#cb20-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb20-12"><a href="análisis-y-resultados.html#cb20-12" tabindex="-1"></a>       ))</span>
+<span id="cb20-13"><a href="análisis-y-resultados.html#cb20-13" tabindex="-1"></a><span class="fu">qqline</span>(yearly_data<span class="sc">$</span>mean_temperature_anomaly, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:17"></span>
+<img src="proyecto-Fabian_files/figure-html/17-1.png" alt="QQ-plot para validación de normalidad - Temperatura media anomála" width="672" />
+<p class="caption">
+Figure 4: QQ-plot para validación de normalidad - Temperatura media anomála
+</p>
+</div>
+<ul>
+<li>Prueba de Correlación de Spearman</li>
+</ul>
+<p>Planteamos la siguiente prueba de correlación de Spearman, mediante la validación de las hipótesis:</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: coeficiente de correlación es igual a 0.</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: coeficiente de correlación es distinto a 0.</p></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="análisis-y-resultados.html#cb21-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(yearly_data<span class="sc">$</span>CO2_emissions, yearly_data<span class="sc">$</span>mean_temperature_anomaly, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb21-2"><a href="análisis-y-resultados.html#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="análisis-y-resultados.html#cb21-3" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-4"><a href="análisis-y-resultados.html#cb21-4" tabindex="-1"></a>  <span class="at">Metodo =</span> res<span class="sc">$</span>method,</span>
+<span id="cb21-5"><a href="análisis-y-resultados.html#cb21-5" tabindex="-1"></a>  <span class="at">Correlacion =</span> <span class="fu">round</span>(res<span class="sc">$</span>estimate, <span class="dv">4</span>),</span>
+<span id="cb21-6"><a href="análisis-y-resultados.html#cb21-6" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">4</span>),</span>
+<span id="cb21-7"><a href="análisis-y-resultados.html#cb21-7" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(res<span class="sc">$</span>statistic, <span class="dv">4</span>)</span>
+<span id="cb21-8"><a href="análisis-y-resultados.html#cb21-8" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="análisis-y-resultados.html#cb21-9" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="análisis-y-resultados.html#cb21-10" tabindex="-1"></a><span class="fu">kable</span>(tabla_res)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="47%" />
+<col width="17%" />
+<col width="11%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Metodo</th>
+<th align="right">Correlacion</th>
+<th align="right">p_value</th>
+<th align="right">Estadistico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">rho</td>
+<td align="left">Spearman’s rank correlation rho</td>
+<td align="right">0.7941</td>
+<td align="right">0</td>
+<td align="right">183869.6</td>
+</tr>
+</tbody>
+</table>
+<p>Con nuestra prueba de Spearman, encontramos un resultado significativo, con p-value mucho menor 0.05 (p-value = 0). El valor de correlación encontrado es de 0.79, indicio de una alta correlación entre ambas variables. Esto va en línea con nuestras conclusiones tras el análisis gráfico de ambas variables.</p>
+</div>
+</div>
+<div id="emisiones-de-co2-y-el-desarrollo-ecónomico." class="section level2 hasAnchor">
+<h2>Emisiones de CO<sub>2</sub> y el desarrollo ecónomico.<a href="análisis-y-resultados.html#emisiones-de-co2-y-el-desarrollo-ec%C3%B3nomico." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div style="text-align: justify;">
+<p>Tras establecer la relación entre las emisiones y el incremento en la temperatura anomala, nuestro análisis continua con la busqueda de una relación entre el desempeño económico de un país y los niveles de emisiones de CO2 que este genera. El análisis histórico revela diferencias estructurales entre grupos de ingreso <a href="análisis-y-resultados.html#fig:4">5</a>:</p>
+<ul>
+<li>Los países de altos ingresos presentan un crecimiento temprano y acelerado de emisiones per cápita desde el siglo XIX, alcanzando niveles elevados durante el siglo XX, seguido de una leve estabilización o reducción reciente.</li>
+<li>Los países de ingresos medios, especialmente medios-altos, muestran un crecimiento tardío pero pronunciado a partir de mediados del siglo XX, coincidiendo con procesos de industrialización acelerada.</li>
+<li>Los países de bajos ingresos mantienen niveles bajos de emisiones per cápita, con incrementos modestos en algunos casos.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="análisis-y-resultados.html#cb22-1" tabindex="-1"></a><span class="fu">ggplot</span>(income_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="análisis-y-resultados.html#cb22-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="análisis-y-resultados.html#cb22-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-4"><a href="análisis-y-resultados.html#cb22-4" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;CO2 Emissions per Capita Over Time&quot;</span>,</span>
+<span id="cb22-5"><a href="análisis-y-resultados.html#cb22-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb22-6"><a href="análisis-y-resultados.html#cb22-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;CO2 Emissions&quot;</span>,</span>
+<span id="cb22-7"><a href="análisis-y-resultados.html#cb22-7" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Income Group&quot;</span></span>
+<span id="cb22-8"><a href="análisis-y-resultados.html#cb22-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="análisis-y-resultados.html#cb22-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb22-10"><a href="análisis-y-resultados.html#cb22-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:4"></span>
+<img src="proyecto-Fabian_files/figure-html/4-1.png" alt="Emisiones per Capita categorizadas por Grupo Económico" width="672" />
+<p class="caption">
+Figure 5: Emisiones per Capita categorizadas por Grupo Económico
+</p>
+</div>
+<p>El comportamiento de las emisiones totales <a href="análisis-y-resultados.html#fig:3">6</a> refuerza los hallazgos anteriores. Los países de ingresos altos dominan las emisiones históricas, con reducciones en los últimos años producto de implementación de medidas de reducción de emisiones. Caso contrario, los países de ingresos medios-altos muestran un crecimiento acelerado, llegando a superar o acercarse a los niveles de los países desarrollados, mostrando que la implementación de medidas de reducción de emisiones no ha sido prioritario en este etipo de países, probablemente ocasionada por la reticencia a impactar su crecimiento económico y verse relegados frente a otros países. Los países de bajos ingresos, finalmente, contribuyen marginalmente al total global.</p>
+<p>Se puede establecer, entonces, que la cronología de las emisiones refleja claramente las etapas de industrialización. La industrialización temprana en países desarrollados causaron que históricamente fueran los principales actores en la producción de emisiones, pero que en los últimos tiempos, la industrialización tardía en economías emergentes ha causado un crecimiento en su papel global de generación de emisiones.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="análisis-y-resultados.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(income_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="análisis-y-resultados.html#cb23-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="análisis-y-resultados.html#cb23-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-4"><a href="análisis-y-resultados.html#cb23-4" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;CO2 Emissions Total Over Time&quot;</span>,</span>
+<span id="cb23-5"><a href="análisis-y-resultados.html#cb23-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb23-6"><a href="análisis-y-resultados.html#cb23-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;CO2 Emissions&quot;</span>,</span>
+<span id="cb23-7"><a href="análisis-y-resultados.html#cb23-7" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Income Group&quot;</span></span>
+<span id="cb23-8"><a href="análisis-y-resultados.html#cb23-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="análisis-y-resultados.html#cb23-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb23-10"><a href="análisis-y-resultados.html#cb23-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:3"></span>
+<img src="proyecto-Fabian_files/figure-html/3-1.png" alt="Gráfico de Dispersión de la Emisión Total de CO~2~ vs Temperatura Anómala" width="672" />
+<p class="caption">
+Figure 6: Gráfico de Dispersión de la Emisión Total de CO<sub>2</sub> vs Temperatura Anómala
+</p>
+</div>
+<p>Para complementar este análisis, usamos un diagrama de dispersión entre PIB y emisiones de CO₂, tanto total <a href="análisis-y-resultados.html#fig:5">7</a> como per capita <a href="análisis-y-resultados.html#fig:6">8</a>. Estos diagramas evidencian una relación positiva, aunque con alta dispersión. Las economías de gran escala concentran la mayor parte de las emisiones globales.</p>
+<p>Sin embargo, la variabilidad observada indica que no todos los países emiten al mismo nivel. Observamos Existen economías con PIB medio cuyas emisiones superan a las de países con alto PIB, lo que sugiere diferencias en eficiencia energética, matriz energética o políticas ambientales. Pero el panorama global es clara, y la tendencia año a año muestra que los países con mayor poder ecónomico son los principales responsables de la generación de emisiones a nivel global.</p>
+</div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="análisis-y-resultados.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>)), <span class="fu">aes</span>(<span class="at">x =</span> GDP, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="análisis-y-resultados.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href="análisis-y-resultados.html#cb24-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="análisis-y-resultados.html#cb24-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> Year) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="análisis-y-resultados.html#cb24-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-6"><a href="análisis-y-resultados.html#cb24-6" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;GDP (USD)&quot;</span>,</span>
+<span id="cb24-7"><a href="análisis-y-resultados.html#cb24-7" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;CO2 Emissions&quot;</span>,</span>
+<span id="cb24-8"><a href="análisis-y-resultados.html#cb24-8" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;GDP vs CO2 a lo largo de los años&quot;</span></span>
+<span id="cb24-9"><a href="análisis-y-resultados.html#cb24-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="análisis-y-resultados.html#cb24-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb24-11"><a href="análisis-y-resultados.html#cb24-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:5"></span>
+<img src="proyecto-Fabian_files/figure-html/5-1.png" alt="Correlación GDP vs Emisiones de CO~2~" width="1152" />
+<p class="caption">
+Figure 7: Correlación GDP vs Emisiones de CO<sub>2</sub>
+</p>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="análisis-y-resultados.html#cb25-1" tabindex="-1"></a>gdp_joined_data<span class="sc">$</span>co2_per_capita <span class="ot">=</span> gdp_joined_data<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span><span class="sc">/</span>gdp_joined_data<span class="sc">$</span>Population</span>
+<span id="cb25-2"><a href="análisis-y-resultados.html#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="análisis-y-resultados.html#cb25-3" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>)), <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">GDP per Capita</span><span class="st">`</span>, <span class="at">y =</span> co2_per_capita)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="análisis-y-resultados.html#cb25-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="análisis-y-resultados.html#cb25-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="análisis-y-resultados.html#cb25-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> Year) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="análisis-y-resultados.html#cb25-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-8"><a href="análisis-y-resultados.html#cb25-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;GDP per Capita (USD per Person)&quot;</span>,</span>
+<span id="cb25-9"><a href="análisis-y-resultados.html#cb25-9" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;CO2 Emissions per capita&quot;</span>,</span>
+<span id="cb25-10"><a href="análisis-y-resultados.html#cb25-10" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;GDP per Capita vs CO2 per capita&quot;</span></span>
+<span id="cb25-11"><a href="análisis-y-resultados.html#cb25-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="análisis-y-resultados.html#cb25-12" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb25-13"><a href="análisis-y-resultados.html#cb25-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:6"></span>
+<img src="proyecto-Fabian_files/figure-html/6-1.png" alt="Correlación GDP per Capita vs Emisiones de CO~2~ per Capita" width="1152" />
+<p class="caption">
+Figure 8: Correlación GDP per Capita vs Emisiones de CO<sub>2</sub> per Capita
+</p>
+</div>
+<div id="validación-estadística" class="section level3 hasAnchor">
+<h3>Validación estadística<a href="análisis-y-resultados.html#validaci%C3%B3n-estad%C3%ADstica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A continuación, se presentan los resultados de las pruebas realizadas para validar las conclusiones obtenidas del análisis exploratorio. Primero, se valida el supuesto de normalidad tanto para la variable ‘C0<sub>2</sub> per capita’ como para la variable ‘CO<sub>2</sub> emissions’. Confirmamos que ninguna de las variables cumple con el supuesto de normalidad (p-valor &lt;&lt;&lt; 0.05).</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="análisis-y-resultados.html#cb26-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb26-2"><a href="análisis-y-resultados.html#cb26-2" tabindex="-1"></a>  income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>,</span>
+<span id="cb26-3"><a href="análisis-y-resultados.html#cb26-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb26-4"><a href="análisis-y-resultados.html#cb26-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>),</span>
+<span id="cb26-5"><a href="análisis-y-resultados.html#cb26-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>)</span>
+<span id="cb26-6"><a href="análisis-y-resultados.html#cb26-6" tabindex="-1"></a>)</span>
+<span id="cb26-7"><a href="análisis-y-resultados.html#cb26-7" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="análisis-y-resultados.html#cb26-8" tabindex="-1"></a><span class="fu">qqnorm</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>,</span>
+<span id="cb26-9"><a href="análisis-y-resultados.html#cb26-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb26-10"><a href="análisis-y-resultados.html#cb26-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb26-11"><a href="análisis-y-resultados.html#cb26-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb26-12"><a href="análisis-y-resultados.html#cb26-12" tabindex="-1"></a>       ))</span>
+<span id="cb26-13"><a href="análisis-y-resultados.html#cb26-13" tabindex="-1"></a><span class="fu">qqline</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:18"></span>
+<img src="proyecto-Fabian_files/figure-html/18-1.png" alt="Validación de normalidad - CO2 per capita" width="672" />
+<p class="caption">
+Figure 9: Validación de normalidad - CO2 per capita
+</p>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="análisis-y-resultados.html#cb27-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb27-2"><a href="análisis-y-resultados.html#cb27-2" tabindex="-1"></a>  income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>,</span>
+<span id="cb27-3"><a href="análisis-y-resultados.html#cb27-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb27-4"><a href="análisis-y-resultados.html#cb27-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>),</span>
+<span id="cb27-5"><a href="análisis-y-resultados.html#cb27-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>)</span>
+<span id="cb27-6"><a href="análisis-y-resultados.html#cb27-6" tabindex="-1"></a>)</span>
+<span id="cb27-7"><a href="análisis-y-resultados.html#cb27-7" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="análisis-y-resultados.html#cb27-8" tabindex="-1"></a><span class="fu">qqnorm</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>,</span>
+<span id="cb27-9"><a href="análisis-y-resultados.html#cb27-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb27-10"><a href="análisis-y-resultados.html#cb27-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb27-11"><a href="análisis-y-resultados.html#cb27-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb27-12"><a href="análisis-y-resultados.html#cb27-12" tabindex="-1"></a>       ))</span>
+<span id="cb27-13"><a href="análisis-y-resultados.html#cb27-13" tabindex="-1"></a><span class="fu">qqline</span>(income_data<span class="sc">$</span><span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:19"></span>
+<img src="proyecto-Fabian_files/figure-html/19-1.png" alt="Validación de normalidad - emisión total de CO2" width="672" />
+<p class="caption">
+Figure 10: Validación de normalidad - emisión total de CO2
+</p>
+</div>
+<p>Procedemos entonces a realizar una prueba de Kruskal-Wallis:</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: Todos los grupos provienen de la misma distribución.</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: Al menos uno de los grupos proviene de una distribución diferente.</p></li>
+</ul>
+<p>Aquí encontramos que si existe diferencia significativa en al menos uno de los distintos grupos ecónomicos análizados para ambas variables ‘C0<sub>2</sub> per capita’ y ‘CO<sub>2</sub> emissions’.
+Tras este resultado, se realiza una prueba de Dunn, para encontrar grupos semejantes:</p>
+<ul>
+<li>CO<sub>2</sub> per capita</li>
+</ul>
+<p>Para las emisiones de CO<sub>2</sub> per capita, se encontraron diferencias significativas para casi todas las parejas de grupos, con excepción de la pareja “Low income vs Lower-middle-income” con un <span class="math inline">\(p_{adj} = 1\)</span>.</p>
+<ul>
+<li>CO<sub>2</sub> emissions</li>
+</ul>
+<p>Para las emisiones de CO<sub>2</sub> totales, obtuvimos resultados similares al análisis per-capita, con diferencias significativas para casi todas las parejas de grupos, con excepción de la pareja “Low income vs Lower-middle-income”, aunque esta vez con un <span class="math inline">\(p_{adj}\)</span> mucho menor (<span class="math inline">\(p_{adj} = 0.06\)</span>).</p>
+<p>Podemos asumir entonces, de acuerdo a la evidencia estadística y gráfica que los países de los grupos de ingresos Alto contribuyen de forma significativa por encima de los países de los demás grupos ecónomicos, seguidos por los países de ingreso Medio-Alto y, finalmente, los países de los grupos de ingreso Bajo y Medio-Bajo, teniendo estos 2 últimos un comportamiento semejante.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="análisis-y-resultados.html#cb28-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb28-2"><a href="análisis-y-resultados.html#cb28-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span> <span class="sc">~</span> Entity,</span>
+<span id="cb28-3"><a href="análisis-y-resultados.html#cb28-3" tabindex="-1"></a>  <span class="at">data =</span> income_data</span>
+<span id="cb28-4"><a href="análisis-y-resultados.html#cb28-4" tabindex="-1"></a>)</span>
+<span id="cb28-5"><a href="análisis-y-resultados.html#cb28-5" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="análisis-y-resultados.html#cb28-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb28-7"><a href="análisis-y-resultados.html#cb28-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb28-8"><a href="análisis-y-resultados.html#cb28-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb28-9"><a href="análisis-y-resultados.html#cb28-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb28-10"><a href="análisis-y-resultados.html#cb28-10" tabindex="-1"></a>)</span>
+<span id="cb28-11"><a href="análisis-y-resultados.html#cb28-11" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="análisis-y-resultados.html#cb28-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-13"><a href="análisis-y-resultados.html#cb28-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb28-14"><a href="análisis-y-resultados.html#cb28-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb28-15"><a href="análisis-y-resultados.html#cb28-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb28-16"><a href="análisis-y-resultados.html#cb28-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb28-17"><a href="análisis-y-resultados.html#cb28-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb28-18"><a href="análisis-y-resultados.html#cb28-18" tabindex="-1"></a>)</span>
+<span id="cb28-19"><a href="análisis-y-resultados.html#cb28-19" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="análisis-y-resultados.html#cb28-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb28-21"><a href="análisis-y-resultados.html#cb28-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb28-22"><a href="análisis-y-resultados.html#cb28-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb28-23"><a href="análisis-y-resultados.html#cb28-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test1)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">236.8313</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="análisis-y-resultados.html#cb29-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb29-2"><a href="análisis-y-resultados.html#cb29-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">CO2 per capita</span><span class="st">`</span> <span class="sc">~</span> Entity,</span>
+<span id="cb29-3"><a href="análisis-y-resultados.html#cb29-3" tabindex="-1"></a>  <span class="at">data =</span> income_data,</span>
+<span id="cb29-4"><a href="análisis-y-resultados.html#cb29-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb29-5"><a href="análisis-y-resultados.html#cb29-5" tabindex="-1"></a>)</span>
+<span id="cb29-6"><a href="análisis-y-resultados.html#cb29-6" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="análisis-y-resultados.html#cb29-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb29-8"><a href="análisis-y-resultados.html#cb29-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb29-9"><a href="análisis-y-resultados.html#cb29-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb29-10"><a href="análisis-y-resultados.html#cb29-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test1)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="66%" />
+<col width="11%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">High-income countries - Low-income countries</td>
+<td align="right">11.2453840</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High-income countries - Lower-middle-income countries</td>
+<td align="right">13.8222489</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Low-income countries - Lower-middle-income countries</td>
+<td align="right">0.9202784</td>
+<td align="right">0.3574273</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High-income countries - Upper-middle-income countries</td>
+<td align="right">9.1524701</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Low-income countries - Upper-middle-income countries</td>
+<td align="right">-3.0279484</td>
+<td align="right">0.0024622</td>
+<td align="right">0.0147732</td>
+</tr>
+<tr class="even">
+<td align="left">Lower-middle-income countries - Upper-middle-income countries</td>
+<td align="right">-4.4114965</td>
+<td align="right">0.0000103</td>
+<td align="right">0.0000616</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="análisis-y-resultados.html#cb30-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb30-2"><a href="análisis-y-resultados.html#cb30-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> Entity,</span>
+<span id="cb30-3"><a href="análisis-y-resultados.html#cb30-3" tabindex="-1"></a>  <span class="at">data =</span> income_data</span>
+<span id="cb30-4"><a href="análisis-y-resultados.html#cb30-4" tabindex="-1"></a>)</span>
+<span id="cb30-5"><a href="análisis-y-resultados.html#cb30-5" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="análisis-y-resultados.html#cb30-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb30-7"><a href="análisis-y-resultados.html#cb30-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb30-8"><a href="análisis-y-resultados.html#cb30-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb30-9"><a href="análisis-y-resultados.html#cb30-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb30-10"><a href="análisis-y-resultados.html#cb30-10" tabindex="-1"></a>)</span>
+<span id="cb30-11"><a href="análisis-y-resultados.html#cb30-11" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="análisis-y-resultados.html#cb30-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb30-13"><a href="análisis-y-resultados.html#cb30-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb30-14"><a href="análisis-y-resultados.html#cb30-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb30-15"><a href="análisis-y-resultados.html#cb30-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb30-16"><a href="análisis-y-resultados.html#cb30-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb30-17"><a href="análisis-y-resultados.html#cb30-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb30-18"><a href="análisis-y-resultados.html#cb30-18" tabindex="-1"></a>)</span>
+<span id="cb30-19"><a href="análisis-y-resultados.html#cb30-19" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="análisis-y-resultados.html#cb30-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb30-21"><a href="análisis-y-resultados.html#cb30-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb30-22"><a href="análisis-y-resultados.html#cb30-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb30-23"><a href="análisis-y-resultados.html#cb30-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test2)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">112.2644</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="análisis-y-resultados.html#cb31-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb31-2"><a href="análisis-y-resultados.html#cb31-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> Entity,</span>
+<span id="cb31-3"><a href="análisis-y-resultados.html#cb31-3" tabindex="-1"></a>  <span class="at">data =</span> income_data,</span>
+<span id="cb31-4"><a href="análisis-y-resultados.html#cb31-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb31-5"><a href="análisis-y-resultados.html#cb31-5" tabindex="-1"></a>)</span>
+<span id="cb31-6"><a href="análisis-y-resultados.html#cb31-6" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="análisis-y-resultados.html#cb31-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb31-8"><a href="análisis-y-resultados.html#cb31-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb31-9"><a href="análisis-y-resultados.html#cb31-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb31-10"><a href="análisis-y-resultados.html#cb31-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test2)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="67%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">High-income countries - Low-income countries</td>
+<td align="right">9.352695</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High-income countries - Lower-middle-income countries</td>
+<td align="right">7.499227</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Low-income countries - Lower-middle-income countries</td>
+<td align="right">-2.564313</td>
+<td align="right">0.0103380</td>
+<td align="right">0.0620281</td>
+</tr>
+<tr class="even">
+<td align="left">High-income countries - Upper-middle-income countries</td>
+<td align="right">2.817273</td>
+<td align="right">0.0048433</td>
+<td align="right">0.0290600</td>
+</tr>
+<tr class="odd">
+<td align="left">Low-income countries - Upper-middle-income countries</td>
+<td align="right">-6.372946</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Lower-middle-income countries - Upper-middle-income countries</td>
+<td align="right">-4.246650</td>
+<td align="right">0.0000217</td>
+<td align="right">0.0001302</td>
+</tr>
+</tbody>
+</table>
+<p>También validamos que el PIB de una nación está correlacionado de forma significativa con las emisiones de dichos países mediante una prueba de correlación de Spearman:</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: coeficiente de correlación es igual a 0.</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: coeficiente de correlación es distinto a 0.</p></li>
+</ul>
+<p>Al realizar el análisis tanto a nivel per cápita (<span class="math inline">\(\rho = 0.86\)</span>) como a nivel total (<span class="math inline">\(\rho = 0.93\)</span>), se obtuvieron p-valores cercanos a 0, lo que indica que ambas correlaciones son estadísticamente significativas.</p>
+<p>Estos resultados sugieren una relación positiva fuerte entre el producto interno bruto y las emisiones de dióxido de carbono. En términos generales, los países con mayores niveles de PIB tienden también a presentar mayores niveles de emisiones de CO<sub>2</sub>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="análisis-y-resultados.html#cb32-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(gdp_joined_data<span class="sc">$</span>GDP, gdp_joined_data<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb32-2"><a href="análisis-y-resultados.html#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="análisis-y-resultados.html#cb32-3" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-4"><a href="análisis-y-resultados.html#cb32-4" tabindex="-1"></a>  <span class="at">Metodo =</span> res<span class="sc">$</span>method,</span>
+<span id="cb32-5"><a href="análisis-y-resultados.html#cb32-5" tabindex="-1"></a>  <span class="at">Correlacion =</span> <span class="fu">round</span>(res<span class="sc">$</span>estimate, <span class="dv">4</span>),</span>
+<span id="cb32-6"><a href="análisis-y-resultados.html#cb32-6" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">4</span>),</span>
+<span id="cb32-7"><a href="análisis-y-resultados.html#cb32-7" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(res<span class="sc">$</span>statistic, <span class="dv">4</span>)</span>
+<span id="cb32-8"><a href="análisis-y-resultados.html#cb32-8" tabindex="-1"></a>)</span>
+<span id="cb32-9"><a href="análisis-y-resultados.html#cb32-9" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="análisis-y-resultados.html#cb32-10" tabindex="-1"></a><span class="fu">kable</span>(tabla_res)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="47%" />
+<col width="17%" />
+<col width="11%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Metodo</th>
+<th align="right">Correlacion</th>
+<th align="right">p_value</th>
+<th align="right">Estadistico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">rho</td>
+<td align="left">Spearman’s rank correlation rho</td>
+<td align="right">0.9357</td>
+<td align="right">0</td>
+<td align="right">616130347</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="análisis-y-resultados.html#cb33-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(gdp_joined_data<span class="sc">$</span><span class="st">`</span><span class="at">GDP per Capita</span><span class="st">`</span>, gdp_joined_data<span class="sc">$</span>co2_per_capita, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb33-2"><a href="análisis-y-resultados.html#cb33-2" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="análisis-y-resultados.html#cb33-3" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-4"><a href="análisis-y-resultados.html#cb33-4" tabindex="-1"></a>  <span class="at">Metodo =</span> res<span class="sc">$</span>method,</span>
+<span id="cb33-5"><a href="análisis-y-resultados.html#cb33-5" tabindex="-1"></a>  <span class="at">Correlacion =</span> <span class="fu">round</span>(res<span class="sc">$</span>estimate, <span class="dv">4</span>),</span>
+<span id="cb33-6"><a href="análisis-y-resultados.html#cb33-6" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">4</span>),</span>
+<span id="cb33-7"><a href="análisis-y-resultados.html#cb33-7" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(res<span class="sc">$</span>statistic, <span class="dv">4</span>)</span>
+<span id="cb33-8"><a href="análisis-y-resultados.html#cb33-8" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="análisis-y-resultados.html#cb33-9" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="análisis-y-resultados.html#cb33-10" tabindex="-1"></a><span class="fu">kable</span>(tabla_res)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="47%" />
+<col width="17%" />
+<col width="11%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Metodo</th>
+<th align="right">Correlacion</th>
+<th align="right">p_value</th>
+<th align="right">Estadistico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">rho</td>
+<td align="left">Spearman’s rank correlation rho</td>
+<td align="right">0.8589</td>
+<td align="right">0</td>
+<td align="right">1352209389</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="analisis-regional" class="section level2 hasAnchor">
+<h2>Analisis Regional<a href="análisis-y-resultados.html#analisis-regional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="análisis-y-resultados.html#cb34-1" tabindex="-1"></a>gdp_joined_data <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="análisis-y-resultados.html#cb34-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(country_data, <span class="at">by=</span><span class="st">&quot;Country code&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="análisis-y-resultados.html#cb34-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Country name</span><span class="st">`</span>) <span class="ot">-&gt;</span> gdp_joined_data2</span>
+<span id="cb34-4"><a href="análisis-y-resultados.html#cb34-4" tabindex="-1"></a>  </span>
+<span id="cb34-5"><a href="análisis-y-resultados.html#cb34-5" tabindex="-1"></a>gdp_joined_data2 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-6"><a href="análisis-y-resultados.html#cb34-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Region, Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-7"><a href="análisis-y-resultados.html#cb34-7" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_emission =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>), <span class="at">total_gdp =</span> <span class="fu">sum</span>(GDP))<span class="ot">-&gt;</span> gdp_joined_data_region</span></code></pre></div>
+<div style="text-align: justify;">
+<p>Trasladamos nuestro análisis a nivel regional, donde podemos evidenciar 3 principales actores en la producción de emisiones (<a href="análisis-y-resultados.html#fig:7">11</a>) y desarrollo económico (<a href="análisis-y-resultados.html#fig:8">12</a>) a nivel global:</p>
+<ul>
+<li>Pacifico y Asia Oriental</li>
+<li>Europa y Asia Central</li>
+<li>América del Norte</li>
+</ul>
+<p>La tendencia más notable corresponde a Asia Oriental y el Pacífico, cuyas emisiones crecen de forma exponencial —de aproximadamente 4.5 × 10⁹ a 1.2 × 10¹⁰ toneladas— mientras su PIB se expande significativamente, aunque sin alcanzar los niveles absolutos de Europa o América del Norte hacia 2010. Esta asimetría revela una estructura productiva con alta producción de carbono, propia de economías en fase de industrialización acelerada. Europa y Asia Central, en contraste, muestra una reducción de emisiones durante los años noventa seguida de estabilización, mientras mantiene el mayor PIB regional del período. América del Norte exhibe emisiones crecientes de forma estable con leve decrecimiento hacia 2010. Las regiones de menor desarrollo —América Latina, Asia del Sur, Oriente Medio y África Subsahariana— registran emisiones absolutas bajas pero con tendencias ascendentes moderadas, anticipando que su industrialización futura será un factor determinante en las trayectorias globales de carbono.</p>
+<p>El análisis conjunto permite establecer tres conclusiones centrales. Primero, existe una correlación positiva entre industrialización acelerada e incremento de emisiones, siendo Asia Oriental la evidencia más contundente del período. Segundo, las economías post-industriales exhiben un desacoplamiento progresivo entre PIB y emisiones, pero manteniendo una participación considerable en el total global. Tercero, la intensidad de carbono —emisiones por unidad de PIB— resulta más informativa que las emisiones absolutas para evaluar la eficiencia ambiental de una economía, ya que niveles bajos de emisión pueden reflejar simplemente un bajo nivel de desarrollo y no una transición hacia modelos productivos más limpios.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="análisis-y-resultados.html#cb35-1" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_data_region, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> total_emission, <span class="at">color =</span> Region)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="análisis-y-resultados.html#cb35-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="análisis-y-resultados.html#cb35-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-4"><a href="análisis-y-resultados.html#cb35-4" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Histórico de Emisiones de CO2 por Región&quot;</span>,</span>
+<span id="cb35-5"><a href="análisis-y-resultados.html#cb35-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Año&quot;</span>,</span>
+<span id="cb35-6"><a href="análisis-y-resultados.html#cb35-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Emisiones de CO2 (toneladas)&quot;</span>,</span>
+<span id="cb35-7"><a href="análisis-y-resultados.html#cb35-7" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Región&quot;</span></span>
+<span id="cb35-8"><a href="análisis-y-resultados.html#cb35-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="análisis-y-resultados.html#cb35-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb35-10"><a href="análisis-y-resultados.html#cb35-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:7"></span>
+<img src="proyecto-Fabian_files/figure-html/7-1.png" alt="Emisiones por Región" width="1152" />
+<p class="caption">
+Figure 11: Emisiones por Región
+</p>
+</div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="análisis-y-resultados.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_data_region, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> total_gdp, <span class="at">color =</span> Region)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="análisis-y-resultados.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="análisis-y-resultados.html#cb36-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb36-4"><a href="análisis-y-resultados.html#cb36-4" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Histórico de PIB por Región&quot;</span>,</span>
+<span id="cb36-5"><a href="análisis-y-resultados.html#cb36-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Año&quot;</span>,</span>
+<span id="cb36-6"><a href="análisis-y-resultados.html#cb36-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;PIB (USD)&quot;</span>,</span>
+<span id="cb36-7"><a href="análisis-y-resultados.html#cb36-7" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Región&quot;</span></span>
+<span id="cb36-8"><a href="análisis-y-resultados.html#cb36-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="análisis-y-resultados.html#cb36-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb36-10"><a href="análisis-y-resultados.html#cb36-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:8"></span>
+<img src="proyecto-Fabian_files/figure-html/8-1.png" alt="PIB por Región" width="1152" />
+<p class="caption">
+Figure 12: PIB por Región
+</p>
+</div>
+<p>Finalmente, analizamos la composición por niveles de ingreso de los países en cada región (<a href="análisis-y-resultados.html#fig:9">13</a>), ordenadas de mayor a menor participación de economías de alto ingreso. Observamos que las regiones con mayor proporción de países de alto ingreso (OCDE) son las 3 regiones que encontramos contruyen mayoritariamente a la emisión de CO<sub>2</sub>. La información provista por esta gráfica se alinea con lo visto en (<a href="análisis-y-resultados.html#fig:7">11</a>) y (<a href="análisis-y-resultados.html#fig:8">12</a>).</p>
+</div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-y-resultados.html#cb37-1" tabindex="-1"></a>country_data <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="análisis-y-resultados.html#cb37-2" tabindex="-1"></a>  <span class="fu">filter</span>(Region <span class="sc">!=</span> <span class="st">&quot;Aggregates&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="análisis-y-resultados.html#cb37-3" tabindex="-1"></a>  <span class="fu">count</span>(Region, <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>, <span class="at">name =</span> <span class="st">&quot;n_count&quot;</span>) <span class="ot">-&gt;</span> income_group_per_region</span>
+<span id="cb37-4"><a href="análisis-y-resultados.html#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="análisis-y-resultados.html#cb37-5" tabindex="-1"></a>region_order <span class="ot">&lt;-</span> country_data <span class="sc">%&gt;%</span></span>
+<span id="cb37-6"><a href="análisis-y-resultados.html#cb37-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Region) <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="análisis-y-resultados.html#cb37-7" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb37-8"><a href="análisis-y-resultados.html#cb37-8" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">n</span>(),</span>
+<span id="cb37-9"><a href="análisis-y-resultados.html#cb37-9" tabindex="-1"></a>    <span class="at">high_income =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;High income: OECD&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-10"><a href="análisis-y-resultados.html#cb37-10" tabindex="-1"></a>    <span class="at">prop_high =</span> high_income <span class="sc">/</span> total,</span>
+<span id="cb37-11"><a href="análisis-y-resultados.html#cb37-11" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb37-12"><a href="análisis-y-resultados.html#cb37-12" tabindex="-1"></a>  )</span>
+<span id="cb37-13"><a href="análisis-y-resultados.html#cb37-13" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="análisis-y-resultados.html#cb37-14" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> income_group_per_region <span class="sc">%&gt;%</span></span>
+<span id="cb37-15"><a href="análisis-y-resultados.html#cb37-15" tabindex="-1"></a>  <span class="fu">left_join</span>(region_order, <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-16"><a href="análisis-y-resultados.html#cb37-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Region =</span> <span class="fu">reorder</span>(Region, prop_high))</span>
+<span id="cb37-17"><a href="análisis-y-resultados.html#cb37-17" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="análisis-y-resultados.html#cb37-18" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, </span>
+<span id="cb37-19"><a href="análisis-y-resultados.html#cb37-19" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Region, <span class="at">y =</span> n_count, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb37-20"><a href="análisis-y-resultados.html#cb37-20" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-21"><a href="análisis-y-resultados.html#cb37-21" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb37-22"><a href="análisis-y-resultados.html#cb37-22" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb37-23"><a href="análisis-y-resultados.html#cb37-23" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Region&quot;</span>,</span>
+<span id="cb37-24"><a href="análisis-y-resultados.html#cb37-24" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Numero de Paises&quot;</span>,</span>
+<span id="cb37-25"><a href="análisis-y-resultados.html#cb37-25" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Grupo de Ingresos por region&quot;</span></span>
+<span id="cb37-26"><a href="análisis-y-resultados.html#cb37-26" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb37-27"><a href="análisis-y-resultados.html#cb37-27" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb37-28"><a href="análisis-y-resultados.html#cb37-28" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:9"></span>
+<img src="proyecto-Fabian_files/figure-html/9-1.png" alt="Distribución económica por región" width="1152" />
+<p class="caption">
+Figure 13: Distribución económica por región
+</p>
+</div>
+<p>Complementamos esta gráfica con una prueba de Chi-cuadrado de independencia, para evaluar si existe asociación entre la región y la distribución de grupos de ingresos mediante la siguiente prueba de Hipótesis:</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: la distribución de grupos de ingresos es igual entre regiones.</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: la distribución cambia según la región.</p></li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="análisis-y-resultados.html#cb38-1" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(</span>
+<span id="cb38-2"><a href="análisis-y-resultados.html#cb38-2" tabindex="-1"></a>  n_count <span class="sc">~</span> Region <span class="sc">+</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>,</span>
+<span id="cb38-3"><a href="análisis-y-resultados.html#cb38-3" tabindex="-1"></a>  <span class="at">data =</span> income_group_per_region</span>
+<span id="cb38-4"><a href="análisis-y-resultados.html#cb38-4" tabindex="-1"></a>)</span>
+<span id="cb38-5"><a href="análisis-y-resultados.html#cb38-5" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="análisis-y-resultados.html#cb38-6" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(tabla)</span>
+<span id="cb38-7"><a href="análisis-y-resultados.html#cb38-7" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="análisis-y-resultados.html#cb38-8" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-9"><a href="análisis-y-resultados.html#cb38-9" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(res<span class="sc">$</span>statistic, <span class="dv">4</span>),</span>
+<span id="cb38-10"><a href="análisis-y-resultados.html#cb38-10" tabindex="-1"></a>  <span class="at">gl =</span> res<span class="sc">$</span>parameter,</span>
+<span id="cb38-11"><a href="análisis-y-resultados.html#cb38-11" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>)</span>
+<span id="cb38-12"><a href="análisis-y-resultados.html#cb38-12" tabindex="-1"></a>)</span>
+<span id="cb38-13"><a href="análisis-y-resultados.html#cb38-13" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="análisis-y-resultados.html#cb38-14" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb38-15"><a href="análisis-y-resultados.html#cb38-15" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb38-16"><a href="análisis-y-resultados.html#cb38-16" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Prueba Chi-cuadrado de independencia&quot;</span></span>
+<span id="cb38-17"><a href="análisis-y-resultados.html#cb38-17" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:prueba_chi_square)Prueba Chi-cuadrado de independencia</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">X-squared</td>
+<td align="right">152.4922</td>
+<td align="right">24</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>La prueba Chi-cuadrado de independencia mostró un resultado estadísticamente significativo (<span class="math inline">\(\chi^2 = 152.49\)</span>, <span class="math inline">\(gl = 24\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). Por lo tanto, se rechaza la hipótesis nula de independencia entre la región y el grupo de ingresos de los países.</p>
+<p>Estos resultados indican que la distribución de los grupos de ingresos no es homogénea entre regiones, lo que sugiere una asociación significativa entre la ubicación regional y el nivel de ingresos de los países.</p>
+</div>
+<div id="analisis-de-distribución-de-emisiones-regional-y-económica" class="section level2 hasAnchor">
+<h2>Analisis de distribución de emisiones regional y económica<a href="análisis-y-resultados.html#analisis-de-distribuci%C3%B3n-de-emisiones-regional-y-econ%C3%B3mica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div style="text-align: justify;">
+<p>Generamos 2 diagramas de caja (boxplots) <a href="análisis-y-resultados.html#fig:7">11</a> y <a href="análisis-y-resultados.html#fig:8">12</a> con el objetivo de profundizar en la heterogeneidad interna de las emisiones de CO₂, desagregando la información por grupo de ingreso y por región respectivamente. Para facilidad de nuestro análisis y evitar incorporar ruido por cambios temporales, filtramos la información para el año 2010.</p>
+<p>Por grupo de ingreso, el resultado más destacado es la elevada dispersión interna del grupo de alto ingreso OCDE, cuya caja intercuartílica se extiende notablemente por encima de los demás grupos, con un valor atípico (outlier) que supera los 5 × 10⁹ toneladas —atribuible presumiblemente a Estados Unidos o un emisor de escala comparable. Los grupos de ingreso bajo e ingreso medio-bajo presentan cajas prácticamente colapsadas sobre el eje horizontal, con medianas cercanas a cero y outliers aislados que representan países de gran población como India o Nigeria. El grupo de ingreso medio-alto muestra un outlier superior cercano a los 8 × 10⁹ toneladas, el más alto del gráfico, consistente con la posición de China en ese grupo de clasificación para 2010. Este hallazgo indica algo: las mayores emisiones absolutas en 2010 no provienen de los países de mayor ingreso per cápita, sino de economías en transición de ingreso medio-alto con grandes bases industriales y poblacionales.</p>
+<p>Por región, el contraste es aún más pronunciado. América del Norte exhibe la distribución más amplia con diferencia: su caja intercuartílica abarca el rango entre aproximadamente 2 × 10⁹ y 5 × 10⁹ toneladas, con una mediana en torno a 3 × 10⁹, lo que refleja que incluso el país mediano de esa región —compuesta por muy pocos países de alta emisión individual— genera volúmenes extraordinariamente elevados. Asia Oriental y el Pacífico presenta una caja comprimida pero con un outlier superior cercano a los 8 × 10⁹ toneladas, el valor más alto del gráfico, coherente con la presencia de China como emisor dominante dentro de una región por lo demás heterogénea. Todas las demás regiones —Europa y Asia Central, América Latina, Oriente Medio, Asia del Sur y África Subsahariana— muestran distribuciones extremadamente comprimidas con medianas próximas a cero, indicando que la gran mayoría de sus países son emisores menores en términos absolutos, aunque con outliers aislados de relevancia.</p>
+<p>La lectura conjunta de ambos gráficos refuerza una conclusión: la distribución de emisiones de CO<sub>4</sub> es profundamente asimétrica tanto entre regiones como dentro de los grupos de ingreso, con un número reducido de países —caracterizados por grandes economías industriales, alta población o abundancia de recursos fósiles— concentrando la mayor parte de las emisiones globales. Esta concentración implica que las políticas de mitigación climática tienen un potencial de impacto desproporcionadamente mayor si se focalizan en dichos emisores dominantes, independientemente de su clasificación regional o de ingreso.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="análisis-y-resultados.html#cb39-1" tabindex="-1"></a>gdp_joined_2010 <span class="ot">=</span> gdp_joined_data2[gdp_joined_data2<span class="sc">$</span>Year <span class="sc">==</span> <span class="dv">2010</span>,]</span>
+<span id="cb39-2"><a href="análisis-y-resultados.html#cb39-2" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="análisis-y-resultados.html#cb39-3" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_2010, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Region), <span class="at">y =</span> <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="análisis-y-resultados.html#cb39-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb39-5"><a href="análisis-y-resultados.html#cb39-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb39-6"><a href="análisis-y-resultados.html#cb39-6" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Region&quot;</span>,</span>
+<span id="cb39-7"><a href="análisis-y-resultados.html#cb39-7" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Emisiones de CO2&quot;</span>,</span>
+<span id="cb39-8"><a href="análisis-y-resultados.html#cb39-8" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribucion de las emisiones de CO2 por region en 2010&quot;</span></span>
+<span id="cb39-9"><a href="análisis-y-resultados.html#cb39-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb39-10"><a href="análisis-y-resultados.html#cb39-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-11"><a href="análisis-y-resultados.html#cb39-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb39-12"><a href="análisis-y-resultados.html#cb39-12" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb39-13"><a href="análisis-y-resultados.html#cb39-13" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb39-14"><a href="análisis-y-resultados.html#cb39-14" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb39-15"><a href="análisis-y-resultados.html#cb39-15" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb39-16"><a href="análisis-y-resultados.html#cb39-16" tabindex="-1"></a>  <span class="fu">theme</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:10"></span>
+<img src="proyecto-Fabian_files/figure-html/10-1.png" alt="Distribución de emisiones por región" width="1152" />
+<p class="caption">
+Figure 14: Distribución de emisiones por región
+</p>
+</div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="análisis-y-resultados.html#cb40-1" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_joined_2010, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="análisis-y-resultados.html#cb40-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb40-3"><a href="análisis-y-resultados.html#cb40-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb40-4"><a href="análisis-y-resultados.html#cb40-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Economico&quot;</span>,</span>
+<span id="cb40-5"><a href="análisis-y-resultados.html#cb40-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Emisiones de CO2&quot;</span>,</span>
+<span id="cb40-6"><a href="análisis-y-resultados.html#cb40-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribucion de las emisiones de CO2 por grupo economico en 2010&quot;</span></span>
+<span id="cb40-7"><a href="análisis-y-resultados.html#cb40-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="análisis-y-resultados.html#cb40-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-9"><a href="análisis-y-resultados.html#cb40-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb40-10"><a href="análisis-y-resultados.html#cb40-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-11"><a href="análisis-y-resultados.html#cb40-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-12"><a href="análisis-y-resultados.html#cb40-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb40-13"><a href="análisis-y-resultados.html#cb40-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:11"></span>
+<img src="proyecto-Fabian_files/figure-html/11-1.png" alt="Distribución de emisiones por grupo económico" width="1152" />
+<p class="caption">
+Figure 15: Distribución de emisiones por grupo económico
+</p>
+</div>
+<p>Lo anterior lo podemos sustentar con evidencia estadística, para lo cuál primero validamos el supuesto de normalidad sobre las emisiones anuales de CO<sub>2</sub>. Podemos evidenciar un comportamiento claramente no normal <a href="análisis-y-resultados.html#fig:20">16</a>, por lo cual se decide realizar una prueba de Kruskal-Wallis para hallar diferencias entre las regiones y los grupos ecónomicos:</p>
+<p><span class="math inline">\(H_0\)</span>: Todos los grupos provienen de la misma distribución.</p>
+<p><span class="math inline">\(H_1\)</span>: Al menos uno de los grupos proviene de una distribución diferente.</p>
+<ul>
+<li>Análisis regional</li>
+</ul>
+<p>El análisis de Dunn permitió identificar qué regiones presentan diferencias significativas en las emisiones de CO<sub>2</sub> per cápita luego de aplicar la corrección por comparaciones múltiples.</p>
+<p>Se encontraron diferencias estadísticamente significativas entre las siguientes regiones:</p>
+<ul>
+<li>East Asia &amp; Pacific y Europe &amp; Central Asia (<span class="math inline">\(p_{adj}=0.0442\)</span>)</li>
+<li>Europe &amp; Central Asia y Latin America &amp; Caribbean (<span class="math inline">\(p_{adj}=0.0209\)</span>)</li>
+<li>Europe &amp; Central Asia y Sub-Saharan Africa (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>Middle East &amp; North Africa y Sub-Saharan Africa (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>North America y Sub-Saharan Africa (<span class="math inline">\(p_{adj}=0.0343\)</span>)</li>
+</ul>
+<p>En contraste, las demás comparaciones no mostraron diferencias significativas después del ajuste de Bonferroni. Debe considerarse que la región de América del Norte contiene únicamente dos observaciones (USA y Canada), por lo que los resultados asociados a este grupo pueden presentar menor estabilidad y sensibilidad a valores extremos. Posiblemente, debido a esto, no encontramos diferencias significativas en la prueba de Dunn como si lo hicimos en el análisis gráfico mediante boxplots.</p>
+<p>Los resultados muestran que las diferencias más marcadas se concentran entre regiones altamente industrializadas y regiones con menores niveles de desarrollo económico, particularmente Sub-Saharan Africa, que difiere significativamente de varias regiones con mayores niveles de emisiones.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-y-resultados.html#cb41-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb41-2"><a href="análisis-y-resultados.html#cb41-2" tabindex="-1"></a>  gdp_joined_2010<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>,</span>
+<span id="cb41-3"><a href="análisis-y-resultados.html#cb41-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb41-4"><a href="análisis-y-resultados.html#cb41-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(gdp_joined_2010<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>),</span>
+<span id="cb41-5"><a href="análisis-y-resultados.html#cb41-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(gdp_joined_2010<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>)</span>
+<span id="cb41-6"><a href="análisis-y-resultados.html#cb41-6" tabindex="-1"></a>)</span>
+<span id="cb41-7"><a href="análisis-y-resultados.html#cb41-7" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="análisis-y-resultados.html#cb41-8" tabindex="-1"></a><span class="fu">qqnorm</span>(gdp_joined_2010<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>,</span>
+<span id="cb41-9"><a href="análisis-y-resultados.html#cb41-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb41-10"><a href="análisis-y-resultados.html#cb41-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb41-11"><a href="análisis-y-resultados.html#cb41-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb41-12"><a href="análisis-y-resultados.html#cb41-12" tabindex="-1"></a>       ))</span>
+<span id="cb41-13"><a href="análisis-y-resultados.html#cb41-13" tabindex="-1"></a><span class="fu">qqline</span>(gdp_joined_2010<span class="sc">$</span><span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:20"></span>
+<img src="proyecto-Fabian_files/figure-html/20-1.png" alt="Validación de normalidad - emisión total de CO2" width="672" />
+<p class="caption">
+Figure 16: Validación de normalidad - emisión total de CO2
+</p>
+</div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="análisis-y-resultados.html#cb42-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb42-2"><a href="análisis-y-resultados.html#cb42-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(Region),</span>
+<span id="cb42-3"><a href="análisis-y-resultados.html#cb42-3" tabindex="-1"></a>  <span class="at">data =</span> gdp_joined_2010</span>
+<span id="cb42-4"><a href="análisis-y-resultados.html#cb42-4" tabindex="-1"></a>)</span>
+<span id="cb42-5"><a href="análisis-y-resultados.html#cb42-5" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="análisis-y-resultados.html#cb42-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb42-7"><a href="análisis-y-resultados.html#cb42-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb42-8"><a href="análisis-y-resultados.html#cb42-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb42-9"><a href="análisis-y-resultados.html#cb42-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb42-10"><a href="análisis-y-resultados.html#cb42-10" tabindex="-1"></a>)</span>
+<span id="cb42-11"><a href="análisis-y-resultados.html#cb42-11" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="análisis-y-resultados.html#cb42-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb42-13"><a href="análisis-y-resultados.html#cb42-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb42-14"><a href="análisis-y-resultados.html#cb42-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb42-15"><a href="análisis-y-resultados.html#cb42-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb42-16"><a href="análisis-y-resultados.html#cb42-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb42-17"><a href="análisis-y-resultados.html#cb42-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb42-18"><a href="análisis-y-resultados.html#cb42-18" tabindex="-1"></a>)</span>
+<span id="cb42-19"><a href="análisis-y-resultados.html#cb42-19" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="análisis-y-resultados.html#cb42-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb42-21"><a href="análisis-y-resultados.html#cb42-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb42-22"><a href="análisis-y-resultados.html#cb42-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb42-23"><a href="análisis-y-resultados.html#cb42-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test3)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">49.4052</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análisis-y-resultados.html#cb43-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb43-2"><a href="análisis-y-resultados.html#cb43-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> Region,</span>
+<span id="cb43-3"><a href="análisis-y-resultados.html#cb43-3" tabindex="-1"></a>  <span class="at">data =</span> gdp_joined_2010,</span>
+<span id="cb43-4"><a href="análisis-y-resultados.html#cb43-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb43-5"><a href="análisis-y-resultados.html#cb43-5" tabindex="-1"></a>)</span>
+<span id="cb43-6"><a href="análisis-y-resultados.html#cb43-6" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="análisis-y-resultados.html#cb43-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb43-8"><a href="análisis-y-resultados.html#cb43-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb43-9"><a href="análisis-y-resultados.html#cb43-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb43-10"><a href="análisis-y-resultados.html#cb43-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test3)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="63%" />
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - Europe &amp; Central Asia</td>
+<td align="right">-3.0753191</td>
+<td align="right">0.0021028</td>
+<td align="right">0.0441583</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Latin America &amp; Caribbean</td>
+<td align="right">-0.0349739</td>
+<td align="right">0.9721005</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Latin America &amp; Caribbean</td>
+<td align="right">3.2915700</td>
+<td align="right">0.0009963</td>
+<td align="right">0.0209223</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Middle East &amp; North Africa</td>
+<td align="right">-2.7518236</td>
+<td align="right">0.0059264</td>
+<td align="right">0.1244553</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Middle East &amp; North Africa</td>
+<td align="right">-0.7490951</td>
+<td align="right">0.4537999</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Middle East &amp; North Africa</td>
+<td align="right">-2.8218746</td>
+<td align="right">0.0047744</td>
+<td align="right">0.1002621</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - North America</td>
+<td align="right">-2.4624290</td>
+<td align="right">0.0137999</td>
+<td align="right">0.2897989</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - North America</td>
+<td align="right">-1.4369320</td>
+<td align="right">0.1507373</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - North America</td>
+<td align="right">-2.4710636</td>
+<td align="right">0.0134712</td>
+<td align="right">0.2828949</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - North America</td>
+<td align="right">-1.0025217</td>
+<td align="right">0.3160917</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - South Asia</td>
+<td align="right">-0.7836919</td>
+<td align="right">0.4332209</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - South Asia</td>
+<td align="right">1.0789535</td>
+<td align="right">0.2806085</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - South Asia</td>
+<td align="right">-0.7817459</td>
+<td align="right">0.4343639</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - South Asia</td>
+<td align="right">1.4186214</td>
+<td align="right">0.1560094</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">North America - South Asia</td>
+<td align="right">1.8404641</td>
+<td align="right">0.0657001</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Sub-Saharan Africa</td>
+<td align="right">1.8360818</td>
+<td align="right">0.0663456</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Sub-Saharan Africa</td>
+<td align="right">5.9067860</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000001</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Sub-Saharan Africa</td>
+<td align="right">2.0290540</td>
+<td align="right">0.0424528</td>
+<td align="right">0.8915085</td>
+</tr>
+<tr class="odd">
+<td align="left">Middle East &amp; North Africa - Sub-Saharan Africa</td>
+<td align="right">4.2901281</td>
+<td align="right">0.0000179</td>
+<td align="right">0.0003750</td>
+</tr>
+<tr class="even">
+<td align="left">North America - Sub-Saharan Africa</td>
+<td align="right">3.1500631</td>
+<td align="right">0.0016324</td>
+<td align="right">0.0342794</td>
+</tr>
+<tr class="odd">
+<td align="left">South Asia - Sub-Saharan Africa</td>
+<td align="right">1.9708047</td>
+<td align="right">0.0487462</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Análisis por Grupo de Ingreso</li>
+</ul>
+<p>El análisis por grupo de ingresos mostró diferencias significativas entre algunos niveles de ingreso en relación con las emisiones de CO<sub>2</sub> per cápita.</p>
+<p>En particular, se encontraron diferencias significativas entre:</p>
+<ul>
+<li>High income: OECD y Low income (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>High income: OECD y Lower middle income (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>High income: OECD y Upper middle income (<span class="math inline">\(p_{adj}=0.0111\)</span>)</li>
+<li>Low income y Upper middle income (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+</ul>
+<p>Por otro lado, no se encontraron diferencias estadísticamente significativas entre los demás pares de grupos luego de aplicar el ajuste de Bonferroni.</p>
+<p>Estos resultados sugieren que los países pertenecientes al grupo High income: OECD presentan patrones de emisiones significativamente distintos frente a economías de menores ingresos, mientras que los demás grupos muestran niveles más similares al resto de categorías.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análisis-y-resultados.html#cb44-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb44-2"><a href="análisis-y-resultados.html#cb44-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>),</span>
+<span id="cb44-3"><a href="análisis-y-resultados.html#cb44-3" tabindex="-1"></a>  <span class="at">data =</span> gdp_joined_2010</span>
+<span id="cb44-4"><a href="análisis-y-resultados.html#cb44-4" tabindex="-1"></a>)</span>
+<span id="cb44-5"><a href="análisis-y-resultados.html#cb44-5" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="análisis-y-resultados.html#cb44-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb44-7"><a href="análisis-y-resultados.html#cb44-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb44-8"><a href="análisis-y-resultados.html#cb44-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb44-9"><a href="análisis-y-resultados.html#cb44-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb44-10"><a href="análisis-y-resultados.html#cb44-10" tabindex="-1"></a>)</span>
+<span id="cb44-11"><a href="análisis-y-resultados.html#cb44-11" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="análisis-y-resultados.html#cb44-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb44-13"><a href="análisis-y-resultados.html#cb44-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb44-14"><a href="análisis-y-resultados.html#cb44-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb44-15"><a href="análisis-y-resultados.html#cb44-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb44-16"><a href="análisis-y-resultados.html#cb44-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb44-17"><a href="análisis-y-resultados.html#cb44-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb44-18"><a href="análisis-y-resultados.html#cb44-18" tabindex="-1"></a>)</span>
+<span id="cb44-19"><a href="análisis-y-resultados.html#cb44-19" tabindex="-1"></a></span>
+<span id="cb44-20"><a href="análisis-y-resultados.html#cb44-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb44-21"><a href="análisis-y-resultados.html#cb44-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb44-22"><a href="análisis-y-resultados.html#cb44-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb44-23"><a href="análisis-y-resultados.html#cb44-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test4)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">48.3268</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-y-resultados.html#cb45-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb45-2"><a href="análisis-y-resultados.html#cb45-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Annual CO2 emissions</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>,</span>
+<span id="cb45-3"><a href="análisis-y-resultados.html#cb45-3" tabindex="-1"></a>  <span class="at">data =</span> gdp_joined_2010,</span>
+<span id="cb45-4"><a href="análisis-y-resultados.html#cb45-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb45-5"><a href="análisis-y-resultados.html#cb45-5" tabindex="-1"></a>)</span>
+<span id="cb45-6"><a href="análisis-y-resultados.html#cb45-6" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="análisis-y-resultados.html#cb45-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb45-8"><a href="análisis-y-resultados.html#cb45-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb45-9"><a href="análisis-y-resultados.html#cb45-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb45-10"><a href="análisis-y-resultados.html#cb45-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test4)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="58%" />
+<col width="14%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">High income: nonOECD - High income: OECD</td>
+<td align="right">-1.8448455</td>
+<td align="right">0.0650600</td>
+<td align="right">0.6506002</td>
+</tr>
+<tr class="even">
+<td align="left">High income: nonOECD - Low income</td>
+<td align="right">2.4723341</td>
+<td align="right">0.0134234</td>
+<td align="right">0.1342340</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: OECD - Low income</td>
+<td align="right">6.6068098</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High income: nonOECD - Lower middle income</td>
+<td align="right">1.1459130</td>
+<td align="right">0.2518312</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: OECD - Lower middle income</td>
+<td align="right">5.0414291</td>
+<td align="right">0.0000005</td>
+<td align="right">0.0000046</td>
+</tr>
+<tr class="even">
+<td align="left">Low income - Lower middle income</td>
+<td align="right">-2.3817221</td>
+<td align="right">0.0172319</td>
+<td align="right">0.1723189</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: nonOECD - Upper middle income</td>
+<td align="right">0.0876227</td>
+<td align="right">0.9301765</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High income: OECD - Upper middle income</td>
+<td align="right">3.2619450</td>
+<td align="right">0.0011065</td>
+<td align="right">0.0110651</td>
+</tr>
+<tr class="odd">
+<td align="left">Low income - Upper middle income</td>
+<td align="right">-4.0663555</td>
+<td align="right">0.0000478</td>
+<td align="right">0.0004775</td>
+</tr>
+<tr class="even">
+<td align="left">Lower middle income - Upper middle income</td>
+<td align="right">-1.9893664</td>
+<td align="right">0.0466608</td>
+<td align="right">0.4666077</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="análisis-de-proyecciones" class="section level2 hasAnchor">
+<h2>Análisis de Proyecciones<a href="análisis-y-resultados.html#an%C3%A1lisis-de-proyecciones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div style="text-align: justify;">
+<p>El conjunto de datos obtenido de <span class="citation">(<a href="#ref-ref155">World Bank, 2023</a>)</span> nos provee proyecciones de cambio de temperatura y precipitaciones para cada país durante el perio 2045 a 2065. Esta información viene un campo de texto en formato ‘Bajo a Alto’. Para nuestro análisis, se extrajó ambos niveles para cada país y se promediaron, de forma que se obtuvo una proyección promedio de cambio de temperatura y precipitación para cada país.</p>
+<div id="proyección-de-cambio-de-temperatura" class="section level3 hasAnchor">
+<h3>Proyección de cambio de temperatura<a href="análisis-y-resultados.html#proyecci%C3%B3n-de-cambio-de-temperatura" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Analizamos la proyección de cambio de temperatura, desagregada por ingreso y por región. El rango general de las proyecciones se sitúa entre aproximadamente 1.0 °C y 3.1 °C, con la mayoría de las medianas concentradas en torno a 2.2–2.5 °C, lo que indica que el calentamiento proyectado es un fenómeno de alcance global sin excepción regional significativa.</p>
+<ul>
+<li>Por región</li>
+</ul>
+<p>Las diferencias por región son más pronunciadas. Asia Oriental y el Pacífico presenta la mediana más baja (~1.7 °C) y la distribución más comprimida, posiblemente asociada a efectos moderadores de la circulación oceánica en las zonas costeras e insulares de la región. En el extremo opuesto, Oriente Medio y África del Norte, América del Norte y Asia del Sur exhiben las medianas más elevadas (~2.5 °C), con cajas amplias que denotan variabilidad interna significativa entre países. África Subsahariana y Europa y Asia Central muestran medianas intermedias (~2.3 °C) pero con bigotes que se extienden hasta valores superiores a 3.0 °C, indicando que algunos países dentro de estas regiones podrían experimentar calentamientos considerablemente más severos. América Latina y el Caribe presenta la mayor dispersión interna de todas las regiones, con una caja que abarca desde aproximadamente 1.6 °C hasta 2.3 °C, coherente con la diversidad climática de un territorio que incluye desde zonas tropicales hasta regiones subpolares.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="análisis-y-resultados.html#cb46-1" tabindex="-1"></a>projected_temperature_change <span class="ot">&lt;-</span> climate_change_data <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="análisis-y-resultados.html#cb46-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Series code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;EN.CLC.PCAT.C&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="análisis-y-resultados.html#cb46-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country code</span><span class="st">`</span>, <span class="st">`</span><span class="at">Country name</span><span class="st">`</span>, <span class="st">`</span><span class="at">2011</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-4"><a href="análisis-y-resultados.html#cb46-4" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-5"><a href="análisis-y-resultados.html#cb46-5" tabindex="-1"></a>    <span class="at">temp =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(<span class="st">`</span><span class="at">2011</span><span class="st">`</span>, <span class="st">&quot; to &quot;</span>),</span>
+<span id="cb46-6"><a href="análisis-y-resultados.html#cb46-6" tabindex="-1"></a>                   <span class="st">`</span><span class="at">2011</span><span class="st">`</span>,</span>
+<span id="cb46-7"><a href="análisis-y-resultados.html#cb46-7" tabindex="-1"></a>                   <span class="cn">NA_character_</span>)</span>
+<span id="cb46-8"><a href="análisis-y-resultados.html#cb46-8" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb46-9"><a href="análisis-y-resultados.html#cb46-9" tabindex="-1"></a>  <span class="fu">separate</span>(</span>
+<span id="cb46-10"><a href="análisis-y-resultados.html#cb46-10" tabindex="-1"></a>    temp,</span>
+<span id="cb46-11"><a href="análisis-y-resultados.html#cb46-11" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Lowest&quot;</span>, <span class="st">&quot;Highest&quot;</span>),</span>
+<span id="cb46-12"><a href="análisis-y-resultados.html#cb46-12" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot; to &quot;</span></span>
+<span id="cb46-13"><a href="análisis-y-resultados.html#cb46-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-14"><a href="análisis-y-resultados.html#cb46-14" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-15"><a href="análisis-y-resultados.html#cb46-15" tabindex="-1"></a>    <span class="at">Lowest =</span> <span class="fu">as.numeric</span>(Lowest),</span>
+<span id="cb46-16"><a href="análisis-y-resultados.html#cb46-16" tabindex="-1"></a>    <span class="at">Highest   =</span> <span class="fu">as.numeric</span>(Highest),</span>
+<span id="cb46-17"><a href="análisis-y-resultados.html#cb46-17" tabindex="-1"></a>    <span class="at">Mean    =</span> <span class="fu">rowMeans</span>(<span class="fu">cbind</span>(Lowest, Highest), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb46-18"><a href="análisis-y-resultados.html#cb46-18" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">2011</span><span class="st">`</span>, <span class="sc">-</span>Lowest, <span class="sc">-</span>Highest)</span>
+<span id="cb46-19"><a href="análisis-y-resultados.html#cb46-19" tabindex="-1"></a></span>
+<span id="cb46-20"><a href="análisis-y-resultados.html#cb46-20" tabindex="-1"></a>projected_precipitation_change <span class="ot">&lt;-</span> climate_change_data <span class="sc">%&gt;%</span> </span>
+<span id="cb46-21"><a href="análisis-y-resultados.html#cb46-21" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Series code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;EN.CLC.PCPT.MM&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-22"><a href="análisis-y-resultados.html#cb46-22" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country code</span><span class="st">`</span>, <span class="st">`</span><span class="at">Country name</span><span class="st">`</span>, <span class="st">`</span><span class="at">2011</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-23"><a href="análisis-y-resultados.html#cb46-23" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-24"><a href="análisis-y-resultados.html#cb46-24" tabindex="-1"></a>    <span class="at">temp =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(<span class="st">`</span><span class="at">2011</span><span class="st">`</span>, <span class="st">&quot; to &quot;</span>),</span>
+<span id="cb46-25"><a href="análisis-y-resultados.html#cb46-25" tabindex="-1"></a>                   <span class="st">`</span><span class="at">2011</span><span class="st">`</span>,</span>
+<span id="cb46-26"><a href="análisis-y-resultados.html#cb46-26" tabindex="-1"></a>                   <span class="cn">NA_character_</span>)</span>
+<span id="cb46-27"><a href="análisis-y-resultados.html#cb46-27" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb46-28"><a href="análisis-y-resultados.html#cb46-28" tabindex="-1"></a>  <span class="fu">separate</span>(</span>
+<span id="cb46-29"><a href="análisis-y-resultados.html#cb46-29" tabindex="-1"></a>    temp,</span>
+<span id="cb46-30"><a href="análisis-y-resultados.html#cb46-30" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Lowest&quot;</span>, <span class="st">&quot;Highest&quot;</span>),</span>
+<span id="cb46-31"><a href="análisis-y-resultados.html#cb46-31" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot; to &quot;</span></span>
+<span id="cb46-32"><a href="análisis-y-resultados.html#cb46-32" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-33"><a href="análisis-y-resultados.html#cb46-33" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-34"><a href="análisis-y-resultados.html#cb46-34" tabindex="-1"></a>    <span class="at">Lowest =</span> <span class="fu">as.numeric</span>(Lowest),</span>
+<span id="cb46-35"><a href="análisis-y-resultados.html#cb46-35" tabindex="-1"></a>    <span class="at">Highest   =</span> <span class="fu">as.numeric</span>(Highest),</span>
+<span id="cb46-36"><a href="análisis-y-resultados.html#cb46-36" tabindex="-1"></a>    <span class="at">Mean    =</span> <span class="fu">rowMeans</span>(<span class="fu">cbind</span>(Lowest, Highest), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb46-37"><a href="análisis-y-resultados.html#cb46-37" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">2011</span><span class="st">`</span>, <span class="sc">-</span>Lowest, <span class="sc">-</span>Highest)</span>
+<span id="cb46-38"><a href="análisis-y-resultados.html#cb46-38" tabindex="-1"></a></span>
+<span id="cb46-39"><a href="análisis-y-resultados.html#cb46-39" tabindex="-1"></a>country_data <span class="sc">%&gt;%</span> </span>
+<span id="cb46-40"><a href="análisis-y-resultados.html#cb46-40" tabindex="-1"></a>  <span class="fu">inner_join</span>(projected_temperature_change, <span class="at">by=</span><span class="st">&quot;Country code&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-41"><a href="análisis-y-resultados.html#cb46-41" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Country name.y</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Lending category</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-42"><a href="análisis-y-resultados.html#cb46-42" tabindex="-1"></a>  <span class="fu">inner_join</span>(projected_precipitation_change, <span class="at">by=</span><span class="st">&quot;Country code&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-43"><a href="análisis-y-resultados.html#cb46-43" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Country name</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-44"><a href="análisis-y-resultados.html#cb46-44" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb46-45"><a href="análisis-y-resultados.html#cb46-45" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
+<span id="cb46-46"><a href="análisis-y-resultados.html#cb46-46" tabindex="-1"></a>    <span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Country code</span><span class="st">`</span>,</span>
+<span id="cb46-47"><a href="análisis-y-resultados.html#cb46-47" tabindex="-1"></a>    <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span> <span class="ot">=</span> Mean.x,</span>
+<span id="cb46-48"><a href="análisis-y-resultados.html#cb46-48" tabindex="-1"></a>    <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span> <span class="ot">=</span> Mean.y</span>
+<span id="cb46-49"><a href="análisis-y-resultados.html#cb46-49" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> projected_climate_change_country_data</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análisis-y-resultados.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Region</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="análisis-y-resultados.html#cb47-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb47-3"><a href="análisis-y-resultados.html#cb47-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb47-4"><a href="análisis-y-resultados.html#cb47-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Región&quot;</span>,</span>
+<span id="cb47-5"><a href="análisis-y-resultados.html#cb47-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Temperatura Media (ºC)&quot;</span>,</span>
+<span id="cb47-6"><a href="análisis-y-resultados.html#cb47-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Temperatura Media (2045- 2065) por Región&quot;</span></span>
+<span id="cb47-7"><a href="análisis-y-resultados.html#cb47-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-8"><a href="análisis-y-resultados.html#cb47-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb47-9"><a href="análisis-y-resultados.html#cb47-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb47-10"><a href="análisis-y-resultados.html#cb47-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb47-11"><a href="análisis-y-resultados.html#cb47-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb47-12"><a href="análisis-y-resultados.html#cb47-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) </span>
+<span id="cb47-13"><a href="análisis-y-resultados.html#cb47-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:12"></span>
+<img src="proyecto-Fabian_files/figure-html/12-1.png" alt="Proyección de cambio de temperatura por región" width="1152" />
+<p class="caption">
+Figure 17: Proyección de cambio de temperatura por región
+</p>
+</div>
+<ul>
+<li>Por Grupo Ecónomico</li>
+</ul>
+<p>Las distribuciones por grupo económico son notablemente similares en sus medianas, oscilando entre 1.8 °C (alto ingreso no-OCDE) y 2.3 °C (bajo ingreso, ingreso medio-bajo e ingreso medio-alto). Sin embargo, la amplitud de las cajas intercuartílicas varía: los grupos de ingreso bajo e ingreso medio presentan mayor dispersión interna, reflejando la heterogeneidad geográfica de los países que los integran. El hallazgo analíticamente más relevante es la ausencia de una gradiente clara entre nivel de ingreso y magnitud del calentamiento proyectado: los países de bajo ingreso —que históricamente han contribuido de forma marginal a las emisiones acumuladas— enfrentarán incrementos de temperatura comparables o superiores a los de las economías que han sido responsables de la mayor parte de las emisiones históricas.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análisis-y-resultados.html#cb48-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="análisis-y-resultados.html#cb48-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb48-3"><a href="análisis-y-resultados.html#cb48-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-4"><a href="análisis-y-resultados.html#cb48-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
+<span id="cb48-5"><a href="análisis-y-resultados.html#cb48-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Temperatura Media (ºC)&quot;</span>,</span>
+<span id="cb48-6"><a href="análisis-y-resultados.html#cb48-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Temperatura Media (2045- 2065) por Grupo Económico&quot;</span></span>
+<span id="cb48-7"><a href="análisis-y-resultados.html#cb48-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="análisis-y-resultados.html#cb48-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb48-9"><a href="análisis-y-resultados.html#cb48-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb48-10"><a href="análisis-y-resultados.html#cb48-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb48-11"><a href="análisis-y-resultados.html#cb48-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb48-12"><a href="análisis-y-resultados.html#cb48-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) </span>
+<span id="cb48-13"><a href="análisis-y-resultados.html#cb48-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:13"></span>
+<img src="proyecto-Fabian_files/figure-html/13-1.png" alt="Proyección de cambio de temperatura por grupo ecónomico" width="1152" />
+<p class="caption">
+Figure 18: Proyección de cambio de temperatura por grupo ecónomico
+</p>
+</div>
+<p>La lectura conjunta de ambos gráficos conduce a dos conclusiones de orden superior. Primero, el calentamiento proyectado es independiente del nivel de responsabilidad histórica en las emisiones: regiones de bajo ingreso y baja industrialización soportarán incrementos de temperatura equivalentes a los de las economías más emisoras, lo que refuerza el argumento de justicia climática en los marcos de negociación internacional. Segundo, la variabilidad intra-regional e intra-grupal es tan o más relevante que las diferencias entre categorías, sugiriendo que las políticas de adaptación climática deben diseñarse atendiendo a vulnerabilidades específicas de cada país, más que a clasificaciones de ingreso o región.</p>
+</div>
+<div id="proyección-de-cambio-en-precipitaciones" class="section level3 hasAnchor">
+<h3>Proyección de cambio en precipitaciones<a href="análisis-y-resultados.html#proyecci%C3%B3n-de-cambio-en-precipitaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A diferencia de las proyecciones de temperatura —donde todas las regiones convergen hacia incrementos positivos— los gráficos de precipitación revelan una dinámica fundamentalmente distinta: el signo del cambio proyectado varía según la región, configurando un escenario en el que el calentamiento global produce simultáneamente exceso hídrico en algunas zonas y déficit severo en otras. Este patrón constituye uno de los impactos más complejos del cambio climático desde el punto de vista de la adaptación.</p>
+<ul>
+<li>Por Región</li>
+</ul>
+<p>Por región, la heterogeneidad es marcada. Asia Oriental y el Pacífico presenta la mediana más alta (~+50 mm) y la mayor dispersión positiva, con outliers que superan los +300 mm, indicando que una fracción de sus países podría experimentar incrementos de precipitación muy significativos, probablemente asociados a la intensificación de sistemas oceánicos y ciclónicos. Asia del Sur y América del Norte también proyectan medianas positivas (~+50 mm y ~+30 mm respectivamente), consistentes con el reforzamiento de regímenes de precipitación en latitudes medias y subtropicales húmedas. En contraste, América Latina y el Caribe, Europa y Asia Central, y especialmente Oriente Medio y África del Norte muestran medianas negativas o cercanas a cero, con cajas que se extienden predominantemente por debajo del eje, señalando tendencias hacia la aridización. África Subsahariana presenta una distribución centrada en torno a cero pero con alta dispersión en ambas direcciones, reflejando la coexistencia de zonas con incrementos y zonas con déficits dentro de una región geográficamente extensa y climáticamente diversa.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análisis-y-resultados.html#cb49-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Region</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="análisis-y-resultados.html#cb49-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="análisis-y-resultados.html#cb49-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-4"><a href="análisis-y-resultados.html#cb49-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Región&quot;</span>,</span>
+<span id="cb49-5"><a href="análisis-y-resultados.html#cb49-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
+<span id="cb49-6"><a href="análisis-y-resultados.html#cb49-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Región&quot;</span></span>
+<span id="cb49-7"><a href="análisis-y-resultados.html#cb49-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="análisis-y-resultados.html#cb49-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb49-9"><a href="análisis-y-resultados.html#cb49-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb49-10"><a href="análisis-y-resultados.html#cb49-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb49-11"><a href="análisis-y-resultados.html#cb49-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb49-12"><a href="análisis-y-resultados.html#cb49-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)  </span>
+<span id="cb49-13"><a href="análisis-y-resultados.html#cb49-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:14"></span>
+<img src="proyecto-Fabian_files/figure-html/14-1.png" alt="Proyección de cambio de precipitaciones por región" width="1152" />
+<p class="caption">
+Figure 19: Proyección de cambio de precipitaciones por región
+</p>
+</div>
+<ul>
+<li>Por grupo económico</li>
+</ul>
+<p>Por grupo de ingreso, el patrón más relevante es que el grupo de alto ingreso no-OCDE presenta una mediana claramente negativa (~−40 mm), coherente con la concentración de países de este grupo en zonas geográficas áridas o semiáridas como el Golfo Pérsico y partes de Europa meridional. El grupo de alto ingreso OCDE muestra una mediana levemente positiva con dispersión moderada, mientras que los grupos de ingreso bajo e ingreso medio-bajo exhiben distribuciones más amplias con medianas próximas a cero, reflejando nuevamente la heterogeneidad geográfica de sus integrantes. Los outliers más extremos —superando los +300 mm— se concentran en los grupos de ingreso medio-bajo y medio-alto, correspondientes a países tropicales de gran extensión territorial.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análisis-y-resultados.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="análisis-y-resultados.html#cb50-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb50-3"><a href="análisis-y-resultados.html#cb50-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-4"><a href="análisis-y-resultados.html#cb50-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
+<span id="cb50-5"><a href="análisis-y-resultados.html#cb50-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
+<span id="cb50-6"><a href="análisis-y-resultados.html#cb50-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Grupo Económico&quot;</span></span>
+<span id="cb50-7"><a href="análisis-y-resultados.html#cb50-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-8"><a href="análisis-y-resultados.html#cb50-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb50-9"><a href="análisis-y-resultados.html#cb50-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb50-10"><a href="análisis-y-resultados.html#cb50-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),   </span>
+<span id="cb50-11"><a href="análisis-y-resultados.html#cb50-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb50-12"><a href="análisis-y-resultados.html#cb50-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)   </span>
+<span id="cb50-13"><a href="análisis-y-resultados.html#cb50-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:15"></span>
+<img src="proyecto-Fabian_files/figure-html/15-1.png" alt="Proyección de cambio de precipitaciones por grupo económico" width="1152" />
+<p class="caption">
+Figure 20: Proyección de cambio de precipitaciones por grupo económico
+</p>
+</div>
+<p>Las implicaciones analíticas de estos gráficos son significativas en dos dimensiones. Primero, la precipitación introduce una asimetría de impacto climático que la temperatura no captura: regiones que ya enfrentan estrés hídrico —como Oriente Medio, partes de América Latina y el Mediterráneo— verán agravada su situación, mientras que otras experimentarán riesgos asociados al exceso hídrico, como inundaciones e infraestructura desbordada. Segundo, y en articulación con los análisis previos, los países de menor ingreso que proyectan reducciones de precipitación enfrentan la combinación más adversa: mayor calentamiento relativo, menor capacidad adaptativa y potencial contracción de sus bases agrícolas, todo ello siendo responsables de una fracción ínfima de las emisiones históricas acumuladas que originan dichos impactos.</p>
+</div>
+</div>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0" line-spacing="2">
+<div id="ref-ref155" class="csl-entry">
+World Bank. (2023). <em>Climate change data - world bank data catalog</em>. <a href="https://datacatalog.worldbank.org/search/dataset/0040205/climate-change-data">https://datacatalog.worldbank.org/search/dataset/0040205/climate-change-data</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="diccionario-de-campos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusiones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/05-EDA.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["proyecto-Fabian.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

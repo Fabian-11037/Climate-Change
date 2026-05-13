@@ -1,52 +1,4 @@
-# Análisis Exploratorio de Datos
-
-## Procesamiento de Datos
-
-<div style="text-align: justify;">
-Debido al uso de datos de diferente origen, es necesario limpiar, organizar y fusionar los conjuntos de datos usados. Esto inclye procesamiento de algunas columnas como la columna Date del dataset de temperaturas anómalas e identificar agrupaciones de países y variables de interes.
-</div>
-
-```{r Temperatura_Dataset, message=FALSE, warning=FALSE}
-temperature_data$year = as.integer(substr(temperature_data$Date, 1, 4))
-temperature_data$month = as.integer(substr(temperature_data$Date, 5, 6))
-
-gdp_data <- climate_change_data %>%  
-  filter(`Series code` %in% c("NY.GDP.MKTP.CD", "SP.POP.TOTL")) %>% 
-  pivot_longer(
-    cols = (ncol(.)-21):ncol(.),
-    names_to = "Year",
-    values_to = "Value"
-  ) %>% 
-  select(-`Series code`, -SCALE, -Decimals) %>% 
-  pivot_wider(
-    names_from = `Series name`,
-    values_from = Value
-  ) %>% 
-  mutate(`GDP ($)` = as.numeric(`GDP ($)`)) %>% 
-  mutate(`Population` = as.numeric(`Population`)) %>% 
-  mutate(`Year` = as.integer(`Year`)) %>% 
-  mutate(gdp_per_capita = `GDP ($)`/Population)
-
-yearly_average <- temperature_data %>% summarise(mean_temperature = mean(Anomaly), .by=year)
-
-
-emissions_data$Code <- as.factor(emissions_data$Code) 
-
-emissions_data %>%
-  distinct(Entity, Code) -> distinct_codes
-
-gdp_data %>% 
-  inner_join(emissions_data, by=c("Year", "Country code" = "Code")) %>%
-  drop_na() %>% select(`Country code`, "Country" = `Country name`, Year, "GDP" = `GDP ($)`, Population, "GDP per Capita"=gdp_per_capita, "Annual CO2 emissions" = `Annual CO₂ emissions`) -> gdp_joined_data
-
-distinct_codes %>% filter(startsWith(as.character(Code), "OWID") | is.na(Code)) -> special_categories
-
-income_codes <- special_categories %>% filter(grepl("income", as.character(Entity), ignore.case = TRUE)) 
-
-income_data <- emissions_data %>% filter(Code %in% income_codes$Code) %>% left_join(emissions_per_capita_data, by = c("Code", "Entity", "Year"))
-
-colnames(income_data) <- c("Entity", "Code", "Year", "CO2 emissions", "CO2 per capita")
-```
+# Análisis y Resultados
 
 ## Relación histórica entre emisiones de CO~2~ y aumento de la temperatura promedio global.
 
@@ -103,6 +55,68 @@ ggplot(yearly_data, aes(x = CO2_emissions, y = mean_temperature_anomaly)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
   
+### Prueba de hipótesis
+Validamos nuestras conclusiones con una prueba de correlación. Para este fin, primero analizamos el supuesto de normalidad sobre las variables de emisión de CO~2~ y temperatura anomála media.
+
+* Validación supuesto de normalidad
+
+Realizando las pruebas de normalidad, encontramos que ninguna de las variables de intéres cumplen con este supuesto, ambos con p-valores cercanos a 0 y con qq-plots (\@ref(fig:16) y \@ref(fig:17)) muy distintos a lo que cabría de esperar en un comportamiento normal. Debido a esto, realizamos una prueba de correlación de Spearman para validar la correlación entre ambas variables.
+
+```{r 16, fig.cap="QQ-plot para validación de normalidad - Emisiones de CO2", message=FALSE, warning=FALSE}
+
+ks_result <- ks.test(
+  yearly_data$CO2_emissions,
+  "pnorm",
+  mean = mean(yearly_data$CO2_emissions),
+  sd = sd(yearly_data$CO2_emissions)
+)
+
+qqnorm(yearly_data$CO2_emissions,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(yearly_data$CO2_emissions, col="red")
+```
+
+```{r 17, fig.cap="QQ-plot para validación de normalidad - Temperatura media anomála", message=FALSE, warning=FALSE}
+ks_result <- ks.test(
+  yearly_data$mean_temperature_anomaly,
+  "pnorm",
+  mean = mean(yearly_data$mean_temperature_anomaly),
+  sd = sd(yearly_data$mean_temperature_anomaly)
+)
+
+qqnorm(yearly_data$mean_temperature_anomaly,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(yearly_data$mean_temperature_anomaly, col="red")
+```
+* Prueba de Correlación de Spearman
+
+Planteamos la siguiente prueba de correlación de Spearman, mediante la validación de las hipótesis:
+
+* $H_0$: coeficiente de correlación es igual a 0.
+
+* $H_1$: coeficiente de correlación es distinto a 0.
+
+```{r Correlacion, message=FALSE, warning=FALSE}
+
+res <- cor.test(yearly_data$CO2_emissions, yearly_data$mean_temperature_anomaly, method = "spearman")
+
+tabla_res <- data.frame(
+  Metodo = res$method,
+  Correlacion = round(res$estimate, 4),
+  p_value = round(res$p.value, 4),
+  Estadistico = round(res$statistic, 4)
+)
+
+kable(tabla_res)
+```
+Con nuestra prueba de Spearman, encontramos un resultado significativo, con p-value mucho menor 0.05 (p-value = `r round(res$p.value,4)`). El valor de correlación encontrado es de `r round(res$estimate,2)`, indicio de una alta correlación entre ambas variables. Esto va en línea con nuestras conclusiones tras el análisis gráfico de ambas variables.
+
 ## Emisiones de CO~2~ y el desarrollo ecónomico.
 
 <div style="text-align: justify;">
@@ -141,7 +155,6 @@ ggplot(income_data, aes(x = Year, y = `CO2 emissions`, color = Entity)) +
   theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5))
 ```
-
 Para complementar este análisis, usamos un diagrama de dispersión entre PIB y emisiones de CO₂, tanto total \@ref(fig:5) como per capita \@ref(fig:6). Estos diagramas evidencian una relación positiva, aunque con alta dispersión. Las economías de gran escala concentran la mayor parte de las emisiones globales.
 
 Sin embargo, la variabilidad observada indica que no todos los países emiten al mismo nivel. Observamos  Existen economías con PIB medio cuyas emisiones superan a las de países con alto PIB, lo que sugiere diferencias en eficiencia energética, matriz energética o políticas ambientales. Pero el panorama global es clara, y la tendencia año a año muestra que los países con mayor poder ecónomico son los principales responsables de la generación de emisiones a nivel global.
@@ -175,6 +188,176 @@ ggplot(gdp_joined_data %>% filter(Year %in% c(1990, 2000, 2010)), aes(x = `GDP p
   ) +
   theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5))
+```
+
+### Validación estadística
+
+A continuación, se presentan los resultados de las pruebas realizadas para validar las conclusiones obtenidas del análisis exploratorio. Primero, se valida el supuesto de normalidad tanto para la variable 'C0~2~ per capita' como para la variable 'CO~2~ emissions'. Confirmamos que ninguna de las variables cumple con el supuesto de normalidad (p-valor <<< 0.05). 
+
+``` {r 18, fig.cap="Validación de normalidad - CO2 per capita", message=FALSE, warning=FALSE}
+ks_result <- ks.test(
+  income_data$`CO2 per capita`,
+  "pnorm",
+  mean = mean(income_data$`CO2 per capita`),
+  sd = sd(income_data$`CO2 per capita`)
+)
+
+qqnorm(income_data$`CO2 per capita`,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(income_data$`CO2 per capita`, col="red")
+```
+
+``` {r 19, fig.cap="Validación de normalidad - emisión total de CO2", message=FALSE, warning=FALSE}
+ks_result <- ks.test(
+  income_data$`CO2 emissions`,
+  "pnorm",
+  mean = mean(income_data$`CO2 emissions`),
+  sd = sd(income_data$`CO2 emissions`)
+)
+
+qqnorm(income_data$`CO2 emissions`,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(income_data$`CO2 emissions`, col="red")
+```
+Procedemos entonces a realizar una prueba de Kruskal-Wallis:
+
+* $H_0$: Todos los grupos provienen de la misma distribución.
+
+* $H_1$: Al menos uno de los grupos proviene de una distribución diferente.
+
+Aquí encontramos que si existe diferencia significativa en al menos uno de los distintos grupos ecónomicos análizados para ambas variables 'C0~2~ per capita' y 'CO~2~ emissions'.
+Tras este resultado, se realiza una prueba de Dunn, para encontrar grupos semejantes:
+
+* CO~2~ per capita
+
+Para las emisiones de CO~2~ per capita, se encontraron diferencias significativas para casi todas las parejas de grupos, con excepción de la pareja "Low income vs Lower-middle-income" con un $p_{adj} = 1$.
+
+* CO~2~ emissions
+
+Para las emisiones de CO~2~ totales, obtuvimos resultados similares al análisis per-capita, con diferencias significativas para casi todas las parejas de grupos, con excepción de la pareja "Low income vs Lower-middle-income", aunque esta vez con un $p_{adj}$ mucho menor ($p_{adj} = 0.06$).
+
+Podemos asumir entonces, de acuerdo a la evidencia estadística y gráfica que los países de los grupos de ingresos Alto contribuyen de forma significativa por encima de los países de los demás grupos ecónomicos, seguidos por los países de ingreso Medio-Alto y, finalmente, los países de los grupos de ingreso Bajo y Medio-Bajo, teniendo estos 2 últimos un comportamiento semejante. 
+
+
+``` {r kruskal_test1, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `CO2 per capita` ~ Entity,
+  data = income_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+``` {r dunn_test1, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `CO2 per capita` ~ Entity,
+  data = income_data,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
+``` {r kruskal_test2, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `CO2 emissions` ~ Entity,
+  data = income_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+``` {r dunn_test2, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `CO2 emissions` ~ Entity,
+  data = income_data,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
+También validamos que el PIB de una nación está correlacionado de forma significativa con las emisiones de dichos países mediante una prueba de correlación de Spearman:
+
+* $H_0$: coeficiente de correlación es igual a 0.
+
+* $H_1$: coeficiente de correlación es distinto a 0.
+
+Al realizar el análisis tanto a nivel per cápita (\(\rho = 0.86\)) como a nivel total (\(\rho = 0.93\)), se obtuvieron p-valores cercanos a 0, lo que indica que ambas correlaciones son estadísticamente significativas.
+
+Estos resultados sugieren una relación positiva fuerte entre el producto interno bruto y las emisiones de dióxido de carbono. En términos generales, los países con mayores niveles de PIB tienden también a presentar mayores niveles de emisiones de CO~2~.
+```{r Correlacion1, message=FALSE, warning=FALSE}
+
+res <- cor.test(gdp_joined_data$GDP, gdp_joined_data$`Annual CO2 emissions`, method = "spearman")
+
+tabla_res <- data.frame(
+  Metodo = res$method,
+  Correlacion = round(res$estimate, 4),
+  p_value = round(res$p.value, 4),
+  Estadistico = round(res$statistic, 4)
+)
+
+kable(tabla_res)
+```
+
+```{r Correlacion2, message=FALSE, warning=FALSE}
+
+res <- cor.test(gdp_joined_data$`GDP per Capita`, gdp_joined_data$co2_per_capita, method = "spearman")
+
+tabla_res <- data.frame(
+  Metodo = res$method,
+  Correlacion = round(res$estimate, 4),
+  p_value = round(res$p.value, 4),
+  Estadistico = round(res$statistic, 4)
+)
+
+kable(tabla_res)
 ```
 
 ## Analisis Regional
@@ -252,13 +435,43 @@ ggplot(plot_data,
   geom_bar(stat = "identity") +
   coord_flip() +
   labs(
-    x = "Región",
-    y = "Número de Países",
-    title = "Grupo de Ingresos por región"
+    x = "Region",
+    y = "Numero de Paises",
+    title = "Grupo de Ingresos por region"
   ) +
   theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5))
 ```
+Complementamos esta gráfica con una prueba de Chi-cuadrado de independencia, para evaluar si existe asociación entre la región y la distribución de grupos de ingresos mediante la siguiente prueba de Hipótesis:
+
+* $H_0$: la distribución de grupos de ingresos es igual entre regiones.
+
+* $H_1$: la distribución cambia según la región.
+
+
+``` {r prueba_chi_square, fig.cap="Distribución económica por región", message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
+tabla <- xtabs(
+  n_count ~ Region + `Income group`,
+  data = income_group_per_region
+)
+
+res <- chisq.test(tabla)
+
+tabla_res <- data.frame(
+  Estadistico = round(res$statistic, 4),
+  gl = res$parameter,
+  p_value = round(res$p.value, 6)
+)
+
+kable(
+  tabla_res,
+  caption = "Prueba Chi-cuadrado de independencia"
+)
+```
+
+La prueba Chi-cuadrado de independencia mostró un resultado estadísticamente significativo (\(\chi^2 = 152.49\), \(gl = 24\), \(p < 0.001\)). Por lo tanto, se rechaza la hipótesis nula de independencia entre la región y el grupo de ingresos de los países.
+
+Estos resultados indican que la distribución de los grupos de ingresos no es homogénea entre regiones, lo que sugiere una asociación significativa entre la ubicación regional y el nivel de ingresos de los países.
 
 ## Analisis de distribución de emisiones regional y económica
 
@@ -272,12 +485,14 @@ Por región, el contraste es aún más pronunciado. América del Norte exhibe la
 La lectura conjunta de ambos gráficos refuerza una conclusión: la distribución de emisiones de CO~4~ es profundamente asimétrica tanto entre regiones como dentro de los grupos de ingreso, con un número reducido de países —caracterizados por grandes economías industriales, alta población o abundancia de recursos fósiles— concentrando la mayor parte de las emisiones globales. Esta concentración implica que las políticas de mitigación climática tienen un potencial de impacto desproporcionadamente mayor si se focalizan en dichos emisores dominantes, independientemente de su clasificación regional o de ingreso.
 
 ``` {r 10, fig.cap="Distribución de emisiones por región", message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
-ggplot(gdp_joined_data2[gdp_joined_data2$Year == 2010,], aes(x = factor(Region), y = `Annual CO2 emissions`, fill = Region)) +
+gdp_joined_2010 = gdp_joined_data2[gdp_joined_data2$Year == 2010,]
+
+ggplot(gdp_joined_2010, aes(x = factor(Region), y = `Annual CO2 emissions`, fill = Region)) +
   geom_boxplot() +
   labs(
-    x = "Región",
+    x = "Region",
     y = "Emisiones de CO2",
-    title = "Distribución de las emisiones de CO2 por región en 2010"
+    title = "Distribucion de las emisiones de CO2 por region en 2010"
   ) +
   theme_minimal() +
   theme(
@@ -289,12 +504,12 @@ ggplot(gdp_joined_data2[gdp_joined_data2$Year == 2010,], aes(x = factor(Region),
 ```
 
 ``` {r 11, fig.cap="Distribución de emisiones por grupo económico", message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
-ggplot(gdp_joined_data2[gdp_joined_data2$Year == 2010,], aes(x = factor(`Income group`), y = `Annual CO2 emissions`, fill = `Income group`)) +
+ggplot(gdp_joined_2010, aes(x = factor(`Income group`), y = `Annual CO2 emissions`, fill = `Income group`)) +
   geom_boxplot() +
   labs(
-    x = "Grupo Económico",
+    x = "Grupo Economico",
     y = "Emisiones de CO2",
-    title = "Distribución de las emisiones de CO2 por grupo económico en 2010"
+    title = "Distribucion de las emisiones de CO2 por grupo economico en 2010"
   ) +
   theme_minimal() +
   theme(
@@ -303,6 +518,138 @@ ggplot(gdp_joined_data2[gdp_joined_data2$Year == 2010,], aes(x = factor(`Income 
     plot.title = element_text(hjust = 0.5)
   )
 ```
+
+Lo anterior lo podemos sustentar con evidencia estadística, para lo cuál primero validamos el supuesto de normalidad sobre las emisiones anuales de CO~2~. Podemos evidenciar un comportamiento claramente no normal \@ref(fig:20), por lo cual se decide realizar una prueba de Kruskal-Wallis para hallar diferencias entre las regiones y los grupos ecónomicos:
+
+$H_0$: Todos los grupos provienen de la misma distribución.
+
+$H_1$: Al menos uno de los grupos proviene de una distribución diferente.
+
+* Análisis regional
+
+El análisis de Dunn permitió identificar qué regiones presentan diferencias significativas en las emisiones de CO~2~ per cápita luego de aplicar la corrección por comparaciones múltiples.
+
+Se encontraron diferencias estadísticamente significativas entre las siguientes regiones:
+
+- East Asia & Pacific y Europe & Central Asia (\(p_{adj}=0.0442\))
+- Europe & Central Asia y Latin America & Caribbean (\(p_{adj}=0.0209\))
+- Europe & Central Asia y Sub-Saharan Africa (\(p_{adj}<0.001\))
+- Middle East & North Africa y Sub-Saharan Africa (\(p_{adj}<0.001\))
+- North America y Sub-Saharan Africa (\(p_{adj}=0.0343\))
+
+En contraste, las demás comparaciones no mostraron diferencias significativas después del ajuste de Bonferroni. Debe considerarse que la región de América del Norte contiene únicamente dos observaciones (USA y Canada), por lo que los resultados asociados a este grupo pueden presentar menor estabilidad y sensibilidad a valores extremos. Posiblemente, debido a esto, no encontramos diferencias significativas en la prueba de Dunn como si lo hicimos en el análisis gráfico mediante boxplots.
+
+Los resultados muestran que las diferencias más marcadas se concentran entre regiones altamente industrializadas y regiones con menores niveles de desarrollo económico, particularmente Sub-Saharan Africa, que difiere significativamente de varias regiones con mayores niveles de emisiones.
+
+``` {r 20, fig.cap="Validación de normalidad - emisión total de CO2", message=FALSE, warning=FALSE}
+
+ks_result <- ks.test(
+  gdp_joined_2010$`Annual CO2 emissions`,
+  "pnorm",
+  mean = mean(gdp_joined_2010$`Annual CO2 emissions`),
+  sd = sd(gdp_joined_2010$`Annual CO2 emissions`)
+)
+
+qqnorm(gdp_joined_2010$`Annual CO2 emissions`,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(gdp_joined_2010$`Annual CO2 emissions`, col="red")
+```
+``` {r kruskal_test3, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Annual CO2 emissions` ~ factor(Region),
+  data = gdp_joined_2010
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+``` {r dunn_test3, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `Annual CO2 emissions` ~ Region,
+  data = gdp_joined_2010,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
+* Análisis por Grupo de Ingreso
+
+El análisis por grupo de ingresos mostró diferencias significativas entre algunos niveles de ingreso en relación con las emisiones de CO~2~ per cápita.
+
+En particular, se encontraron diferencias significativas entre:
+
+- High income: OECD y Low income (\(p_{adj}<0.001\))
+- High income: OECD y Lower middle income (\(p_{adj}<0.001\))
+- High income: OECD y Upper middle income (\(p_{adj}=0.0111\))
+- Low income y Upper middle income (\(p_{adj}<0.001\))
+
+Por otro lado, no se encontraron diferencias estadísticamente significativas entre los demás pares de grupos luego de aplicar el ajuste de Bonferroni.
+
+Estos resultados sugieren que los países pertenecientes al grupo High income: OECD presentan patrones de emisiones significativamente distintos frente a economías de menores ingresos, mientras que los demás grupos muestran niveles más similares al resto de categorías.
+
+``` {r kruskal_test4, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Annual CO2 emissions` ~ factor(`Income group`),
+  data = gdp_joined_2010
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+``` {r dunn_test4, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `Annual CO2 emissions` ~ `Income group`,
+  data = gdp_joined_2010,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
 </div>
 ## Análisis de Proyecciones
 

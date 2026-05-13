@@ -1,5 +1,5 @@
 ---
-title: "Calentamiento Global, Emisiones de Dióxido de Carbono y Crecimiento Económico: Una Perspectiva Regional y Económica"
+title: "Calentamiento global, emisiones de dióxido de carbono y crecimiento económico: Una perspectiva regional y económica"
 author: "Fabian Manrique"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 

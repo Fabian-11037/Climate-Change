@@ -4,9 +4,11 @@
 
 <div style="text-align: justify;">
 Los datos utilizados provienen de diferentes fuentes, entre las cuales encontramos:
+
 * El analisis realizado por el sitio Web 'Our World in Data' [@ref1]. 
 * El repositorio de datos provisto por el 'National Centers for Environmental Information (NCEI)' [@ref159].
 * El repositorio de datos 'Climate Change Data' provisto por la agencia 'World Bank' [@ref155].
+
 </div>
 ## Procesamiento de Datos
 
@@ -34,9 +36,72 @@ library(readr)
 library(tidyverse)
 library(readxl)
 library(knitr)
+library(FSA)
 ```
 
 <div style="text-align: justify;">
 Mediante estas herramientas, se realizó una exploración inicial mediante gráficas para explorar correlaciones esperadas del entendimiento inicial del tema para obtener conclusiones. Posteriormente, se validarán estas conclusiones con pruebas estadísticas que las sustenten. 
 </div>
+
+## Importación de datos
+
+Cargamos al ambiente de r-studio los conjuntos de datos con los que se trabajará, para iniciar el procesamiento y análisis de esta información:
+```{r import, message=FALSE, warning=FALSE}
+temperature_data <- read_csv("./Data/data.csv", skip = 3)
+emissions_data <- read_csv("./Data/annual-co2-emissions.csv")
+emissions_per_capita_data <- read_csv("./Data/co2-emissions-per-capita.csv")
+climate_change_data <- read_excel("./Data/climate_change.xlsx", sheet = "Data")
+country_data <- read_excel("./Data/climate_change.xlsx", sheet = "Country")
+series_data <- read_excel("./Data/climate_change.xlsx", sheet = "Series")
+
+```
+
+## Procesamiento de datos
+
+<div style="text-align: justify;">
+Debido al uso de datos de diferente origen, es necesario limpiar, organizar y fusionar los conjuntos de datos usados. Esto incluye procesamiento de algunas columnas como la columna Date del dataset de temperaturas anómalas e identificar agrupaciones de países y variables de interes.
+</div>
+
+```{r Temperatura_Dataset, message=FALSE, warning=FALSE}
+temperature_data$year = as.integer(substr(temperature_data$Date, 1, 4))
+temperature_data$month = as.integer(substr(temperature_data$Date, 5, 6))
+
+gdp_data <- climate_change_data %>%  
+  filter(`Series code` %in% c("NY.GDP.MKTP.CD", "SP.POP.TOTL")) %>% 
+  pivot_longer(
+    cols = (ncol(.)-21):ncol(.),
+    names_to = "Year",
+    values_to = "Value"
+  ) %>% 
+  select(-`Series code`, -SCALE, -Decimals) %>% 
+  pivot_wider(
+    names_from = `Series name`,
+    values_from = Value
+  ) %>% 
+  mutate(`GDP ($)` = as.numeric(`GDP ($)`)) %>% 
+  mutate(`Population` = as.numeric(`Population`)) %>% 
+  mutate(`Year` = as.integer(`Year`)) %>% 
+  mutate(gdp_per_capita = `GDP ($)`/Population)
+
+yearly_average <- temperature_data %>% summarise(mean_temperature = mean(Anomaly), .by=year)
+
+
+emissions_data$Code <- as.factor(emissions_data$Code) 
+
+emissions_data %>%
+  distinct(Entity, Code) -> distinct_codes
+
+gdp_data %>% 
+  inner_join(emissions_data, by=c("Year", "Country code" = "Code")) %>%
+  drop_na() %>% select(`Country code`, "Country" = `Country name`, Year, "GDP" = `GDP ($)`, Population, "GDP per Capita"=gdp_per_capita, "Annual CO2 emissions" = `Annual CO₂ emissions`) -> gdp_joined_data
+
+distinct_codes %>% filter(startsWith(as.character(Code), "OWID") | is.na(Code)) -> special_categories
+
+income_codes <- special_categories %>% filter(grepl("income", as.character(Entity), ignore.case = TRUE)) 
+
+income_data <- emissions_data %>% filter(Code %in% income_codes$Code) %>% left_join(emissions_per_capita_data, by = c("Code", "Entity", "Year"))
+
+colnames(income_data) <- c("Entity", "Code", "Year", "CO2 emissions", "CO2 per capita")
+```
+
 ---
