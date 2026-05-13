@@ -23,7 +23,7 @@
 <meta name="author" content="Fabian Manrique" />
 
 
-<meta name="date" content="2026-05-12" />
+<meta name="date" content="2026-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1477,30 +1477,417 @@ Figure 16: Validación de normalidad - emisión total de CO2
 Figure 17: Proyección de cambio de temperatura por región
 </p>
 </div>
+<p>Para validar lo anterior, se realiza una prueba estadística donde si el supuesto de normalidad se cumple, con el fin de determinar que tipo de prueba podemos realizar.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análisis-y-resultados.html#cb48-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb48-2"><a href="análisis-y-resultados.html#cb48-2" tabindex="-1"></a>  projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>,</span>
+<span id="cb48-3"><a href="análisis-y-resultados.html#cb48-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb48-4"><a href="análisis-y-resultados.html#cb48-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>),</span>
+<span id="cb48-5"><a href="análisis-y-resultados.html#cb48-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>)</span>
+<span id="cb48-6"><a href="análisis-y-resultados.html#cb48-6" tabindex="-1"></a>)</span>
+<span id="cb48-7"><a href="análisis-y-resultados.html#cb48-7" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="análisis-y-resultados.html#cb48-8" tabindex="-1"></a><span class="fu">qqnorm</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>,</span>
+<span id="cb48-9"><a href="análisis-y-resultados.html#cb48-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb48-10"><a href="análisis-y-resultados.html#cb48-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb48-11"><a href="análisis-y-resultados.html#cb48-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb48-12"><a href="análisis-y-resultados.html#cb48-12" tabindex="-1"></a>       ))</span>
+<span id="cb48-13"><a href="análisis-y-resultados.html#cb48-13" tabindex="-1"></a><span class="fu">qqline</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:21"></span>
+<img src="proyecto-Fabian_files/figure-html/21-1.png" alt="Validación de normalidad - Proyección de temperatura" width="672" />
+<p class="caption">
+Figure 18: Validación de normalidad - Proyección de temperatura
+</p>
+</div>
+<p>La prueba de Kolmogorov-Smirnov evidenció que los datos de proyección de temperatura no siguen una distribución normal (<span class="math inline">\(p\text{-value} = 0.006\)</span>), por lo que se rechaza la hipótesis nula de normalidad. Por consiguiente, procedemos a realizar una prueba de Kruskal Wallis con el objetivo de validar si existe diferencia significativa en la proyección de temperatura de cada región:</p>
+<p><span class="math inline">\(H_0\)</span>: Todas las regiones provienen de la misma distribución.</p>
+<p><span class="math inline">\(H_1\)</span>: Al menos uno de las regiones proviene de una distribución diferente.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análisis-y-resultados.html#cb49-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb49-2"><a href="análisis-y-resultados.html#cb49-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>),</span>
+<span id="cb49-3"><a href="análisis-y-resultados.html#cb49-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data</span>
+<span id="cb49-4"><a href="análisis-y-resultados.html#cb49-4" tabindex="-1"></a>)</span>
+<span id="cb49-5"><a href="análisis-y-resultados.html#cb49-5" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="análisis-y-resultados.html#cb49-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb49-7"><a href="análisis-y-resultados.html#cb49-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb49-8"><a href="análisis-y-resultados.html#cb49-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb49-9"><a href="análisis-y-resultados.html#cb49-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb49-10"><a href="análisis-y-resultados.html#cb49-10" tabindex="-1"></a>)</span>
+<span id="cb49-11"><a href="análisis-y-resultados.html#cb49-11" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="análisis-y-resultados.html#cb49-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-13"><a href="análisis-y-resultados.html#cb49-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb49-14"><a href="análisis-y-resultados.html#cb49-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb49-15"><a href="análisis-y-resultados.html#cb49-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb49-16"><a href="análisis-y-resultados.html#cb49-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb49-17"><a href="análisis-y-resultados.html#cb49-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb49-18"><a href="análisis-y-resultados.html#cb49-18" tabindex="-1"></a>)</span>
+<span id="cb49-19"><a href="análisis-y-resultados.html#cb49-19" tabindex="-1"></a></span>
+<span id="cb49-20"><a href="análisis-y-resultados.html#cb49-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb49-21"><a href="análisis-y-resultados.html#cb49-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb49-22"><a href="análisis-y-resultados.html#cb49-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb49-23"><a href="análisis-y-resultados.html#cb49-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test5)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">75.3782</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análisis-y-resultados.html#cb50-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb50-2"><a href="análisis-y-resultados.html#cb50-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>),</span>
+<span id="cb50-3"><a href="análisis-y-resultados.html#cb50-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data,</span>
+<span id="cb50-4"><a href="análisis-y-resultados.html#cb50-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb50-5"><a href="análisis-y-resultados.html#cb50-5" tabindex="-1"></a>)</span>
+<span id="cb50-6"><a href="análisis-y-resultados.html#cb50-6" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="análisis-y-resultados.html#cb50-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb50-8"><a href="análisis-y-resultados.html#cb50-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb50-9"><a href="análisis-y-resultados.html#cb50-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb50-10"><a href="análisis-y-resultados.html#cb50-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test5)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="63%" />
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - Europe &amp; Central Asia</td>
+<td align="right">-6.7888180</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Latin America &amp; Caribbean</td>
+<td align="right">-1.4982161</td>
+<td align="right">0.1340771</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Latin America &amp; Caribbean</td>
+<td align="right">5.1057349</td>
+<td align="right">0.0000003</td>
+<td align="right">0.0000069</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Middle East &amp; North Africa</td>
+<td align="right">-6.2999765</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Middle East &amp; North Africa</td>
+<td align="right">-1.1533144</td>
+<td align="right">0.2487814</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Middle East &amp; North Africa</td>
+<td align="right">-5.0152157</td>
+<td align="right">0.0000005</td>
+<td align="right">0.0000111</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - North America</td>
+<td align="right">-2.1875656</td>
+<td align="right">0.0287013</td>
+<td align="right">0.6027264</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - North America</td>
+<td align="right">0.1690121</td>
+<td align="right">0.8657871</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - North America</td>
+<td align="right">-1.6160617</td>
+<td align="right">0.1060810</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - North America</td>
+<td align="right">0.6391971</td>
+<td align="right">0.5226947</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - South Asia</td>
+<td align="right">-3.5608810</td>
+<td align="right">0.0003696</td>
+<td align="right">0.0077619</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - South Asia</td>
+<td align="right">0.0760574</td>
+<td align="right">0.9393734</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - South Asia</td>
+<td align="right">-2.6750153</td>
+<td align="right">0.0074726</td>
+<td align="right">0.1569242</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - South Asia</td>
+<td align="right">0.7777188</td>
+<td align="right">0.4367348</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">North America - South Asia</td>
+<td align="right">-0.1054628</td>
+<td align="right">0.9160086</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Sub-Saharan Africa</td>
+<td align="right">-4.8690197</td>
+<td align="right">0.0000011</td>
+<td align="right">0.0000236</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Sub-Saharan Africa</td>
+<td align="right">1.8433979</td>
+<td align="right">0.0652709</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Sub-Saharan Africa</td>
+<td align="right">-3.2613060</td>
+<td align="right">0.0011090</td>
+<td align="right">0.0232891</td>
+</tr>
+<tr class="odd">
+<td align="left">Middle East &amp; North Africa - Sub-Saharan Africa</td>
+<td align="right">2.5055236</td>
+<td align="right">0.0122270</td>
+<td align="right">0.2567675</td>
+</tr>
+<tr class="even">
+<td align="left">North America - Sub-Saharan Africa</td>
+<td align="right">0.4385834</td>
+<td align="right">0.6609634</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">South Asia - Sub-Saharan Africa</td>
+<td align="right">0.8704485</td>
+<td align="right">0.3840554</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
+<p>El análisis realizado mostró diferencias estadísticamente significativas entre algunas regiones respecto a las proyecciones de temperatura. En particular, se encontraron diferencias significativas entre:</p>
+<ul>
+<li>East Asia &amp; Pacific y Europe &amp; Central Asia (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>Europe &amp; Central Asia y Latin America &amp; Caribbean (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>East Asia &amp; Pacific y Middle East &amp; North Africa (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>Latin America &amp; Caribbean y Middle East &amp; North Africa (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>East Asia &amp; Pacific y South Asia (<span class="math inline">\(p_{adj}=0.0078\)</span>)</li>
+<li>East Asia &amp; Pacific y Sub-Saharan Africa (<span class="math inline">\(p_{adj}&lt;0.001\)</span>)</li>
+<li>Latin America &amp; Caribbean y Sub-Saharan Africa (<span class="math inline">\(p_{adj}=0.0233\)</span>)</li>
+</ul>
+<p>Por otro lado, las demás comparaciones no mostraron diferencias estadísticamente significativas luego del ajuste de Bonferroni.</p>
+<p>Estos resultados sugieren que las mayores diferencias en las proyecciones de temperatura se concentran principalmente entre Asia Oriental y el Pacífico, tal como pudimos observar en el diagrama de cajas.</p>
 <ul>
 <li>Por Grupo Ecónomico</li>
 </ul>
 <p>Las distribuciones por grupo económico son notablemente similares en sus medianas, oscilando entre 1.8 °C (alto ingreso no-OCDE) y 2.3 °C (bajo ingreso, ingreso medio-bajo e ingreso medio-alto). Sin embargo, la amplitud de las cajas intercuartílicas varía: los grupos de ingreso bajo e ingreso medio presentan mayor dispersión interna, reflejando la heterogeneidad geográfica de los países que los integran. El hallazgo analíticamente más relevante es la ausencia de una gradiente clara entre nivel de ingreso y magnitud del calentamiento proyectado: los países de bajo ingreso —que históricamente han contribuido de forma marginal a las emisiones acumuladas— enfrentarán incrementos de temperatura comparables o superiores a los de las economías que han sido responsables de la mayor parte de las emisiones históricas.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análisis-y-resultados.html#cb48-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb48-2"><a href="análisis-y-resultados.html#cb48-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb48-3"><a href="análisis-y-resultados.html#cb48-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb48-4"><a href="análisis-y-resultados.html#cb48-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
-<span id="cb48-5"><a href="análisis-y-resultados.html#cb48-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Temperatura Media (ºC)&quot;</span>,</span>
-<span id="cb48-6"><a href="análisis-y-resultados.html#cb48-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Temperatura Media (2045- 2065) por Grupo Económico&quot;</span></span>
-<span id="cb48-7"><a href="análisis-y-resultados.html#cb48-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb48-8"><a href="análisis-y-resultados.html#cb48-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb48-9"><a href="análisis-y-resultados.html#cb48-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb48-10"><a href="análisis-y-resultados.html#cb48-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
-<span id="cb48-11"><a href="análisis-y-resultados.html#cb48-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb48-12"><a href="análisis-y-resultados.html#cb48-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) </span>
-<span id="cb48-13"><a href="análisis-y-resultados.html#cb48-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="análisis-y-resultados.html#cb51-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="análisis-y-resultados.html#cb51-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb51-3"><a href="análisis-y-resultados.html#cb51-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-4"><a href="análisis-y-resultados.html#cb51-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
+<span id="cb51-5"><a href="análisis-y-resultados.html#cb51-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Temperatura Media (ºC)&quot;</span>,</span>
+<span id="cb51-6"><a href="análisis-y-resultados.html#cb51-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Temperatura Media (2045- 2065) por Grupo Económico&quot;</span></span>
+<span id="cb51-7"><a href="análisis-y-resultados.html#cb51-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-8"><a href="análisis-y-resultados.html#cb51-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb51-9"><a href="análisis-y-resultados.html#cb51-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb51-10"><a href="análisis-y-resultados.html#cb51-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb51-11"><a href="análisis-y-resultados.html#cb51-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb51-12"><a href="análisis-y-resultados.html#cb51-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) </span>
+<span id="cb51-13"><a href="análisis-y-resultados.html#cb51-13" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:13"></span>
 <img src="proyecto-Fabian_files/figure-html/13-1.png" alt="Proyección de cambio de temperatura por grupo ecónomico" width="1152" />
 <p class="caption">
-Figure 18: Proyección de cambio de temperatura por grupo ecónomico
+Figure 19: Proyección de cambio de temperatura por grupo ecónomico
 </p>
 </div>
 <p>La lectura conjunta de ambos gráficos conduce a dos conclusiones de orden superior. Primero, el calentamiento proyectado es independiente del nivel de responsabilidad histórica en las emisiones: regiones de bajo ingreso y baja industrialización soportarán incrementos de temperatura equivalentes a los de las economías más emisoras, lo que refuerza el argumento de justicia climática en los marcos de negociación internacional. Segundo, la variabilidad intra-regional e intra-grupal es tan o más relevante que las diferencias entre categorías, sugiriendo que las políticas de adaptación climática deben diseñarse atendiendo a vulnerabilidades específicas de cada país, más que a clasificaciones de ingreso o región.</p>
+<p>Procedemos nuevamente a validar la siguiente hipótesis mediante una prueba de Kruskall-Wallis:</p>
+<p><span class="math inline">\(H_0\)</span>: Todas los grupos de ingreso provienen de la misma distribución.</p>
+<p><span class="math inline">\(H_1\)</span>: Al menos uno de los grupos de ingreso proviene de una distribución diferente.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="análisis-y-resultados.html#cb52-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb52-2"><a href="análisis-y-resultados.html#cb52-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>),</span>
+<span id="cb52-3"><a href="análisis-y-resultados.html#cb52-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data</span>
+<span id="cb52-4"><a href="análisis-y-resultados.html#cb52-4" tabindex="-1"></a>)</span>
+<span id="cb52-5"><a href="análisis-y-resultados.html#cb52-5" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="análisis-y-resultados.html#cb52-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb52-7"><a href="análisis-y-resultados.html#cb52-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb52-8"><a href="análisis-y-resultados.html#cb52-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb52-9"><a href="análisis-y-resultados.html#cb52-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb52-10"><a href="análisis-y-resultados.html#cb52-10" tabindex="-1"></a>)</span>
+<span id="cb52-11"><a href="análisis-y-resultados.html#cb52-11" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="análisis-y-resultados.html#cb52-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb52-13"><a href="análisis-y-resultados.html#cb52-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb52-14"><a href="análisis-y-resultados.html#cb52-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb52-15"><a href="análisis-y-resultados.html#cb52-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb52-16"><a href="análisis-y-resultados.html#cb52-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb52-17"><a href="análisis-y-resultados.html#cb52-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb52-18"><a href="análisis-y-resultados.html#cb52-18" tabindex="-1"></a>)</span>
+<span id="cb52-19"><a href="análisis-y-resultados.html#cb52-19" tabindex="-1"></a></span>
+<span id="cb52-20"><a href="análisis-y-resultados.html#cb52-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb52-21"><a href="análisis-y-resultados.html#cb52-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb52-22"><a href="análisis-y-resultados.html#cb52-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb52-23"><a href="análisis-y-resultados.html#cb52-23" tabindex="-1"></a>)</span></code></pre></div>
+<table style="width:100%;">
+<caption>(#tab:kruskal_test6)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="10%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">9.8681</td>
+<td align="right">4</td>
+<td align="right">0.042709</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<p>El análisis mostró existía diferencias significativas en al menos uno de los grupos, y en la prueba de Dunn se evidencia que únicamente se encontraron diferencias estadísticamente significativas entre los grupos High income: nonOECD y Low income (<span class="math inline">\(p_{adj}=0.0269\)</span>) después de aplicar la corrección por comparaciones múltiples.</p>
+<p>Las demás comparaciones entre grupos de ingreso no presentaron diferencias estadísticamente significativas luego del ajuste de Bonferroni (<span class="math inline">\(p_{adj} \geq 0.05\)</span>).</p>
+<p>Estos resultados van en línea con la conclusión previo de que no existe mucha diferencia entre el ingreso de un país y el impacto que este sufrirá en aumento de temperatura debido al cambio climático, con la única excepción siendo los países de bajos ingresos y países de altos ingresos no pertenecientes a la OECD.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="análisis-y-resultados.html#cb53-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb53-2"><a href="análisis-y-resultados.html#cb53-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Temperature change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>),</span>
+<span id="cb53-3"><a href="análisis-y-resultados.html#cb53-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data,</span>
+<span id="cb53-4"><a href="análisis-y-resultados.html#cb53-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb53-5"><a href="análisis-y-resultados.html#cb53-5" tabindex="-1"></a>)</span>
+<span id="cb53-6"><a href="análisis-y-resultados.html#cb53-6" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="análisis-y-resultados.html#cb53-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb53-8"><a href="análisis-y-resultados.html#cb53-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb53-9"><a href="análisis-y-resultados.html#cb53-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb53-10"><a href="análisis-y-resultados.html#cb53-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test6)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="58%" />
+<col width="14%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">High income: nonOECD - High income: OECD</td>
+<td align="right">-2.1099697</td>
+<td align="right">0.0348610</td>
+<td align="right">0.3486097</td>
+</tr>
+<tr class="even">
+<td align="left">High income: nonOECD - Low income</td>
+<td align="right">-3.0016343</td>
+<td align="right">0.0026853</td>
+<td align="right">0.0268535</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: OECD - Low income</td>
+<td align="right">-0.7992845</td>
+<td align="right">0.4241255</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">High income: nonOECD - Lower middle income</td>
+<td align="right">-2.2426955</td>
+<td align="right">0.0249165</td>
+<td align="right">0.2491646</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: OECD - Lower middle income</td>
+<td align="right">0.1659717</td>
+<td align="right">0.8681792</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Low income - Lower middle income</td>
+<td align="right">1.0873188</td>
+<td align="right">0.2768959</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">High income: nonOECD - Upper middle income</td>
+<td align="right">-1.8082022</td>
+<td align="right">0.0705750</td>
+<td align="right">0.7057504</td>
+</tr>
+<tr class="even">
+<td align="left">High income: OECD - Upper middle income</td>
+<td align="right">0.5919132</td>
+<td align="right">0.5539087</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Low income - Upper middle income</td>
+<td align="right">1.5331041</td>
+<td align="right">0.1252502</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Lower middle income - Upper middle income</td>
+<td align="right">0.5045840</td>
+<td align="right">0.6138510</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="proyección-de-cambio-en-precipitaciones" class="section level3 hasAnchor">
 <h3>Proyección de cambio en precipitaciones<a href="análisis-y-resultados.html#proyecci%C3%B3n-de-cambio-en-precipitaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1509,49 +1896,333 @@ Figure 18: Proyección de cambio de temperatura por grupo ecónomico
 <li>Por Región</li>
 </ul>
 <p>Por región, la heterogeneidad es marcada. Asia Oriental y el Pacífico presenta la mediana más alta (~+50 mm) y la mayor dispersión positiva, con outliers que superan los +300 mm, indicando que una fracción de sus países podría experimentar incrementos de precipitación muy significativos, probablemente asociados a la intensificación de sistemas oceánicos y ciclónicos. Asia del Sur y América del Norte también proyectan medianas positivas (~+50 mm y ~+30 mm respectivamente), consistentes con el reforzamiento de regímenes de precipitación en latitudes medias y subtropicales húmedas. En contraste, América Latina y el Caribe, Europa y Asia Central, y especialmente Oriente Medio y África del Norte muestran medianas negativas o cercanas a cero, con cajas que se extienden predominantemente por debajo del eje, señalando tendencias hacia la aridización. África Subsahariana presenta una distribución centrada en torno a cero pero con alta dispersión en ambas direcciones, reflejando la coexistencia de zonas con incrementos y zonas con déficits dentro de una región geográficamente extensa y climáticamente diversa.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análisis-y-resultados.html#cb49-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Region</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb49-2"><a href="análisis-y-resultados.html#cb49-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb49-3"><a href="análisis-y-resultados.html#cb49-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-4"><a href="análisis-y-resultados.html#cb49-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Región&quot;</span>,</span>
-<span id="cb49-5"><a href="análisis-y-resultados.html#cb49-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
-<span id="cb49-6"><a href="análisis-y-resultados.html#cb49-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Región&quot;</span></span>
-<span id="cb49-7"><a href="análisis-y-resultados.html#cb49-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-8"><a href="análisis-y-resultados.html#cb49-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb49-9"><a href="análisis-y-resultados.html#cb49-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb49-10"><a href="análisis-y-resultados.html#cb49-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
-<span id="cb49-11"><a href="análisis-y-resultados.html#cb49-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb49-12"><a href="análisis-y-resultados.html#cb49-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)  </span>
-<span id="cb49-13"><a href="análisis-y-resultados.html#cb49-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="análisis-y-resultados.html#cb54-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Region</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="análisis-y-resultados.html#cb54-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb54-3"><a href="análisis-y-resultados.html#cb54-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb54-4"><a href="análisis-y-resultados.html#cb54-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Región&quot;</span>,</span>
+<span id="cb54-5"><a href="análisis-y-resultados.html#cb54-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
+<span id="cb54-6"><a href="análisis-y-resultados.html#cb54-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Región&quot;</span></span>
+<span id="cb54-7"><a href="análisis-y-resultados.html#cb54-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="análisis-y-resultados.html#cb54-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb54-9"><a href="análisis-y-resultados.html#cb54-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb54-10"><a href="análisis-y-resultados.html#cb54-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb54-11"><a href="análisis-y-resultados.html#cb54-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-12"><a href="análisis-y-resultados.html#cb54-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)  </span>
+<span id="cb54-13"><a href="análisis-y-resultados.html#cb54-13" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:14"></span>
 <img src="proyecto-Fabian_files/figure-html/14-1.png" alt="Proyección de cambio de precipitaciones por región" width="1152" />
 <p class="caption">
-Figure 19: Proyección de cambio de precipitaciones por región
+Figure 20: Proyección de cambio de precipitaciones por región
 </p>
 </div>
+<p>Para validar lo anterior, se realiza una prueba estadística donde si el supuesto de normalidad se cumple, con el fin de determinar que tipo de prueba podemos realizar.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="análisis-y-resultados.html#cb55-1" tabindex="-1"></a>ks_result <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(</span>
+<span id="cb55-2"><a href="análisis-y-resultados.html#cb55-2" tabindex="-1"></a>  projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>,</span>
+<span id="cb55-3"><a href="análisis-y-resultados.html#cb55-3" tabindex="-1"></a>  <span class="st">&quot;pnorm&quot;</span>,</span>
+<span id="cb55-4"><a href="análisis-y-resultados.html#cb55-4" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>),</span>
+<span id="cb55-5"><a href="análisis-y-resultados.html#cb55-5" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>)</span>
+<span id="cb55-6"><a href="análisis-y-resultados.html#cb55-6" tabindex="-1"></a>)</span>
+<span id="cb55-7"><a href="análisis-y-resultados.html#cb55-7" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="análisis-y-resultados.html#cb55-8" tabindex="-1"></a><span class="fu">qqnorm</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>,</span>
+<span id="cb55-9"><a href="análisis-y-resultados.html#cb55-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(</span>
+<span id="cb55-10"><a href="análisis-y-resultados.html#cb55-10" tabindex="-1"></a>         <span class="st">&quot;QQ Plot</span><span class="sc">\n</span><span class="st">KS p-value =&quot;</span>,</span>
+<span id="cb55-11"><a href="análisis-y-resultados.html#cb55-11" tabindex="-1"></a>         <span class="fu">round</span>(ks_result<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb55-12"><a href="análisis-y-resultados.html#cb55-12" tabindex="-1"></a>       ))</span>
+<span id="cb55-13"><a href="análisis-y-resultados.html#cb55-13" tabindex="-1"></a><span class="fu">qqline</span>(projected_climate_change_country_data<span class="sc">$</span><span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:22"></span>
+<img src="proyecto-Fabian_files/figure-html/22-1.png" alt="Validación de normalidad - Proyección de Precipitaciones" width="672" />
+<p class="caption">
+Figure 21: Validación de normalidad - Proyección de Precipitaciones
+</p>
+</div>
+<p>La prueba de Kolmogorov-Smirnov evidenció que los datos de proyección de precipitaciones no siguen una distribución normal (<span class="math inline">\(p\text{-value} = 0.0097\)</span>), por lo que se rechaza la hipótesis nula de normalidad. Por consiguiente, procedemos a realizar una prueba de Kruskal Wallis con el objetivo de validar si existe diferencia significativa en la proyección de temperatura de cada región:</p>
+<p><span class="math inline">\(H_0\)</span>: Todas las regiones provienen de la misma distribución.</p>
+<p><span class="math inline">\(H_1\)</span>: Al menos uno de las regiones proviene de una distribución diferente.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="análisis-y-resultados.html#cb56-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb56-2"><a href="análisis-y-resultados.html#cb56-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>),</span>
+<span id="cb56-3"><a href="análisis-y-resultados.html#cb56-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data</span>
+<span id="cb56-4"><a href="análisis-y-resultados.html#cb56-4" tabindex="-1"></a>)</span>
+<span id="cb56-5"><a href="análisis-y-resultados.html#cb56-5" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="análisis-y-resultados.html#cb56-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb56-7"><a href="análisis-y-resultados.html#cb56-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb56-8"><a href="análisis-y-resultados.html#cb56-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb56-9"><a href="análisis-y-resultados.html#cb56-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb56-10"><a href="análisis-y-resultados.html#cb56-10" tabindex="-1"></a>)</span>
+<span id="cb56-11"><a href="análisis-y-resultados.html#cb56-11" tabindex="-1"></a></span>
+<span id="cb56-12"><a href="análisis-y-resultados.html#cb56-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb56-13"><a href="análisis-y-resultados.html#cb56-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb56-14"><a href="análisis-y-resultados.html#cb56-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb56-15"><a href="análisis-y-resultados.html#cb56-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb56-16"><a href="análisis-y-resultados.html#cb56-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb56-17"><a href="análisis-y-resultados.html#cb56-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb56-18"><a href="análisis-y-resultados.html#cb56-18" tabindex="-1"></a>)</span>
+<span id="cb56-19"><a href="análisis-y-resultados.html#cb56-19" tabindex="-1"></a></span>
+<span id="cb56-20"><a href="análisis-y-resultados.html#cb56-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb56-21"><a href="análisis-y-resultados.html#cb56-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb56-22"><a href="análisis-y-resultados.html#cb56-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb56-23"><a href="análisis-y-resultados.html#cb56-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test7)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="3%" />
+<col width="9%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">53.425</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="left">Existen diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<p>La prueba de Kruskall-Wallis indica que existe diferencia significativa en al menos una región, y la prueba de Dunn muestra que la región que más se diferencia de las demás es Asia Oriental y el Pacífico, presentando desigualdad significativa con Europa y Asia Central, América Latina y el Caribe y el Medio Oriente y el Norte de Africa.</p>
+<p>América Latina y el Caribe también mostró diferencias con otras dos regiones como son Asia del Sur y Africa Sub-Sahariana, resultados que van en línea con lo observado en los diagramas de caja.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="análisis-y-resultados.html#cb57-1" tabindex="-1"></a>dunn_res <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb57-2"><a href="análisis-y-resultados.html#cb57-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Region</span><span class="st">`</span>),</span>
+<span id="cb57-3"><a href="análisis-y-resultados.html#cb57-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data,</span>
+<span id="cb57-4"><a href="análisis-y-resultados.html#cb57-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb57-5"><a href="análisis-y-resultados.html#cb57-5" tabindex="-1"></a>)</span>
+<span id="cb57-6"><a href="análisis-y-resultados.html#cb57-6" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="análisis-y-resultados.html#cb57-7" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb57-8"><a href="análisis-y-resultados.html#cb57-8" tabindex="-1"></a>  dunn_res<span class="sc">$</span>res,</span>
+<span id="cb57-9"><a href="análisis-y-resultados.html#cb57-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Comparaciones múltiples - Dunn Test&quot;</span></span>
+<span id="cb57-10"><a href="análisis-y-resultados.html#cb57-10" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:dunn_test7)Comparaciones múltiples - Dunn Test</caption>
+<colgroup>
+<col width="63%" />
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Comparison</th>
+<th align="right">Z</th>
+<th align="right">P.unadj</th>
+<th align="right">P.adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - Europe &amp; Central Asia</td>
+<td align="right">5.1036092</td>
+<td align="right">0.0000003</td>
+<td align="right">0.0000070</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Latin America &amp; Caribbean</td>
+<td align="right">6.4157842</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Latin America &amp; Caribbean</td>
+<td align="right">1.9187435</td>
+<td align="right">0.0550168</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Middle East &amp; North Africa</td>
+<td align="right">3.7768656</td>
+<td align="right">0.0001588</td>
+<td align="right">0.0033351</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Middle East &amp; North Africa</td>
+<td align="right">-0.1500787</td>
+<td align="right">0.8807025</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Middle East &amp; North Africa</td>
+<td align="right">-1.6187263</td>
+<td align="right">0.1055062</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - North America</td>
+<td align="right">0.4585811</td>
+<td align="right">0.6465350</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - North America</td>
+<td align="right">-1.3266223</td>
+<td align="right">0.1846337</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - North America</td>
+<td align="right">-1.9803984</td>
+<td align="right">0.0476588</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - North America</td>
+<td align="right">-1.2111088</td>
+<td align="right">0.2258537</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">East Asia &amp; Pacific - South Asia</td>
+<td align="right">0.0421437</td>
+<td align="right">0.9663842</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Europe &amp; Central Asia - South Asia</td>
+<td align="right">-2.7657878</td>
+<td align="right">0.0056785</td>
+<td align="right">0.1192495</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin America &amp; Caribbean - South Asia</td>
+<td align="right">-3.7174400</td>
+<td align="right">0.0002013</td>
+<td align="right">0.0042263</td>
+</tr>
+<tr class="even">
+<td align="left">Middle East &amp; North Africa - South Asia</td>
+<td align="right">-2.4211163</td>
+<td align="right">0.0154729</td>
+<td align="right">0.3249315</td>
+</tr>
+<tr class="odd">
+<td align="left">North America - South Asia</td>
+<td align="right">-0.3816812</td>
+<td align="right">0.7026978</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">East Asia &amp; Pacific - Sub-Saharan Africa</td>
+<td align="right">2.9905101</td>
+<td align="right">0.0027851</td>
+<td align="right">0.0584875</td>
+</tr>
+<tr class="odd">
+<td align="left">Europe &amp; Central Asia - Sub-Saharan Africa</td>
+<td align="right">-2.1229508</td>
+<td align="right">0.0337580</td>
+<td align="right">0.7089175</td>
+</tr>
+<tr class="even">
+<td align="left">Latin America &amp; Caribbean - Sub-Saharan Africa</td>
+<td align="right">-3.7659133</td>
+<td align="right">0.0001659</td>
+<td align="right">0.0034848</td>
+</tr>
+<tr class="odd">
+<td align="left">Middle East &amp; North Africa - Sub-Saharan Africa</td>
+<td align="right">-1.4431512</td>
+<td align="right">0.1489779</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">North America - Sub-Saharan Africa</td>
+<td align="right">0.6216153</td>
+<td align="right">0.5341948</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">South Asia - Sub-Saharan Africa</td>
+<td align="right">1.6453660</td>
+<td align="right">0.0998944</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>Por grupo económico</li>
 </ul>
 <p>Por grupo de ingreso, el patrón más relevante es que el grupo de alto ingreso no-OCDE presenta una mediana claramente negativa (~−40 mm), coherente con la concentración de países de este grupo en zonas geográficas áridas o semiáridas como el Golfo Pérsico y partes de Europa meridional. El grupo de alto ingreso OCDE muestra una mediana levemente positiva con dispersión moderada, mientras que los grupos de ingreso bajo e ingreso medio-bajo exhiben distribuciones más amplias con medianas próximas a cero, reflejando nuevamente la heterogeneidad geográfica de sus integrantes. Los outliers más extremos —superando los +300 mm— se concentran en los grupos de ingreso medio-bajo y medio-alto, correspondientes a países tropicales de gran extensión territorial.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análisis-y-resultados.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb50-2"><a href="análisis-y-resultados.html#cb50-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb50-3"><a href="análisis-y-resultados.html#cb50-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb50-4"><a href="análisis-y-resultados.html#cb50-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
-<span id="cb50-5"><a href="análisis-y-resultados.html#cb50-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
-<span id="cb50-6"><a href="análisis-y-resultados.html#cb50-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Grupo Económico&quot;</span></span>
-<span id="cb50-7"><a href="análisis-y-resultados.html#cb50-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb50-8"><a href="análisis-y-resultados.html#cb50-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb50-9"><a href="análisis-y-resultados.html#cb50-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb50-10"><a href="análisis-y-resultados.html#cb50-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),   </span>
-<span id="cb50-11"><a href="análisis-y-resultados.html#cb50-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb50-12"><a href="análisis-y-resultados.html#cb50-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)   </span>
-<span id="cb50-13"><a href="análisis-y-resultados.html#cb50-13" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="análisis-y-resultados.html#cb58-1" tabindex="-1"></a><span class="fu">ggplot</span>(projected_climate_change_country_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Income group</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb58-2"><a href="análisis-y-resultados.html#cb58-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb58-3"><a href="análisis-y-resultados.html#cb58-3" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb58-4"><a href="análisis-y-resultados.html#cb58-4" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo Económico&quot;</span>,</span>
+<span id="cb58-5"><a href="análisis-y-resultados.html#cb58-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cambio Proyectado de Precipitación Promedio (mm)&quot;</span>,</span>
+<span id="cb58-6"><a href="análisis-y-resultados.html#cb58-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del Cambio Proyectado de Precipitación Promedio (2045- 2065) por Grupo Económico&quot;</span></span>
+<span id="cb58-7"><a href="análisis-y-resultados.html#cb58-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb58-8"><a href="análisis-y-resultados.html#cb58-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb58-9"><a href="análisis-y-resultados.html#cb58-9" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb58-10"><a href="análisis-y-resultados.html#cb58-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),   </span>
+<span id="cb58-11"><a href="análisis-y-resultados.html#cb58-11" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb58-12"><a href="análisis-y-resultados.html#cb58-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)   </span>
+<span id="cb58-13"><a href="análisis-y-resultados.html#cb58-13" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:15"></span>
 <img src="proyecto-Fabian_files/figure-html/15-1.png" alt="Proyección de cambio de precipitaciones por grupo económico" width="1152" />
 <p class="caption">
-Figure 20: Proyección de cambio de precipitaciones por grupo económico
+Figure 22: Proyección de cambio de precipitaciones por grupo económico
 </p>
 </div>
-<p>Las implicaciones analíticas de estos gráficos son significativas en dos dimensiones. Primero, la precipitación introduce una asimetría de impacto climático que la temperatura no captura: regiones que ya enfrentan estrés hídrico —como Oriente Medio, partes de América Latina y el Mediterráneo— verán agravada su situación, mientras que otras experimentarán riesgos asociados al exceso hídrico, como inundaciones e infraestructura desbordada. Segundo, y en articulación con los análisis previos, los países de menor ingreso que proyectan reducciones de precipitación enfrentan la combinación más adversa: mayor calentamiento relativo, menor capacidad adaptativa y potencial contracción de sus bases agrícolas, todo ello siendo responsables de una fracción ínfima de las emisiones históricas acumuladas que originan dichos impactos.</p>
+<p>Sin embargo, nuestra prueba de Kruskall-Wallis indica que no hay diferencia significativo en el cambio de precipitación de acuerdo al grupo de ingreso.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="análisis-y-resultados.html#cb59-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb59-2"><a href="análisis-y-resultados.html#cb59-2" tabindex="-1"></a>  <span class="st">`</span><span class="at">Precipitation change</span><span class="st">`</span> <span class="sc">~</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">Income group</span><span class="st">`</span>),</span>
+<span id="cb59-3"><a href="análisis-y-resultados.html#cb59-3" tabindex="-1"></a>  <span class="at">data =</span> projected_climate_change_country_data</span>
+<span id="cb59-4"><a href="análisis-y-resultados.html#cb59-4" tabindex="-1"></a>)</span>
+<span id="cb59-5"><a href="análisis-y-resultados.html#cb59-5" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="análisis-y-resultados.html#cb59-6" tabindex="-1"></a>interpretacion <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb59-7"><a href="análisis-y-resultados.html#cb59-7" tabindex="-1"></a>  res<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb59-8"><a href="análisis-y-resultados.html#cb59-8" tabindex="-1"></a>  <span class="st">&quot;Existen diferencias significativas entre grupos.&quot;</span>,</span>
+<span id="cb59-9"><a href="análisis-y-resultados.html#cb59-9" tabindex="-1"></a>  <span class="st">&quot;No se encontraron diferencias significativas entre grupos.&quot;</span></span>
+<span id="cb59-10"><a href="análisis-y-resultados.html#cb59-10" tabindex="-1"></a>)</span>
+<span id="cb59-11"><a href="análisis-y-resultados.html#cb59-11" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="análisis-y-resultados.html#cb59-12" tabindex="-1"></a>tabla_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb59-13"><a href="análisis-y-resultados.html#cb59-13" tabindex="-1"></a>  <span class="at">Prueba =</span> <span class="st">&quot;Kruskal-Wallis&quot;</span>,</span>
+<span id="cb59-14"><a href="análisis-y-resultados.html#cb59-14" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>statistic), <span class="dv">4</span>),</span>
+<span id="cb59-15"><a href="análisis-y-resultados.html#cb59-15" tabindex="-1"></a>  <span class="at">gl =</span> <span class="fu">as.numeric</span>(res<span class="sc">$</span>parameter),</span>
+<span id="cb59-16"><a href="análisis-y-resultados.html#cb59-16" tabindex="-1"></a>  <span class="at">p_value =</span> <span class="fu">round</span>(res<span class="sc">$</span>p.value, <span class="dv">6</span>),</span>
+<span id="cb59-17"><a href="análisis-y-resultados.html#cb59-17" tabindex="-1"></a>  <span class="at">interpretacion =</span> interpretacion</span>
+<span id="cb59-18"><a href="análisis-y-resultados.html#cb59-18" tabindex="-1"></a>)</span>
+<span id="cb59-19"><a href="análisis-y-resultados.html#cb59-19" tabindex="-1"></a></span>
+<span id="cb59-20"><a href="análisis-y-resultados.html#cb59-20" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb59-21"><a href="análisis-y-resultados.html#cb59-21" tabindex="-1"></a>  tabla_res,</span>
+<span id="cb59-22"><a href="análisis-y-resultados.html#cb59-22" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Resultados de la prueba de Kruskal-Wallis&quot;</span></span>
+<span id="cb59-23"><a href="análisis-y-resultados.html#cb59-23" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>(#tab:kruskal_test8)Resultados de la prueba de Kruskal-Wallis</caption>
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="3%" />
+<col width="9%" />
+<col width="60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Prueba</th>
+<th align="right">Estadistico</th>
+<th align="right">gl</th>
+<th align="right">p_value</th>
+<th align="left">interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Kruskal-Wallis</td>
+<td align="right">7.7385</td>
+<td align="right">4</td>
+<td align="right">0.101643</td>
+<td align="left">No se encontraron diferencias significativas entre grupos.</td>
+</tr>
+</tbody>
+</table>
+<p>Estos resultados tienen implicaciones importantes desde el punto de vista climático y social. En primer lugar, las precipitaciones muestran diferencias entre regiones que no se observan con la misma claridad en las proyecciones de temperatura. Mientras algunas zonas podrían enfrentar una disminución en la disponibilidad de agua —como Oriente Medio, ciertas regiones de América Latina y el área mediterránea— otras podrían verse expuestas a un aumento de eventos asociados al exceso hídrico, como inundaciones, desbordamientos y presión sobre la infraestructura urbana.</p>
+<p>En segundo lugar, los resultados refuerzan una idea central: las consecuencias del cambio climático afectarán a países de todos los niveles de ingreso, independientemente de cuánto hayan contribuido históricamente a la generación de emisiones. Sin embargo, los países de menores ingresos continúan siendo los más vulnerables frente a estos impactos, debido a su menor capacidad de adaptación ante las variaciones climáticas y a la alta dependencia de sectores sensibles como la agricultura y los recursos hídricos. Así, muchas de las naciones que menos han aportado a las emisiones acumuladas de gases de efecto invernadero son, al mismo tiempo, las que enfrentan mayores riesgos y menores herramientas para responder a ellos.</p>
 </div>
 </div>
 

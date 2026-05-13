@@ -15,8 +15,10 @@ fig:10
 fig:11
 fig:20
 fig:12
+fig:21
 fig:13
 fig:14
+fig:22
 fig:15
 resumen
 introducción

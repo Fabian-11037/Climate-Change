@@ -732,6 +732,83 @@ ggplot(projected_climate_change_country_data, aes(x = factor(`Region`), y = `Tem
   )
 ```
 
+Para validar lo anterior, se realiza una prueba estadística donde si el supuesto de normalidad se cumple, con el fin de determinar que tipo de prueba podemos realizar.
+
+``` {r 21, fig.cap="Validación de normalidad - Proyección de temperatura", message=FALSE, warning=FALSE}
+
+ks_result <- ks.test(
+  projected_climate_change_country_data$`Temperature change`,
+  "pnorm",
+  mean = mean(projected_climate_change_country_data$`Temperature change`),
+  sd = sd(projected_climate_change_country_data$`Temperature change`)
+)
+
+qqnorm(projected_climate_change_country_data$`Temperature change`,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(projected_climate_change_country_data$`Temperature change`, col="red")
+```
+La prueba de Kolmogorov-Smirnov evidenció que los datos de proyección de temperatura no siguen una distribución normal (\(p\text{-value} = `r round(ks_result$p.value, 4)`\)), por lo que se rechaza la hipótesis nula de normalidad. Por consiguiente, procedemos a realizar una prueba de Kruskal Wallis con el objetivo de validar si existe diferencia significativa en la proyección de temperatura de cada región:
+
+$H_0$: Todas las regiones provienen de la misma distribución.
+
+$H_1$: Al menos uno de las regiones proviene de una distribución diferente.
+
+``` {r kruskal_test5, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Temperature change` ~ factor(`Region`),
+  data = projected_climate_change_country_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+``` {r dunn_test5, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `Temperature change` ~ factor(`Region`),
+  data = projected_climate_change_country_data,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
+El análisis realizado mostró diferencias estadísticamente significativas entre algunas regiones respecto a las proyecciones de temperatura. En particular, se encontraron diferencias significativas entre:
+
+- East Asia & Pacific y Europe & Central Asia (\(p_{adj}<0.001\))
+- Europe & Central Asia y Latin America & Caribbean (\(p_{adj}<0.001\))
+- East Asia & Pacific y Middle East & North Africa (\(p_{adj}<0.001\))
+- Latin America & Caribbean y Middle East & North Africa (\(p_{adj}<0.001\))
+- East Asia & Pacific y South Asia (\(p_{adj}=0.0078\))
+- East Asia & Pacific y Sub-Saharan Africa (\(p_{adj}<0.001\))
+- Latin America & Caribbean y Sub-Saharan Africa (\(p_{adj}=0.0233\))
+
+Por otro lado, las demás comparaciones no mostraron diferencias estadísticamente significativas luego del ajuste de Bonferroni.
+
+Estos resultados sugieren que las mayores diferencias en las proyecciones de temperatura se concentran principalmente entre Asia Oriental y el Pacífico, tal como pudimos observar en el diagrama de cajas.
+
 * Por Grupo Ecónomico
 
 Las distribuciones por grupo económico son notablemente similares en sus medianas, oscilando entre 1.8 °C (alto ingreso no-OCDE) y 2.3 °C (bajo ingreso, ingreso medio-bajo e ingreso medio-alto). Sin embargo, la amplitud de las cajas intercuartílicas varía: los grupos de ingreso bajo e ingreso medio presentan mayor dispersión interna, reflejando la heterogeneidad geográfica de los países que los integran. El hallazgo analíticamente más relevante es la ausencia de una gradiente clara entre nivel de ingreso y magnitud del calentamiento proyectado: los países de bajo ingreso —que históricamente han contribuido de forma marginal a las emisiones acumuladas— enfrentarán incrementos de temperatura comparables o superiores a los de las economías que han sido responsables de la mayor parte de las emisiones históricas.
@@ -752,6 +829,57 @@ ggplot(projected_climate_change_country_data, aes(x = factor(`Income group`), y 
   )
 ```
 La lectura conjunta de ambos gráficos conduce a dos conclusiones de orden superior. Primero, el calentamiento proyectado es independiente del nivel de responsabilidad histórica en las emisiones: regiones de bajo ingreso y baja industrialización soportarán incrementos de temperatura equivalentes a los de las economías más emisoras, lo que refuerza el argumento de justicia climática en los marcos de negociación internacional. Segundo, la variabilidad intra-regional e intra-grupal es tan o más relevante que las diferencias entre categorías, sugiriendo que las políticas de adaptación climática deben diseñarse atendiendo a vulnerabilidades específicas de cada país, más que a clasificaciones de ingreso o región.
+
+Procedemos nuevamente a validar la siguiente hipótesis mediante una prueba de Kruskall-Wallis:
+
+$H_0$: Todas los grupos de ingreso provienen de la misma distribución.
+
+$H_1$: Al menos uno de los grupos de ingreso proviene de una distribución diferente.
+
+``` {r kruskal_test6, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Temperature change` ~ factor(`Income group`),
+  data = projected_climate_change_country_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+El análisis mostró existía diferencias significativas en al menos uno de los grupos, y en la prueba de Dunn se evidencia que únicamente se encontraron diferencias estadísticamente significativas entre los grupos High income: nonOECD y Low income (\(p_{adj}=0.0269\)) después de aplicar la corrección por comparaciones múltiples.
+
+Las demás comparaciones entre grupos de ingreso no presentaron diferencias estadísticamente significativas luego del ajuste de Bonferroni (\(p_{adj} \geq 0.05\)).
+
+Estos resultados van en línea con la conclusión previo de que no existe mucha diferencia entre el ingreso de un país y el impacto que este sufrirá en aumento de temperatura debido al cambio climático, con la única excepción siendo los países de bajos ingresos y países de altos ingresos no pertenecientes a la OECD.
+
+``` {r dunn_test6, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `Temperature change` ~ factor(`Income group`),
+  data = projected_climate_change_country_data,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
 
 ### Proyección de cambio en precipitaciones
 
@@ -777,6 +905,74 @@ ggplot(projected_climate_change_country_data, aes(x = factor(`Region`), y = `Pre
   )
 ```
 
+Para validar lo anterior, se realiza una prueba estadística donde si el supuesto de normalidad se cumple, con el fin de determinar que tipo de prueba podemos realizar.
+
+``` {r 22, fig.cap="Validación de normalidad - Proyección de Precipitaciones", message=FALSE, warning=FALSE}
+
+ks_result <- ks.test(
+  projected_climate_change_country_data$`Precipitation change`,
+  "pnorm",
+  mean = mean(projected_climate_change_country_data$`Precipitation change`),
+  sd = sd(projected_climate_change_country_data$`Precipitation change`)
+)
+
+qqnorm(projected_climate_change_country_data$`Precipitation change`,
+       main = paste(
+         "QQ Plot\nKS p-value =",
+         round(ks_result$p.value, 4)
+       ))
+qqline(projected_climate_change_country_data$`Precipitation change`, col="red")
+```
+
+La prueba de Kolmogorov-Smirnov evidenció que los datos de proyección de precipitaciones no siguen una distribución normal (\(p\text{-value} = `r round(ks_result$p.value, 4)`\)), por lo que se rechaza la hipótesis nula de normalidad. Por consiguiente, procedemos a realizar una prueba de Kruskal Wallis con el objetivo de validar si existe diferencia significativa en la proyección de temperatura de cada región:
+
+$H_0$: Todas las regiones provienen de la misma distribución.
+
+$H_1$: Al menos uno de las regiones proviene de una distribución diferente.
+
+``` {r kruskal_test7, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Precipitation change` ~ factor(`Region`),
+  data = projected_climate_change_country_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+La prueba de Kruskall-Wallis indica que existe diferencia significativa en al menos una región, y la prueba de Dunn muestra que la región que más se diferencia de las demás es Asia Oriental y el Pacífico, presentando desigualdad significativa con Europa y Asia Central, América Latina y el Caribe y el Medio Oriente y el Norte de Africa.
+
+América Latina y el Caribe también mostró diferencias con otras dos regiones como son Asia del Sur y Africa Sub-Sahariana, resultados que van en línea con lo observado en los diagramas de caja.
+
+``` {r dunn_test7, message=FALSE, warning=FALSE}
+dunn_res <- dunnTest(
+  `Precipitation change` ~ factor(`Region`),
+  data = projected_climate_change_country_data,
+  method = "bonferroni"
+)
+
+kable(
+  dunn_res$res,
+  caption = "Comparaciones múltiples - Dunn Test"
+)
+```
+
 * Por grupo económico
 
 Por grupo de ingreso, el patrón más relevante es que el grupo de alto ingreso no-OCDE presenta una mediana claramente negativa (~−40 mm), coherente con la concentración de países de este grupo en zonas geográficas áridas o semiáridas como el Golfo Pérsico y partes de Europa meridional. El grupo de alto ingreso OCDE muestra una mediana levemente positiva con dispersión moderada, mientras que los grupos de ingreso bajo e ingreso medio-bajo exhiben distribuciones más amplias con medianas próximas a cero, reflejando nuevamente la heterogeneidad geográfica de sus integrantes. Los outliers más extremos —superando los +300 mm— se concentran en los grupos de ingreso medio-bajo y medio-alto, correspondientes a países tropicales de gran extensión territorial.
@@ -796,5 +992,35 @@ ggplot(projected_climate_change_country_data, aes(x = factor(`Income group`), y 
     plot.title = element_text(hjust = 0.5)   
   )
 ```
-Las implicaciones analíticas de estos gráficos son significativas en dos dimensiones. Primero, la precipitación introduce una asimetría de impacto climático que la temperatura no captura: regiones que ya enfrentan estrés hídrico —como Oriente Medio, partes de América Latina y el Mediterráneo— verán agravada su situación, mientras que otras experimentarán riesgos asociados al exceso hídrico, como inundaciones e infraestructura desbordada. Segundo, y en articulación con los análisis previos, los países de menor ingreso que proyectan reducciones de precipitación enfrentan la combinación más adversa: mayor calentamiento relativo, menor capacidad adaptativa y potencial contracción de sus bases agrícolas, todo ello siendo responsables de una fracción ínfima de las emisiones históricas acumuladas que originan dichos impactos.
+
+Sin embargo, nuestra prueba de Kruskall-Wallis indica que no hay diferencia significativo en el cambio de precipitación de acuerdo al grupo de ingreso. 
+``` {r kruskal_test8, message=FALSE, warning=FALSE}
+res <- kruskal.test(
+  `Precipitation change` ~ factor(`Income group`),
+  data = projected_climate_change_country_data
+)
+
+interpretacion <- ifelse(
+  res$p.value < 0.05,
+  "Existen diferencias significativas entre grupos.",
+  "No se encontraron diferencias significativas entre grupos."
+)
+
+tabla_res <- data.frame(
+  Prueba = "Kruskal-Wallis",
+  Estadistico = round(as.numeric(res$statistic), 4),
+  gl = as.numeric(res$parameter),
+  p_value = round(res$p.value, 6),
+  interpretacion = interpretacion
+)
+
+kable(
+  tabla_res,
+  caption = "Resultados de la prueba de Kruskal-Wallis"
+)
+```
+
+Estos resultados tienen implicaciones importantes desde el punto de vista climático y social. En primer lugar, las precipitaciones muestran diferencias entre regiones que no se observan con la misma claridad en las proyecciones de temperatura. Mientras algunas zonas podrían enfrentar una disminución en la disponibilidad de agua —como Oriente Medio, ciertas regiones de América Latina y el área mediterránea— otras podrían verse expuestas a un aumento de eventos asociados al exceso hídrico, como inundaciones, desbordamientos y presión sobre la infraestructura urbana.
+
+En segundo lugar, los resultados refuerzan una idea central: las consecuencias del cambio climático afectarán a países de todos los niveles de ingreso, independientemente de cuánto hayan contribuido históricamente a la generación de emisiones. Sin embargo, los países de menores ingresos continúan siendo los más vulnerables frente a estos impactos, debido a su menor capacidad de adaptación ante las variaciones climáticas y a la alta dependencia de sectores sensibles como la agricultura y los recursos hídricos. Así, muchas de las naciones que menos han aportado a las emisiones acumuladas de gases de efecto invernadero son, al mismo tiempo, las que enfrentan mayores riesgos y menores herramientas para responder a ellos.
 </div>
