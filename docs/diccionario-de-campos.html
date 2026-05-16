@@ -23,7 +23,7 @@
 <meta name="author" content="Fabian Manrique" />
 
 
-<meta name="date" content="2026-05-13" />
+<meta name="date" content="2026-05-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -261,20 +261,42 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="diccionario-de-campos.html#cb4-1" tabindex="-1"></a><span class="fu">str</span>(emissions_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## spc_tbl_ [29,384 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ Entity              : chr [1:29384] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
-##  $ Code                : Factor w/ 228 levels &quot;ABW&quot;,&quot;AFG&quot;,&quot;AGO&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
-##  $ Year                : num [1:29384] 1949 1950 1951 1952 1953 ...
-##  $ Annual CO₂ emissions: num [1:29384] 14656 84272 91600 91600 106256 ...
-##  - attr(*, &quot;spec&quot;)=
-##   .. cols(
-##   ..   Entity = col_character(),
-##   ..   Code = col_character(),
-##   ..   Year = col_double(),
-##   ..   `Annual CO₂ emissions` = col_double()
-##   .. )
-##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="diccionario-de-campos.html#cb4-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-2"><a href="diccionario-de-campos.html#cb4-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(emissions_data),</span>
+<span id="cb4-3"><a href="diccionario-de-campos.html#cb4-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(emissions_data, class))</span>
+<span id="cb4-4"><a href="diccionario-de-campos.html#cb4-4" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="diccionario-de-campos.html#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="diccionario-de-campos.html#cb4-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb4-7"><a href="diccionario-de-campos.html#cb4-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb4-8"><a href="diccionario-de-campos.html#cb4-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset emissions_data&quot;</span></span>
+<span id="cb4-9"><a href="diccionario-de-campos.html#cb4-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:emissionsDataStr">Table 1: </span>Estructura del dataset emissions_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Entity</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Code</td>
+<td align="left">factor</td>
+</tr>
+<tr class="odd">
+<td align="left">Year</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="even">
+<td align="left">Annual CO₂ emissions</td>
+<td align="left">numeric</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="dataset-co2-emissions-per-capita" class="section level2 hasAnchor">
 <h2>Dataset ‘CO<sub>2</sub> Emissions per Capita’<a href="diccionario-de-campos.html#dataset-co2-emissions-per-capita" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -311,20 +333,42 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="diccionario-de-campos.html#cb6-1" tabindex="-1"></a><span class="fu">str</span>(emissions_per_capita_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## spc_tbl_ [26,509 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ Entity                  : chr [1:26509] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
-##  $ Code                    : chr [1:26509] &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
-##  $ Year                    : num [1:26509] 1949 1950 1951 1952 1953 ...
-##  $ CO₂ emissions per capita: num [1:26509] 0.00199 0.01084 0.01163 0.01147 0.01312 ...
-##  - attr(*, &quot;spec&quot;)=
-##   .. cols(
-##   ..   Entity = col_character(),
-##   ..   Code = col_character(),
-##   ..   Year = col_double(),
-##   ..   `CO₂ emissions per capita` = col_double()
-##   .. )
-##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="diccionario-de-campos.html#cb5-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a href="diccionario-de-campos.html#cb5-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(emissions_per_capita_data),</span>
+<span id="cb5-3"><a href="diccionario-de-campos.html#cb5-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(emissions_per_capita_data, class))</span>
+<span id="cb5-4"><a href="diccionario-de-campos.html#cb5-4" tabindex="-1"></a>)</span>
+<span id="cb5-5"><a href="diccionario-de-campos.html#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="diccionario-de-campos.html#cb5-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb5-7"><a href="diccionario-de-campos.html#cb5-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb5-8"><a href="diccionario-de-campos.html#cb5-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset emissions_per_capita_data&quot;</span></span>
+<span id="cb5-9"><a href="diccionario-de-campos.html#cb5-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:emissionsPerCapitaDataStr">Table 2: </span>Estructura del dataset emissions_per_capita_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Entity</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Code</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Year</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="even">
+<td align="left">CO₂ emissions per capita</td>
+<td align="left">numeric</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="dataset-global-land-and-ocean-12-month-period-average-temperature-anomalies" class="section level2 hasAnchor">
 <h2>Dataset ‘Global Land and Ocean 12-Month Period Average Temperature Anomalies’<a href="diccionario-de-campos.html#dataset-global-land-and-ocean-12-month-period-average-temperature-anomalies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -353,18 +397,42 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="diccionario-de-campos.html#cb8-1" tabindex="-1"></a><span class="fu">str</span>(temperature_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## spc_tbl_ [2,104 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ Date   : num [1:2104] 185012 185101 185102 185103 185104 ...
-##  $ Anomaly: num [1:2104] -0.15 -0.13 -0.13 -0.13 -0.12 -0.12 -0.12 -0.11 -0.09 -0.08 ...
-##  $ year   : int [1:2104] 1850 1851 1851 1851 1851 1851 1851 1851 1851 1851 ...
-##  $ month  : int [1:2104] 12 1 2 3 4 5 6 7 8 9 ...
-##  - attr(*, &quot;spec&quot;)=
-##   .. cols(
-##   ..   Date = col_double(),
-##   ..   Anomaly = col_double()
-##   .. )
-##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="diccionario-de-campos.html#cb6-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-2"><a href="diccionario-de-campos.html#cb6-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(temperature_data),</span>
+<span id="cb6-3"><a href="diccionario-de-campos.html#cb6-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(temperature_data, class))</span>
+<span id="cb6-4"><a href="diccionario-de-campos.html#cb6-4" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="diccionario-de-campos.html#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="diccionario-de-campos.html#cb6-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb6-7"><a href="diccionario-de-campos.html#cb6-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb6-8"><a href="diccionario-de-campos.html#cb6-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset temperature_data&quot;</span></span>
+<span id="cb6-9"><a href="diccionario-de-campos.html#cb6-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:temperatureDataStr">Table 3: </span>Estructura del dataset temperature_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="even">
+<td align="left">Anomaly</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">year</td>
+<td align="left">integer</td>
+</tr>
+<tr class="even">
+<td align="left">month</td>
+<td align="left">integer</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="dataset-climate-change-data" class="section level2 hasAnchor">
 <h2>Dataset ‘Climate Change Data’<a href="diccionario-de-campos.html#dataset-climate-change-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -404,54 +472,234 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="diccionario-de-campos.html#cb10-1" tabindex="-1"></a><span class="fu">str</span>(climate_change_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## tibble [13,512 × 28] (S3: tbl_df/tbl/data.frame)
-##  $ Country code: chr [1:13512] &quot;ABW&quot; &quot;ADO&quot; &quot;AFG&quot; &quot;AGO&quot; ...
-##  $ Country name: chr [1:13512] &quot;Aruba&quot; &quot;Andorra&quot; &quot;Afghanistan&quot; &quot;Angola&quot; ...
-##  $ Series code : chr [1:13512] &quot;AG.LND.EL5M.ZS&quot; &quot;AG.LND.EL5M.ZS&quot; &quot;AG.LND.EL5M.ZS&quot; &quot;AG.LND.EL5M.ZS&quot; ...
-##  $ Series name : chr [1:13512] &quot;Land area below 5m (% of land area)&quot; &quot;Land area below 5m (% of land area)&quot; &quot;Land area below 5m (% of land area)&quot; &quot;Land area below 5m (% of land area)&quot; ...
-##  $ SCALE       : num [1:13512] 0 0 0 0 0 0 0 0 0 0 ...
-##  $ Decimals    : num [1:13512] 1 1 1 1 1 1 1 1 1 1 ...
-##  $ 1990        : chr [1:13512] &quot;29.574809999999999&quot; &quot;0&quot; &quot;0&quot; &quot;0.20823459999999999&quot; ...
-##  $ 1991        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1992        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1993        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1994        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1995        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1996        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1997        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1998        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 1999        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2000        : chr [1:13512] &quot;29.574809999999999&quot; &quot;0&quot; &quot;0&quot; &quot;0.20823459999999999&quot; ...
-##  $ 2001        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2002        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2003        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2004        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2005        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2006        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2007        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2008        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2009        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2010        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ 2011        : chr [1:13512] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="diccionario-de-campos.html#cb12-1" tabindex="-1"></a><span class="fu">str</span>(country_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## tibble [233 × 6] (S3: tbl_df/tbl/data.frame)
-##  $ Country code    : chr [1:233] &quot;EAP&quot; &quot;ECA&quot; &quot;EMU&quot; &quot;HIC&quot; ...
-##  $ Country name    : chr [1:233] &quot;East Asia &amp; Pacific&quot; &quot;Europe &amp; Central Asia&quot; &quot;Euro area&quot; &quot;High income&quot; ...
-##  $ Capital city    : chr [1:233] &quot;..&quot; &quot;..&quot; &quot;..&quot; &quot;..&quot; ...
-##  $ Region          : chr [1:233] &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; ...
-##  $ Income group    : chr [1:233] &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; ...
-##  $ Lending category: chr [1:233] &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; &quot;Aggregates&quot; ...</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="diccionario-de-campos.html#cb14-1" tabindex="-1"></a><span class="fu">str</span>(series_data) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
-<pre><code>## tibble [58 × 8] (S3: tbl_df/tbl/data.frame)
-##  $ Series code: chr [1:58] &quot;SP.POP.TOTL&quot; &quot;SP.POP.GROW&quot; &quot;NY.GDP.MKTP.CD&quot; &quot;NY.GNP.PCAP.CD&quot; ...
-##  $ Series name: chr [1:58] &quot;Population&quot; &quot;Population growth (annual %)&quot; &quot;GDP ($)&quot; &quot;GNI per capita (Atlas $)&quot; ...
-##  $ Scale      : chr [1:58] &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...
-##  $ Decimals   : chr [1:58] &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; ...
-##  $ Order      : num [1:58] 1 2 3 4 5 6 7 8 9 10 ...
-##  $ Topic      : chr [1:58] &quot;Size of the economy&quot; &quot;Size of the economy&quot; &quot;Size of the economy&quot; &quot;Size of the economy&quot; ...
-##  $ Definition : chr [1:58] &quot;Population includes all residents who are present regardless of legal status or citizenship except for refugees&quot;| __truncated__ &quot;Annual population growth rate for year t is the exponential rate of growth of midyear population from year t-1 &quot;| __truncated__ &quot;GDP is gross domestic product and measures the total output of goods and services for final use occurring withi&quot;| __truncated__ &quot;GNI per capita is the gross national income, converted to U.S. dollars using the World Bank Atlas method, divid&quot;| __truncated__ ...
-##  $ Source     : chr [1:58] &quot;(1) United Nations Population Division. 2011. World Population Prospects: The 2010 Revision. New York, United N&quot;| __truncated__ &quot;Derived from total population. Population source: (1) United Nations Population Division. 2011. World Populatio&quot;| __truncated__ &quot;World Bank national accounts data, and OECD National Accounts data files.&quot; &quot;World Bank national accounts data, and OECD National Accounts data files.&quot; ...</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="diccionario-de-campos.html#cb7-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-2"><a href="diccionario-de-campos.html#cb7-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(climate_change_data),</span>
+<span id="cb7-3"><a href="diccionario-de-campos.html#cb7-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(climate_change_data, class))</span>
+<span id="cb7-4"><a href="diccionario-de-campos.html#cb7-4" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="diccionario-de-campos.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="diccionario-de-campos.html#cb7-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb7-7"><a href="diccionario-de-campos.html#cb7-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb7-8"><a href="diccionario-de-campos.html#cb7-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset climate_change_data&quot;</span></span>
+<span id="cb7-9"><a href="diccionario-de-campos.html#cb7-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:climateChangeDataStr">Table 4: </span>Estructura del dataset climate_change_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Country code</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Country name</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Series code</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Series name</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">SCALE</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="even">
+<td align="left">Decimals</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">1990</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">1991</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">1992</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">1993</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">1994</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">1995</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">1996</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">1997</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">1998</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">1999</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2000</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2001</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2002</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2003</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2004</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2005</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2006</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2007</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2008</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2009</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">2010</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">2011</td>
+<td align="left">character</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="diccionario-de-campos.html#cb8-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-2"><a href="diccionario-de-campos.html#cb8-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(country_data),</span>
+<span id="cb8-3"><a href="diccionario-de-campos.html#cb8-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(country_data, class))</span>
+<span id="cb8-4"><a href="diccionario-de-campos.html#cb8-4" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="diccionario-de-campos.html#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="diccionario-de-campos.html#cb8-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb8-7"><a href="diccionario-de-campos.html#cb8-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb8-8"><a href="diccionario-de-campos.html#cb8-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset country_data&quot;</span></span>
+<span id="cb8-9"><a href="diccionario-de-campos.html#cb8-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:countryDataStr">Table 5: </span>Estructura del dataset country_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Country code</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Country name</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Capital city</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Region</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Income group</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Lending category</td>
+<td align="left">character</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="diccionario-de-campos.html#cb9-1" tabindex="-1"></a>estructura <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="diccionario-de-campos.html#cb9-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">names</span>(series_data),</span>
+<span id="cb9-3"><a href="diccionario-de-campos.html#cb9-3" tabindex="-1"></a>  <span class="at">Clase =</span> <span class="fu">unname</span>(<span class="fu">sapply</span>(series_data, class))</span>
+<span id="cb9-4"><a href="diccionario-de-campos.html#cb9-4" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="diccionario-de-campos.html#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="diccionario-de-campos.html#cb9-6" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb9-7"><a href="diccionario-de-campos.html#cb9-7" tabindex="-1"></a>  estructura,</span>
+<span id="cb9-8"><a href="diccionario-de-campos.html#cb9-8" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estructura del dataset series_data&quot;</span></span>
+<span id="cb9-9"><a href="diccionario-de-campos.html#cb9-9" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:seriesDataStr">Table 6: </span>Estructura del dataset series_data</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Series code</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Series name</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Scale</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Decimals</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Order</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="even">
+<td align="left">Topic</td>
+<td align="left">character</td>
+</tr>
+<tr class="odd">
+<td align="left">Definition</td>
+<td align="left">character</td>
+</tr>
+<tr class="even">
+<td align="left">Source</td>
+<td align="left">character</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>Variables utilizadas:</li>
 </ul>

@@ -10,6 +10,6 @@ Diversos estudios han analizado la relación entre el suministro total de energ�
 
 A esto se suma una fuerte desigualdad en las contribuciones nacionales al problema climático. Los países con mayores niveles de riqueza pueden llegar a emitir hasta 100 veces más CO2 por persona que las naciones de menores ingresos [@ref12]. Esta diferencia complica la construcción de una transición global que sea, al mismo tiempo, efectiva y equitativa. Para muchas economías en desarrollo, implementar políticas de reducción de emisiones implica altos costos económicos y tensiones políticas asociadas al contexto internacional. En consecuencia, estos países deben equilibrar sus objetivos de crecimiento económico con las exigencias de reducir su dependencia de combustibles fósiles y avanzar hacia tecnologías energéticas más sostenibles [@ref2]. 
 
-Aunque la transición hacia fuentes limpias resulta indispensable, también representa un desafío político y económico considerable. Los gobiernos deben navegar cuidadosamente este proceso para evitar que los esfuerzos de descarbonización afecten negativamente la mejora en la calidad de vida y el desarrollo de sus poblaci
+Aunque la transición hacia fuentes limpias resulta indispensable, también representa un desafío político y económico considerable. Los gobiernos deben navegar cuidadosamente este proceso para evitar que los esfuerzos de descarbonización afecten negativamente la mejora en la calidad de vida y el desarrollo de sus poblaciones.
 
 </div>

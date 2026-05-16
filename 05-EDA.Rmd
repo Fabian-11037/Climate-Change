@@ -245,7 +245,7 @@ Para las emisiones de CO~2~ totales, obtuvimos resultados similares al análisis
 Podemos asumir entonces, de acuerdo a la evidencia estadística y gráfica que los países de los grupos de ingresos Alto contribuyen de forma significativa por encima de los países de los demás grupos ecónomicos, seguidos por los países de ingreso Medio-Alto y, finalmente, los países de los grupos de ingreso Bajo y Medio-Bajo, teniendo estos 2 últimos un comportamiento semejante. 
 
 
-``` {r kruskal_test1, message=FALSE, warning=FALSE}
+``` {r kruskalTest1, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `CO2 per capita` ~ Entity,
   data = income_data
@@ -271,7 +271,7 @@ kable(
 )
 ```
 
-``` {r dunn_test1, message=FALSE, warning=FALSE}
+``` {r dunnTest1, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `CO2 per capita` ~ Entity,
   data = income_data,
@@ -284,7 +284,7 @@ kable(
 )
 ```
 
-``` {r kruskal_test2, message=FALSE, warning=FALSE}
+``` {r kruskalTest2, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `CO2 emissions` ~ Entity,
   data = income_data
@@ -310,7 +310,7 @@ kable(
 )
 ```
 
-``` {r dunn_test2, message=FALSE, warning=FALSE}
+``` {r dunnTest2, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `CO2 emissions` ~ Entity,
   data = income_data,
@@ -442,24 +442,36 @@ ggplot(plot_data,
   theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5))
 ```
-Complementamos esta gráfica con una prueba de Chi-cuadrado de independencia, para evaluar si existe asociación entre la región y la distribución de grupos de ingresos mediante la siguiente prueba de Hipótesis:
+Complementamos esta gráfica con una prueba de Chi-cuadrado de independencia con simulación de MonteCarlo, debido a la presencia de niveles con cantidades menores a 5, para evaluar si existe asociación entre la región y la distribución de grupos de ingresos mediante la siguiente prueba de Hipótesis:
 
 * $H_0$: la distribución de grupos de ingresos es igual entre regiones.
 
 * $H_1$: la distribución cambia según la región.
 
 
-``` {r prueba_chi_square, fig.cap="Distribución económica por región", message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
+``` {r tablaContingencia, message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
 tabla <- xtabs(
   n_count ~ Region + `Income group`,
   data = income_group_per_region
 )
 
-res <- chisq.test(tabla)
+tabla_df <- as.data.frame.matrix(tabla)
+
+kable(
+  tabla_df,
+  caption = "Tabla de contingencia: Región vs Grupo de ingreso"
+)
+```
+
+``` {r pruebaChiSquare, message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
+set.seed(42)
+
+res <- chisq.test(tabla,
+  simulate.p.value = TRUE,
+  B = 10000)
 
 tabla_res <- data.frame(
   Estadistico = round(res$statistic, 4),
-  gl = res$parameter,
   p_value = round(res$p.value, 6)
 )
 
@@ -478,9 +490,9 @@ Estos resultados indican que la distribución de los grupos de ingresos no es ho
 <div style="text-align: justify;">
 Generamos 2 diagramas de caja (boxplots) \@ref(fig:7) y \@ref(fig:8) con el objetivo de profundizar en la heterogeneidad interna de las emisiones de CO₂, desagregando la información por grupo de ingreso y por región respectivamente. Para facilidad de nuestro análisis y evitar incorporar ruido por cambios temporales, filtramos la información para el año 2010.
 
-Por grupo de ingreso, el resultado más destacado es la elevada dispersión interna del grupo de alto ingreso OCDE, cuya caja intercuartílica se extiende notablemente por encima de los demás grupos, con un valor atípico (outlier) que supera los 5 × 10⁹ toneladas —atribuible presumiblemente a Estados Unidos o un emisor de escala comparable. Los grupos de ingreso bajo e ingreso medio-bajo presentan cajas prácticamente colapsadas sobre el eje horizontal, con medianas cercanas a cero y outliers aislados que representan países de gran población como India o Nigeria. El grupo de ingreso medio-alto muestra un outlier superior cercano a los 8 × 10⁹ toneladas, el más alto del gráfico, consistente con la posición de China en ese grupo de clasificación para 2010. Este hallazgo indica algo: las mayores emisiones absolutas en 2010 no provienen de los países de mayor ingreso per cápita, sino de economías en transición de ingreso medio-alto con grandes bases industriales y poblacionales.
+Por grupo de ingreso, el resultado más destacado es la elevada dispersión interna del grupo de alto ingreso OCDE, cuya caja intercuartílica se extiende notablemente por encima de los demás grupos, con un valor atípico (outlier) que supera los 5 × 10⁹ toneladas. Los grupos de ingreso bajo e ingreso medio-bajo presentan cajas prácticamente colapsadas sobre el eje horizontal, con medianas cercanas a cero y outliers aislados que representan países de gran población como India o Nigeria. El grupo de ingreso medio-alto muestra un outlier superior cercano a los 8 × 10⁹ toneladas, el más alto del gráfico, consistente con la posición de China en ese grupo de clasificación para 2010. Este hallazgo indica algo: las mayores emisiones absolutas en 2010 no provienen de los países de mayor ingreso per cápita, sino de economías en transición de ingreso medio-alto con grandes bases industriales y poblacionales.
 
-Por región, el contraste es aún más pronunciado. América del Norte exhibe la distribución más amplia con diferencia: su caja intercuartílica abarca el rango entre aproximadamente 2 × 10⁹ y 5 × 10⁹ toneladas, con una mediana en torno a 3 × 10⁹, lo que refleja que incluso el país mediano de esa región —compuesta por muy pocos países de alta emisión individual— genera volúmenes extraordinariamente elevados. Asia Oriental y el Pacífico presenta una caja comprimida pero con un outlier superior cercano a los 8 × 10⁹ toneladas, el valor más alto del gráfico, coherente con la presencia de China como emisor dominante dentro de una región por lo demás heterogénea. Todas las demás regiones —Europa y Asia Central, América Latina, Oriente Medio, Asia del Sur y África Subsahariana— muestran distribuciones extremadamente comprimidas con medianas próximas a cero, indicando que la gran mayoría de sus países son emisores menores en términos absolutos, aunque con outliers aislados de relevancia.
+Por región, el contraste es aún más pronunciado. América del Norte exhibe la distribución más amplia con diferencia: su caja intercuartílica abarca el rango entre aproximadamente 2 × 10⁹ y 5 × 10⁹ toneladas, con una mediana en torno a 3 × 10⁹, lo que refleja que incluso el país mediano de esa región genera volúmenes extraordinariamente elevados. Asia Oriental y el Pacífico presenta una caja comprimida pero con un outlier superior cercano a los 8 × 10⁹ toneladas, el valor más alto del gráfico, coherente con la presencia de China como emisor dominante dentro de una región por lo demás heterogénea. Todas las demás regiones (Europa y Asia Central, América Latina, Oriente Medio, Asia del Sur y África Subsahariana) muestran distribuciones extremadamente comprimidas con medianas próximas a cero, indicando que la gran mayoría de sus países son emisores menores en términos absolutos, aunque con outliers aislados de relevancia.
 
 La lectura conjunta de ambos gráficos refuerza una conclusión: la distribución de emisiones de CO~4~ es profundamente asimétrica tanto entre regiones como dentro de los grupos de ingreso, con un número reducido de países —caracterizados por grandes economías industriales, alta población o abundancia de recursos fósiles— concentrando la mayor parte de las emisiones globales. Esta concentración implica que las políticas de mitigación climática tienen un potencial de impacto desproporcionadamente mayor si se focalizan en dichos emisores dominantes, independientemente de su clasificación regional o de ingreso.
 
@@ -557,7 +569,7 @@ qqnorm(gdp_joined_2010$`Annual CO2 emissions`,
        ))
 qqline(gdp_joined_2010$`Annual CO2 emissions`, col="red")
 ```
-``` {r kruskal_test3, message=FALSE, warning=FALSE}
+``` {r kruskalTest3, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Annual CO2 emissions` ~ factor(Region),
   data = gdp_joined_2010
@@ -583,7 +595,7 @@ kable(
 )
 ```
 
-``` {r dunn_test3, message=FALSE, warning=FALSE}
+``` {r dunnTest3, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `Annual CO2 emissions` ~ Region,
   data = gdp_joined_2010,
@@ -611,7 +623,7 @@ Por otro lado, no se encontraron diferencias estadísticamente significativas en
 
 Estos resultados sugieren que los países pertenecientes al grupo High income: OECD presentan patrones de emisiones significativamente distintos frente a economías de menores ingresos, mientras que los demás grupos muestran niveles más similares al resto de categorías.
 
-``` {r kruskal_test4, message=FALSE, warning=FALSE}
+``` {r kruskalTest4, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Annual CO2 emissions` ~ factor(`Income group`),
   data = gdp_joined_2010
@@ -637,7 +649,7 @@ kable(
 )
 ```
 
-``` {r dunn_test4, message=FALSE, warning=FALSE}
+``` {r dunnTest4, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `Annual CO2 emissions` ~ `Income group`,
   data = gdp_joined_2010,
@@ -756,7 +768,7 @@ $H_0$: Todas las regiones provienen de la misma distribución.
 
 $H_1$: Al menos uno de las regiones proviene de una distribución diferente.
 
-``` {r kruskal_test5, message=FALSE, warning=FALSE}
+``` {r kruskalTest5, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Temperature change` ~ factor(`Region`),
   data = projected_climate_change_country_data
@@ -782,7 +794,7 @@ kable(
 )
 ```
 
-``` {r dunn_test5, message=FALSE, warning=FALSE}
+``` {r dunnTest5, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `Temperature change` ~ factor(`Region`),
   data = projected_climate_change_country_data,
@@ -836,7 +848,7 @@ $H_0$: Todas los grupos de ingreso provienen de la misma distribución.
 
 $H_1$: Al menos uno de los grupos de ingreso proviene de una distribución diferente.
 
-``` {r kruskal_test6, message=FALSE, warning=FALSE}
+``` {r kruskalTest6, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Temperature change` ~ factor(`Income group`),
   data = projected_climate_change_country_data
@@ -868,7 +880,7 @@ Las demás comparaciones entre grupos de ingreso no presentaron diferencias esta
 
 Estos resultados van en línea con la conclusión previo de que no existe mucha diferencia entre el ingreso de un país y el impacto que este sufrirá en aumento de temperatura debido al cambio climático, con la única excepción siendo los países de bajos ingresos y países de altos ingresos no pertenecientes a la OECD.
 
-``` {r dunn_test6, message=FALSE, warning=FALSE}
+``` {r dunnTest6, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `Temperature change` ~ factor(`Income group`),
   data = projected_climate_change_country_data,
@@ -930,7 +942,7 @@ $H_0$: Todas las regiones provienen de la misma distribución.
 
 $H_1$: Al menos uno de las regiones proviene de una distribución diferente.
 
-``` {r kruskal_test7, message=FALSE, warning=FALSE}
+``` {r kruskalTest7, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Precipitation change` ~ factor(`Region`),
   data = projected_climate_change_country_data
@@ -960,7 +972,7 @@ La prueba de Kruskall-Wallis indica que existe diferencia significativa en al me
 
 América Latina y el Caribe también mostró diferencias con otras dos regiones como son Asia del Sur y Africa Sub-Sahariana, resultados que van en línea con lo observado en los diagramas de caja.
 
-``` {r dunn_test7, message=FALSE, warning=FALSE}
+``` {r dunnTest7, message=FALSE, warning=FALSE}
 dunn_res <- dunnTest(
   `Precipitation change` ~ factor(`Region`),
   data = projected_climate_change_country_data,
@@ -994,7 +1006,7 @@ ggplot(projected_climate_change_country_data, aes(x = factor(`Income group`), y 
 ```
 
 Sin embargo, nuestra prueba de Kruskall-Wallis indica que no hay diferencia significativo en el cambio de precipitación de acuerdo al grupo de ingreso. 
-``` {r kruskal_test8, message=FALSE, warning=FALSE}
+``` {r kruskalTest8, message=FALSE, warning=FALSE}
 res <- kruskal.test(
   `Precipitation change` ~ factor(`Income group`),
   data = projected_climate_change_country_data
@@ -1020,7 +1032,7 @@ kable(
 )
 ```
 
-Estos resultados tienen implicaciones importantes desde el punto de vista climático y social. En primer lugar, las precipitaciones muestran diferencias entre regiones que no se observan con la misma claridad en las proyecciones de temperatura. Mientras algunas zonas podrían enfrentar una disminución en la disponibilidad de agua —como Oriente Medio, ciertas regiones de América Latina y el área mediterránea— otras podrían verse expuestas a un aumento de eventos asociados al exceso hídrico, como inundaciones, desbordamientos y presión sobre la infraestructura urbana.
+Estos resultados tienen implicaciones importantes desde el punto de vista climático y social. En primer lugar, las precipitaciones muestran diferencias entre regiones que no se observan con la misma claridad en las proyecciones de temperatura. Mientras algunas zonas podrían enfrentar una disminución en la disponibilidad de agua, como Oriente Medio, ciertas regiones de América Latina y el área mediterránea, otras podrían verse expuestas a un aumento de eventos asociados al exceso hídrico, como inundaciones, desbordamientos y presión sobre la infraestructura urbana.
 
 En segundo lugar, los resultados refuerzan una idea central: las consecuencias del cambio climático afectarán a países de todos los niveles de ingreso, independientemente de cuánto hayan contribuido históricamente a la generación de emisiones. Sin embargo, los países de menores ingresos continúan siendo los más vulnerables frente a estos impactos, debido a su menor capacidad de adaptación ante las variaciones climáticas y a la alta dependencia de sectores sensibles como la agricultura y los recursos hídricos. Así, muchas de las naciones que menos han aportado a las emisiones acumuladas de gases de efecto invernadero son, al mismo tiempo, las que enfrentan mayores riesgos y menores herramientas para responder a ellos.
 </div>

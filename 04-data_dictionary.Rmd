@@ -18,9 +18,17 @@ Obtenido de [@ref1], este dataset nos provee información histórica de las emis
 | CO~2~ emissions| Total emitido por la entidad en el año en cuestión en Toneladas  |
 </div>
 
-```{r emissions_data_str, message=FALSE, warning=FALSE}
+```{r emissionsDataStr, message=FALSE, warning=FALSE}
 
-str(emissions_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(emissions_data),
+  Clase = unname(sapply(emissions_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset emissions_data"
+)
 
 ```
 
@@ -38,9 +46,17 @@ Obtenido de [@ref1], este dataset nos provee información histórica de las emis
 | CO~2~ emissions per capita| Total emitido por la entidad dividido por la población en el año en cuestión en Toneladas por persona |
 </div>
 
-```{r emissions_pèr_capita_data_str, message=FALSE, warning=FALSE}
+```{r emissionsPerCapitaDataStr, message=FALSE, warning=FALSE}
 
-str(emissions_per_capita_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(emissions_per_capita_data),
+  Clase = unname(sapply(emissions_per_capita_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset emissions_per_capita_data"
+)
 
 ```
 
@@ -55,9 +71,17 @@ Obtenido de [@ref159], este dataset nos provee información histórica de la tem
 | Anomaly          | Temperatura anómala, calculada como la diferencia entre la temperatura global promedio y la temperatura global promedio entre los años 1861 a 1890, en Celsius|
 </div>
 
-```{r temperature_data_str, message=FALSE, warning=FALSE}
+```{r temperatureDataStr, message=FALSE, warning=FALSE}
 
-str(temperature_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(temperature_data),
+  Clase = unname(sapply(temperature_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset temperature_data"
+)
 
 ```
 
@@ -74,21 +98,45 @@ Obtenido de [@ref155], este dataset nos provee información histórica diferente
 | Series Name   | Nombre de la variable muestreada|
 | 1990 - 2011   | Columnas que corresponden al año de muestreo. Para algunas variables, como proyecciones a futuro, solo se encuentra data en la columna 2011, correspondiente al valor de la proyección|
 
-```{r climate_change_data_str, message=FALSE, warning=FALSE}
+```{r climateChangeDataStr, message=FALSE, warning=FALSE}
 
-str(climate_change_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(climate_change_data),
+  Clase = unname(sapply(climate_change_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset climate_change_data"
+)
 
 ```
 
-```{r country_data_str, message=FALSE, warning=FALSE}
+```{r countryDataStr, message=FALSE, warning=FALSE}
 
-str(country_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(country_data),
+  Clase = unname(sapply(country_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset country_data"
+)
 
 ```
 
-```{r series_data_str, message=FALSE, warning=FALSE}
+```{r seriesDataStr, message=FALSE, warning=FALSE}
 
-str(series_data) %>% kable()
+estructura <- data.frame(
+  Variable = names(series_data),
+  Clase = unname(sapply(series_data, class))
+)
+
+kable(
+  estructura,
+  caption = "Estructura del dataset series_data"
+)
 
 ```
 
